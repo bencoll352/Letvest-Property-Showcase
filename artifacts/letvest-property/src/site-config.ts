@@ -7,7 +7,6 @@ export const siteConfig = {
   tagline: 'Guaranteed Rent & Fully Managed Letting across West Sussex',
 
   // Contact details
-  phone: '01903 000000',
   email: 'info@jmletvest.com',
   prsMembershipNumber: 'PRS058309',
   baseTown: 'West Sussex, United Kingdom',
@@ -31,15 +30,15 @@ export const siteConfig = {
   testimonials: [
     {
       quote:
-        'Having our rent paid on the 1st of every month without fail has given us total financial peace of mind. JM LetVest take immaculate care of the flat in Worthing.',
+        'Having our rent paid on the 1st of every month without fail has given us total financial peace of mind. JM LetVest take immaculate care of the flat.',
       name: 'David & Helen M.',
-      detail: 'Landlords, Worthing (Guaranteed Rent agreement)',
+      detail: 'Landlords (Guaranteed Rent agreement)',
     },
     {
       quote:
         'Professional, communicative, and truly local. They treat our property with real pride and we never have to worry about maintenance or compliance.',
       name: 'Sarah K.',
-      detail: 'Landlord, Chichester (Fully Managed Letting)',
+      detail: 'Landlord (Fully Managed Letting)',
     },
   ],
 };

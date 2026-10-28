@@ -6,7 +6,6 @@ import {
   HelpCircle,
   MapPin,
   MessageCircle,
-  Phone,
   Send,
   Smile,
   Sparkles,
@@ -37,9 +36,9 @@ const KNOWLEDGE_BASE: { keywords: string[]; answer: string; cta?: { label: strin
     cta: { label: 'Our Property Care Standard', href: '#property-care' },
   },
   {
-    keywords: ['area', 'location', 'where', 'cover', 'chichester', 'worthing', 'crawley', 'horsham', 'arundel', 'bognor'],
+    keywords: ['area', 'location', 'where', 'cover'],
     answer:
-      'We cover all of West Sussex! Core locations include Chichester, Worthing, Arundel, Horsham, Crawley, Bognor Regis, Littlehampton, Shoreham-by-Sea, The Witterings, Haywards Heath, and the South Downs National Park villages. If your property is in or near West Sussex, we can manage it.',
+      'We manage properties across West Sussex, from coastal communities to countryside homes and commuter neighbourhoods. Tell us about your property and we can advise on the right letting option.',
     cta: { label: 'Explore Sussex Areas', href: '#local' },
   },
   {
@@ -51,9 +50,7 @@ const KNOWLEDGE_BASE: { keywords: string[]; answer: string; cta?: { label: strin
   {
     keywords: ['valuation', 'appraisal', 'quote', 'contact', 'call', 'speak', 'phone', 'email'],
     answer:
-      'We would be delighted to visit your property or speak on the phone to provide a free, no-obligation rental appraisal comparing both letting options. You can fill out the form below or call our West Sussex office directly on ' +
-      siteConfig.phone +
-      '.',
+      'We would be delighted to provide a free, no-obligation rental appraisal comparing both letting options. Fill out the enquiry form or email ' + siteConfig.email + '.',
     cta: { label: 'Request Free Appraisal', href: '#contact' },
   },
   {
@@ -293,10 +290,8 @@ export function Chatbot() {
 
           {/* Footer Direct Contact */}
           <div className="chatbot-footer">
-            <span>Direct helpline:</span>
-            <a href={`tel:${siteConfig.phone.replace(/\s+/g, '')}`}>
-              <Phone size={12} /> {siteConfig.phone}
-            </a>
+            <span>Email our team:</span>
+            <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a>
           </div>
         </aside>
       )}

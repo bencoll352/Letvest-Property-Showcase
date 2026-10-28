@@ -18,7 +18,6 @@ import {
   Mail,
   MapPin,
   Menu,
-  Phone,
   Plus,
   Quote,
   ShieldCheck,
@@ -35,7 +34,6 @@ import { Chatbot } from '@/components/chatbot';
 
 const BASE = import.meta.env.BASE_URL;
 const asset = (path: string) => `${BASE}${path.replace(/^\//, '')}`;
-const telHref = `tel:${siteConfig.phone.replace(/\s+/g, '')}`;
 
 /** Adds `.is-visible` to `.reveal` elements as they scroll into view. */
 function useScrollReveal() {
@@ -187,7 +185,7 @@ const compliance = [
 const steps = [
   {
     title: 'Free Property Appraisal',
-    text: 'We visit your property or speak on the phone to provide honest Sussex rental valuation advice across both letting routes.',
+    text: 'We visit your property or discuss your requirements to provide honest Sussex rental valuation advice across both letting routes.',
   },
   {
     title: 'Clear Written Agreement',
@@ -218,7 +216,7 @@ const faqs = [
   },
   {
     q: 'Which areas of West Sussex do you cover?',
-    a: 'We cover the entire county of West Sussex, including Chichester, Worthing, Arundel, Crawley, Horsham, Bognor Regis, Littlehampton, Shoreham, Midhurst, Petworth, and surrounding villages. If your property is in or near West Sussex, we would be delighted to manage it.',
+    a: 'We cover West Sussex and its surrounding villages. If your property is in or near West Sussex, we would be delighted to manage it.',
   },
   {
     q: 'Are there any hidden fees or charges?',
@@ -292,7 +290,6 @@ export default function Home() {
     const body = [
       `Name: ${form.get('name')}`,
       `Email: ${form.get('email')}`,
-      `Phone: ${form.get('phone') || 'Not provided'}`,
       `Property location: ${form.get('location') || 'Not provided'}`,
       `Interested in: ${form.get('arrangement')}`,
       '',
@@ -508,8 +505,7 @@ export default function Home() {
               </p>
               <p>
                 We live, work, and operate right here in West Sussex. We know the rhythm of the local housing market —
-                from peak summer demand in coastal Worthing and the Witterings, to the vibrant festival weeks of
-                Goodwood, to steady professional commuters in Chichester, Horsham, and Crawley.
+                from coastal communities and countryside homes to established commuter neighbourhoods.
               </p>
 
               <div className="about-pillars">
@@ -674,23 +670,17 @@ export default function Home() {
                   We know West Sussex <em>street by street.</em>
                 </h2>
                 <p>
-                  West Sussex is our home and our specialty. From the bustling commuter hubs of Worthing and Crawley
-                  to the historic beauty of Chichester, Arundel, and the rolling South Downs, each neighbourhood possesses
-                  its own distinct rental market and tenant demographics. Our team lives and operates right here in the county,
-                  giving us genuine on-the-ground understanding of tenant demand, local neighbourhoods, and true market rental values.
+                  West Sussex is our home and our specialty. Our team understands the county’s coastal communities, countryside homes, and commuter neighbourhoods. We bring local knowledge of tenant demand and rental values to every property we manage.
                 </p>
                 <p>
                   Whether your property is an executive apartment close to transport links, a suburban family home, or a character
-                  cottage in the South Downs, our local presence means faster turnaround times, regular in-person
+                  countryside cottage, our local presence means faster turnaround times, regular in-person
                   property care, and trusted relationships with local Sussex tradesmen. We ensure your home is matched with
                   the ideal rental model to maximize returns while safeguarding its long-term condition.
                 </p>
                 <div className="local-simple-actions">
                   <a href="#contact" className="btn btn-gold">
                     Discuss Your Sussex Property <ArrowRight size={16} />
-                  </a>
-                  <a href={telHref} className="btn btn-ghost-light">
-                    <Phone size={16} /> Call Our Local Office
                   </a>
                 </div>
               </div>
@@ -699,12 +689,8 @@ export default function Home() {
                   <Img
                     src="images/south-downs-cottage.jpg"
                     fallback="letvest-home.jpg"
-                    alt="Charming Sussex cottage nestled in the South Downs"
+                    alt="Countryside cottage in West Sussex"
                   />
-                  <div className="local-simple-badge">
-                    <MapPin size={16} aria-hidden="true" />
-                    <span>Serving Chichester, Worthing, Arundel, Horsham, Crawley &amp; South Downs</span>
-                  </div>
                 </div>
               </div>
             </div>
@@ -734,13 +720,6 @@ export default function Home() {
                   <p>{text}</p>
                 </div>
               ))}
-            </div>
-            <div className="gas-safe-standard">
-              <img src={asset('gas-safe-logo.png')} alt="Gas Safe Register" width="148" height="148" loading="lazy" />
-              <div>
-                <h3>Gas safety, handled professionally</h3>
-                <p>Gas safety inspections and gas work are carried out by Gas Safe registered engineers.</p>
-              </div>
             </div>
           </div>
         </section>
@@ -808,8 +787,7 @@ export default function Home() {
                 Everything you need <em>to know.</em>
               </h2>
               <p>
-                Have a specific question about your property? Call our West Sussex team on{' '}
-                <a href={telHref}>{siteConfig.phone}</a> or use our live digital assistant below.
+                Have a specific question about your property? Email our West Sussex team or use our digital assistant below.
               </p>
             </div>
             <div className="faq-list">
@@ -856,10 +834,6 @@ export default function Home() {
                 <li><Check size={18} /> Fast response within 1 business day</li>
               </ul>
               <div className="contact-direct">
-                <a href={telHref}>
-                  <span className="cd-icon"><Phone size={18} /></span>
-                  <span><small>Call us directly</small>{siteConfig.phone}</span>
-                </a>
                 <a href={`mailto:${siteConfig.email}`}>
                   <span className="cd-icon"><Mail size={18} /></span>
                   <span><small>Email our desk</small>{siteConfig.email}</span>
@@ -870,13 +844,9 @@ export default function Home() {
             <form className="contact-form reveal" onSubmit={sendEnquiry}>
               <h3 className="display">Book Your Free Appraisal</h3>
               <div className="form-grid">
-                <div className="field">
+                <div className="field full">
                   <label htmlFor="c-name">Your Full Name</label>
                   <input id="c-name" name="name" autoComplete="name" placeholder="e.g. John Smith" required />
-                </div>
-                <div className="field">
-                  <label htmlFor="c-phone">Phone Number</label>
-                  <input id="c-phone" name="phone" type="tel" autoComplete="tel" placeholder="e.g. 07123 456789" />
                 </div>
                 <div className="field full">
                   <label htmlFor="c-email">Email Address</label>
@@ -884,7 +854,7 @@ export default function Home() {
                 </div>
                 <div className="field">
                   <label htmlFor="c-location">Property Town or Postcode</label>
-                  <input id="c-location" name="location" placeholder="e.g. Worthing, Chichester, BN11" />
+                  <input id="c-location" name="location" placeholder="Your property town or postcode in West Sussex" />
                 </div>
                 <div className="field">
                   <label htmlFor="c-arrangement">Interested In</label>
@@ -909,8 +879,7 @@ export default function Home() {
               <p className="form-note">
                 {sent ? (
                   <>
-                    Your email client has opened with your inquiry ready to send. Or call us directly on{' '}
-                    <a href={telHref}>{siteConfig.phone}</a>.
+                    Your enquiry is ready in your email app. Please send it to complete your request.
                   </>
                 ) : (
                   'Your details are strictly confidential and used solely to prepare your property appraisal.'
@@ -941,17 +910,8 @@ export default function Home() {
             </ul>
           </div>
           <div>
-            <h4>Sussex Locations</h4>
-            <ul>
-              {['Chichester', 'Worthing', 'Arundel', 'Crawley', 'Horsham', 'Bognor Regis'].map((t) => (
-                <li key={t}><a href="#local">{t}</a></li>
-              ))}
-            </ul>
-          </div>
-          <div>
             <h4>Contact</h4>
             <ul>
-              <li><a href={telHref}>{siteConfig.phone}</a></li>
               <li><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
               <li>{siteConfig.baseTown}</li>
             </ul>
@@ -980,11 +940,6 @@ export default function Home() {
       {/* FLOATING CHATBOT WIDGET */}
       <Chatbot />
 
-      {/* FLOATING MOBILE PHONE CALL BUTTON */}
-      <a className="mobile-call" href={telHref} aria-label={`Call ${siteConfig.companyName}`}>
-        <Phone size={20} />
-      </a>
     </div>
   );
 }
-

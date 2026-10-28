@@ -1011,4 +1011,34 @@ body, .care-section, .process, .faq { background: #fff; }
 .gas-safe-standard h3 { margin: 0 0 8px; color: var(--ink); font-size: 1.15rem; }
 .gas-safe-standard p { margin: 0; color: var(--text); line-height: 1.6; }
 @media (max-width: 480px) { .gas-safe-standard { flex-direction: column; align-items: flex-start; gap: 16px; padding: 20px; } }
-
+/* Consistent section rhythm on white backgrounds. */
+.section { padding-block: clamp(48px, 6vw, 76px); }
+.section-head { margin-bottom: 32px; }
+.hero { min-height: 520px; padding: 60px 0 112px; }
+.spotlight-clean .spotlight-benefits { margin: 28px 0; }
+.spotlight-actions, .local-simple-actions { gap: 12px; }
+.care-pledge-banner { margin-top: 32px; }
+.about-grid, .peace-grid, .local-simple-grid { gap: 40px; }
+.faq-grid, .contact-grid { gap: 40px; align-items: start; }
+.compare { margin-top: 40px; padding: 32px; }
+.footer-grid { grid-template-columns: 1.5fr 1fr 1fr; gap: 32px; }
+.site-footer { padding-top: 48px; }
+.prs-membership { margin-top: 28px; }
+.site-footer .gas-safe-standard { margin-top: 20px; }
+.footer-legal { margin-top: 28px; }
+@media (max-width: 900px) {
+  .about-grid, .peace-grid, .local-simple-grid, .faq-grid, .contact-grid { gap: 28px; }
+  .footer-grid { grid-template-columns: 1fr 1fr; gap: 28px; }
+  .footer-brand { grid-column: 1 / -1; }
+}
+@media (max-width: 680px) {
+  .section { padding-block: 48px; }
+  .hero { min-height: auto; padding: 40px 0 100px; }
+  .section-head { margin-bottom: 28px; }
+  .compare { margin-top: 32px; padding: 24px 16px; }
+  .care-pledge-banner { padding: 24px 20px; gap: 24px; }
+  .footer-grid { grid-template-columns: 1fr; gap: 28px; }
+  .site-footer { padding-bottom: 32px; }
+  .chatbot-trigger { bottom: calc(18px + env(safe-area-inset-bottom)); }
+  .chatbot-window { bottom: calc(82px + env(safe-area-inset-bottom)); }
+}
