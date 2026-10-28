@@ -964,6 +964,13 @@ export default function Home() {
             <span>Membership number: <b>{siteConfig.prsMembershipNumber}</b></span>
           </div>
         </div>
+        <div className="container-wide gas-safe-standard">
+          <img src={asset('gas-safe-logo.png')} alt="Gas Safe Register" width="148" height="148" loading="lazy" />
+          <div>
+            <h3>Gas Safe registered engineers</h3>
+            <p>Gas work and gas safety inspections are carried out by Gas Safe registered engineers.</p>
+          </div>
+        </div>
         <div className="container-wide footer-legal">
           <span>© {new Date().getFullYear()} {siteConfig.companyName}. All rights reserved.</span>
           {legalLines.length > 0 && <span>{legalLines.join(' · ')}</span>}
