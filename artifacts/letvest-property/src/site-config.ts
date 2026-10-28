@@ -1,44 +1,36 @@
-/**
- * Central business details for the JM LetVest Ltd website.
- */
+/** Publish only explicitly approved facts. Empty values never render as credentials. */
+export interface OccupantGroup { name: string; description: string; approved: boolean }
+export interface Responsibility { label: string; guaranteedRent: string; managedLetting: string; approved: boolean }
+export interface CaseStudy { approved: boolean; title: string; propertyType: string; approximateLocation: string; challenge: string; service: string; work: string; outcome: string; photos: { src: string; alt: string }[]; testimonial?: { quote: string; attribution: string }; evidenceApproved: boolean }
+export interface FamilyMember { approved: boolean; name: string; role: string; photograph: string; photographApproved: boolean; biography: string }
+export interface FamilyCommitment { approved: boolean; title: string; detail: string }
 export const siteConfig = {
-  companyName: 'JM LetVest Ltd',
-  shortName: 'JM LetVest',
+  companyName: 'JM LetVest Ltd', shortName: 'JM LetVest',
   tagline: 'Guaranteed Rent & Fully Managed Letting across West Sussex',
-
-  // Contact details
-  email: 'info@jmletvest.com',
-  prsMembershipNumber: 'PRS058309',
-  baseTown: 'West Sussex, United Kingdom',
-
-  // Key performance & trust figures
-  stats: [
-    { value: '100%', label: 'Rent paid guaranteed every month' },
-    { value: '£0', label: 'Letting fees on guaranteed rent' },
-    { value: '24/7', label: 'Local emergency & property care' },
-    { value: '100%', label: 'Compliance & inspection checked' },
-  ],
-
-  // Legal and compliance placeholders (visible once provided)
-  legal: {
-    companyNumber: '', // e.g. 'Registered in England & Wales'
-    redressScheme: '', // e.g. 'The Property Redress Scheme'
-    clientMoneyProtection: '', // e.g. 'Client Money Protection'
-    icoNumber: '', // e.g. 'Information Commissioner\'s Office (ICO)'
+  email: 'info@jmletvest.com', baseTown: 'West Sussex, United Kingdom',
+  occupants: [
+    { name: 'Working professionals', description: 'Homes for people working in the area.', approved: true },
+    { name: 'Healthcare professionals', description: 'Homes for people working in healthcare. This does not imply an NHS or employer partnership.', approved: true },
+  ] satisfies OccupantGroup[],
+  screening: 'Occupants are screened before an arrangement proceeds. Ask us for the checks proposed for your property; the process depends on the letting arrangement.',
+  responsibilities: [] as Responsibility[],
+  family: {
+    introductionApproved: true, introduction: 'JM LetVest is a family-run business owned by Jake and Maddie Mallender. They are parents to a young son.',
+    storyApproved: false, relationship: '', reasonForStarting: '', westSussexConnection: '',
+    members: [
+      { approved: true, name: 'Jake Mallender', role: 'Owner', photograph: '', photographApproved: false, biography: 'Jake has always lived in West Sussex.' },
+      { approved: true, name: 'Maddie Mallender', role: 'Owner', photograph: '', photographApproved: false, biography: 'Maddie has always lived in West Sussex.' },
+    ] as FamilyMember[],
+    commitments: [] as FamilyCommitment[],
   },
-
-  testimonials: [
-    {
-      quote:
-        'Having our rent paid on the 1st of every month without fail has given us total financial peace of mind. JM LetVest take immaculate care of the flat.',
-      name: 'David & Helen M.',
-      detail: 'Landlords (Guaranteed Rent agreement)',
-    },
-    {
-      quote:
-        'Professional, communicative, and truly local. They treat our property with real pride and we never have to worry about maintenance or compliance.',
-      name: 'Sarah K.',
-      detail: 'Landlord (Fully Managed Letting)',
-    },
-  ],
+  complaints: {
+    approved: false, handlerName: '', acknowledgementTime: '', responseTime: '', reviewProcess: '', escalation: '',
+  },
+  registrations: {
+    companyNumber: '', registeredOffice: '', icoNumber: '', icoVerified: false, clientMoneyProtection: '',
+    prs: { number: 'PRS058309', verified: true },
+  },
+  caseStudies: [] as CaseStudy[],
+  investorsConfirmed: false,
 };
+export const pageHref = (view: 'professional-standards' | 'privacy' | 'complaints') => `${import.meta.env.BASE_URL}?view=${view}`;

@@ -1,48 +1,10 @@
-﻿import { type ReactNode } from 'react';
-import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ErrorBoundary } from '@/components/error-boundary';
-import { Toaster } from '@/components/ui/toaster';
-import { TooltipProvider } from '@/components/ui/tooltip';
+import { useEffect } from 'react';
 import Home from '@/pages/home';
-import NotFound from '@/pages/not-found';
-import {
-  Route,
-  Switch,
-  useLocation,
-  Router as WouterRouter,
-} from 'wouter';
-
-const queryClient = new QueryClient();
-
-function Router() {
-  return (
-    // Keep a shared shell (sidebar, navbar) outside the boundary so it
-    // survives a page crash.
-    <RoutedErrorBoundary>
-      <Switch>
-        <Route path="/" component={Home} />
-        <Route component={NotFound} />
-      </Switch>
-    </RoutedErrorBoundary>
-  );
+import InformationPage from '@/pages/information';
+import { ErrorBoundary } from '@/components/error-boundary';
+export default function App() {
+ const view=new URLSearchParams(window.location.search).get('view');
+ const kind=view==='privacy'?'privacy':view==='professional-standards'?'professional-standards':view==='complaints'?'complaints':null;
+ useEffect(()=>{document.title=kind==='privacy'?'Enquiry Privacy Notice | JM LetVest Ltd':kind==='complaints'?'Complaints Procedure | JM LetVest Ltd':kind?'Professional Standards | JM LetVest Ltd':'JM LetVest Ltd | Letting in West Sussex';const canonical=document.querySelector<HTMLLinkElement>('link[rel="canonical"]');if(canonical&&kind) canonical.href=`${canonical.href.split('?')[0]}?view=${kind}`;},[kind]);
+ return <ErrorBoundary>{kind?<InformationPage kind={kind}/>:<Home />}</ErrorBoundary>;
 }
-
-function RoutedErrorBoundary({ children }: { children: ReactNode }) {
-  const [location] = useLocation();
-  return <ErrorBoundary resetKey={location}>{children}</ErrorBoundary>;
-}
-
-function App() {
-  return (
-    <QueryClientProvider client={queryClient}>
-      <TooltipProvider>
-        <WouterRouter base={import.meta.env.BASE_URL.replace(/\/$/, '')}>
-          <Router />
-        </WouterRouter>
-        <Toaster />
-      </TooltipProvider>
-    </QueryClientProvider>
-  );
-}
-
-export default App;

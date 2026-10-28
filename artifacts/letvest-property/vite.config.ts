@@ -30,6 +30,16 @@ if (!basePath) {
 export default defineConfig({
   base: basePath,
   plugins: [
+    {
+      name: 'letvest-site-metadata',
+      transformIndexHtml(html) {
+        const configuredUrl = process.env.SITE_URL || 'https://bencoll352.github.io/Letvest-Property-Showcase/';
+        const siteUrl = new URL(configuredUrl);
+        if (siteUrl.protocol !== 'https:' || siteUrl.search || siteUrl.hash) throw new Error('SITE_URL must be a clean HTTPS site URL');
+        if (!siteUrl.pathname.endsWith('/')) siteUrl.pathname += '/';
+        return html.replaceAll('__SITE_URL__', siteUrl.href).replaceAll('__ROBOTS__', process.env.PUBLICATION_READY === 'true' ? 'index, follow' : 'noindex, nofollow');
+      },
+    },
     react(),
     tailwindcss(),
     runtimeErrorOverlay(),
