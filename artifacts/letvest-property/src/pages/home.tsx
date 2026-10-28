@@ -189,62 +189,6 @@ const comparison = [
   { label: 'Use home yourself?', values: ['No (commercial lease)', 'No (exclusive tenancy)', 'Yes — block personal dates'] },
 ];
 
-const areas = [
-  {
-    name: 'Chichester & The Witterings',
-    headline: 'Cathedral city charm & world-class coast',
-    detail:
-      'Chichester enjoys continuous demand from hospital consultants, university staff, and professionals. During the summer, West Wittering beach and the world-renowned Goodwood Festival of Speed and Revival drive exceptional premium short-let occupancy.',
-    bestFit: 'Guaranteed Rent · Airbnb Holiday Lets · Long Lets',
-    image: 'images/south-downs-cottage.jpg',
-  },
-  {
-    name: 'Worthing & Shoreham-by-Sea',
-    headline: 'Thriving coastal hub & commuter hotspot',
-    detail:
-      'Worthing offers superb seaside living, a buzzing restaurant scene, and direct train links to Brighton and London. High demand for flats and family houses makes it an ideal territory for fixed guaranteed rent and hands-free tenancies.',
-    bestFit: 'Guaranteed Rent · Fully Managed Lettings',
-    image: 'images/sussex-coast.jpg',
-  },
-  {
-    name: 'Arundel & The South Downs',
-    headline: 'Historic castle town & national park haven',
-    detail:
-      'Arundel, Midhurst, and Petworth sit nestled along the South Downs. Walkers, romantic weekenders, wedding parties, and Goodwood visitors make period cottages and character townhouses top performers for holiday letting.',
-    bestFit: 'Airbnb & Boutique Holiday Lets · Character Lets',
-    image: 'images/south-downs-cottage.jpg',
-  },
-  {
-    name: 'Crawley & Gatwick Corridor',
-    headline: 'Aviation, corporate & contractor powerhouse',
-    detail:
-      'Anchored by London Gatwick Airport and the thriving Manor Royal business district, Crawley experiences an unceasing requirement for quality corporate stays, flight crew accommodation, and flexible contractor housing.',
-    bestFit: 'Corporate Guaranteed Rent · Serviced Accommodation',
-    image: 'images/modern-apartment.jpg',
-  },
-  {
-    name: 'Horsham & Mid Sussex',
-    headline: 'Affluent market towns & London commuters',
-    detail:
-      'Horsham, Haywards Heath, and Burgess Hill consistently rank among the best places to live in the UK. Excellent grammar schools, green parks, and swift 45-minute rail links to London Victoria deliver reliable, respectful family tenancies.',
-    bestFit: 'Fully Managed Letting · Long-Term Guaranteed Rent',
-    image: 'letvest-home.jpg',
-  },
-  {
-    name: 'Bognor Regis & Littlehampton',
-    headline: 'Regenerated coast & high-yield opportunities',
-    detail:
-      'Featuring sandy beaches, extensive sea-defence regenerations, and university campus developments, these south coast resorts provide exceptional rental yields and steady summer staycation popularity.',
-    bestFit: 'Guaranteed Rent · Holiday Lets',
-    image: 'images/sussex-coast.jpg',
-  },
-];
-
-const towns = [
-  'Chichester', 'Worthing', 'Arundel', 'Crawley', 'Horsham', 'Bognor Regis',
-  'Littlehampton', 'Shoreham-by-Sea', 'Haywards Heath', 'Burgess Hill', 'East Grinstead',
-  'Midhurst', 'Petworth', 'Selsey', 'The Witterings', 'Steyning', 'Lancing', 'Pulborough',
-];
 
 const compliance = [
   { icon: Flame, title: 'Gas Safety (CP12)', text: 'Annual gas inspections scheduled, certified, and filed on time.' },
@@ -325,7 +269,6 @@ export default function Home() {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
-  const [activeArea, setActiveArea] = useState(0);
   const [sent, setSent] = useState(false);
 
   useScrollReveal();
@@ -358,7 +301,6 @@ export default function Home() {
   };
 
   const legalLines = Object.values(siteConfig.legal).filter(Boolean);
-  const area = areas[activeArea];
 
   return (
     <div className="site-shell">
@@ -428,10 +370,6 @@ export default function Home() {
           </div>
           <div className="container-wide hero-inner">
             <div className="hero-copy">
-              <div className="hero-highlight-pill">
-                <Sparkles size={15} />
-                <span>#1 Advantage: Rent Paid Guaranteed Every Single Month</span>
-              </div>
               <h1 className="display">
                 Your Sussex property cared for like our own.
                 <em> Your income guaranteed.</em>
@@ -448,31 +386,7 @@ export default function Home() {
                   Book Free Property Appraisal
                 </a>
               </div>
-              <ul className="hero-ticks">
-                <li><Check size={16} /> Rent paid on time every month</li>
-                <li><Check size={16} /> Zero void periods &amp; zero agency fees</li>
-                <li><Check size={16} /> 24/7 Sussex property care</li>
-                <li><Check size={16} /> Full statutory compliance</li>
-              </ul>
             </div>
-
-            <aside className="hero-card" aria-label="Why landlords choose JM LetVest">
-              <div className="hero-card-stars" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, i) => (
-                  <Star key={i} size={16} fill="currentColor" />
-                ))}
-              </div>
-              <p className="hero-card-title">The JM LetVest Standard</p>
-              <ul>
-                <li><Wallet size={18} /> <strong>Guaranteed Rent:</strong> Paid on the same date every month</li>
-                <li><ShieldCheck size={18} /> <strong>Care Commitment:</strong> Regular photographic reports</li>
-                <li><Wrench size={18} /> <strong>Local Trades:</strong> Vetted Sussex plumbers, electricians &amp; handymen</li>
-                <li><CalendarCheck size={18} /> <strong>Zero Headaches:</strong> No tenant chasing or midnight emergencies</li>
-              </ul>
-              <a href={telHref} className="hero-card-call">
-                <Phone size={16} /> Speak to our Sussex team
-              </a>
-            </aside>
           </div>
         </section>
 
@@ -489,14 +403,11 @@ export default function Home() {
         </section>
 
         {/* =================================================================
-            CORE ADVANTAGE SPOTLIGHT: 100% GUARANTEED MONTHLY RENT
+            100% GUARANTEED MONTHLY RENT
             ================================================================= */}
         <section id="guaranteed-rent" className="section guaranteed-spotlight">
-          <div className="container-wide spotlight-grid">
+          <div className="container-wide spotlight-clean">
             <div className="spotlight-copy reveal">
-              <span className="spotlight-badge">
-                <Sparkles size={14} /> Our Core Landlord Advantage
-              </span>
               <h2 className="display">
                 Your rent paid guaranteed <em>every single month.</em>
               </h2>
@@ -527,49 +438,11 @@ export default function Home() {
                   <p>Secure long-term certainty with flexible commercial lease terms tailored to your goals.</p>
                 </div>
               </div>
-              <a href="#contact" className="btn btn-gold btn-lg">
-                Get Your Guaranteed Rent Offer <ArrowRight size={18} />
-              </a>
-            </div>
-
-            <div className="spotlight-card reveal">
-              <div className="spotlight-card-head">
-                <h3>Conventional Letting vs JM LetVest</h3>
-                <span>Guaranteed</span>
+              <div className="spotlight-actions">
+                <a href="#contact" className="btn btn-gold btn-lg">
+                  Get Your Guaranteed Rent Offer <ArrowRight size={18} />
+                </a>
               </div>
-              <div className="compare-pills">
-                <div className="compare-pill bad">
-                  <span>Traditional Letting Agent:</span>
-                  <strong>Void periods = £0 income</strong>
-                </div>
-                <div className="compare-pill good">
-                  <span>JM LetVest Guarantee:</span>
-                  <strong>100% Paid Every Month</strong>
-                </div>
-                <div className="compare-pill bad">
-                  <span>Traditional Letting Agent:</span>
-                  <strong>12%–15% commission deducted</strong>
-                </div>
-                <div className="compare-pill good">
-                  <span>JM LetVest Guarantee:</span>
-                  <strong>£0 Agency Fees Deducted</strong>
-                </div>
-                <div className="compare-pill bad">
-                  <span>Traditional Letting Agent:</span>
-                  <strong>Tenant calls you for midnight repairs</strong>
-                </div>
-                <div className="compare-pill good">
-                  <span>JM LetVest Guarantee:</span>
-                  <strong>24/7 Local Sussex Care Handled</strong>
-                </div>
-              </div>
-              <p className="spotlight-card-note">
-                Every detail is documented in a clear commercial agreement. Enjoy pure, hands-off passive income
-                with total financial security.
-              </p>
-              <a href={telHref} className="btn btn-navy btn-block">
-                <Phone size={16} /> Discuss Your Rent: {siteConfig.phone}
-              </a>
             </div>
           </div>
         </section>
@@ -809,65 +682,47 @@ export default function Home() {
             ================================================================= */}
         <section id="local" className="section local">
           <div className="container-wide">
-            <div className="local-head reveal">
-              <div>
+            <div className="local-simple-grid reveal">
+              <div className="local-simple-copy">
                 <span className="eyebrow eyebrow-light">West Sussex Expertise</span>
                 <h2 className="display">
                   We know West Sussex <em>street by street.</em>
                 </h2>
-              </div>
-              <p>
-                From festival crowds at Goodwood to corporate contractors near Gatwick and coastal commuters along
-                the Worthing promenade, each market has unique dynamics. Our hyper-local knowledge ensures your
-                property achieves peak returns.
-              </p>
-            </div>
-
-            <div className="local-panel reveal">
-              <div className="area-tabs" role="tablist" aria-label="West Sussex areas">
-                {areas.map((a, i) => (
-                  <button
-                    key={a.name}
-                    role="tab"
-                    id={`area-tab-${i}`}
-                    aria-selected={activeArea === i}
-                    aria-controls="area-panel"
-                    className="area-tab"
-                    onClick={() => setActiveArea(i)}
-                  >
-                    <MapPin size={16} aria-hidden="true" /> {a.name}
-                  </button>
-                ))}
-              </div>
-              <div
-                className="area-detail"
-                id="area-panel"
-                role="tabpanel"
-                aria-labelledby={`area-tab-${activeArea}`}
-                key={area.name}
-              >
-                <div className="area-image">
-                  <Img src={area.image} fallback="letvest-home.jpg" alt={area.name} />
+                <p>
+                  West Sussex is our home and our specialty. From the bustling commuter hubs of Worthing and Crawley
+                  to the historic beauty of Chichester, Arundel, and the rolling South Downs, each neighbourhood possesses
+                  its own distinct rental market and tenant demographics. Our team lives and operates right here in the county,
+                  giving us genuine on-the-ground understanding of tenant demands, seasonal holiday peaks around Goodwood and
+                  the coast, and true market rental values.
+                </p>
+                <p>
+                  Whether your property is an executive apartment close to transport links, a suburban family home, or a character
+                  cottage welcoming weekend holidaymakers, our local presence means faster turnaround times, regular in-person
+                  property care, and trusted relationships with local Sussex tradesmen. We ensure your home is matched with
+                  the ideal rental model to maximize returns while safeguarding its long-term condition.
+                </p>
+                <div className="local-simple-actions">
+                  <a href="#contact" className="btn btn-gold">
+                    Discuss Your Sussex Property <ArrowRight size={16} />
+                  </a>
+                  <a href={telHref} className="btn btn-ghost-light">
+                    <Phone size={16} /> Call Our Local Office
+                  </a>
                 </div>
-                <div className="area-copy">
-                  <span className="area-kicker">{area.name}</span>
-                  <h3 className="display">{area.headline}</h3>
-                  <p>{area.detail}</p>
-                  <div className="area-fit">
-                    <Sparkles size={16} aria-hidden="true" />
-                    <span><strong>Recommended model:</strong> {area.bestFit}</span>
+              </div>
+              <div className="local-simple-media">
+                <div className="local-simple-image-frame">
+                  <Img
+                    src="images/south-downs-cottage.jpg"
+                    fallback="letvest-home.jpg"
+                    alt="Charming Sussex cottage nestled in the South Downs"
+                  />
+                  <div className="local-simple-badge">
+                    <MapPin size={16} aria-hidden="true" />
+                    <span>Serving Chichester, Worthing, Arundel, Horsham, Crawley &amp; South Downs</span>
                   </div>
                 </div>
               </div>
-            </div>
-
-            <div className="towns reveal">
-              <span className="towns-label">Sussex Towns We Cover</span>
-              <ul>
-                {towns.map((t) => (
-                  <li key={t}>{t}</li>
-                ))}
-              </ul>
             </div>
           </div>
         </section>

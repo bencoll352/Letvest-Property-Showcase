@@ -1,13 +1,14 @@
 import { useEffect, useRef, useState } from 'react';
 import {
   ArrowRight,
-  Bot,
   CheckCircle2,
+  Headphones,
   HelpCircle,
   MapPin,
-  MessageSquare,
+  MessageCircle,
   Phone,
   Send,
+  Smile,
   Sparkles,
   X,
 } from 'lucide-react';
@@ -167,11 +168,11 @@ export function Chatbot() {
         onClick={() => setIsOpen(!isOpen)}
       >
         <span className="chatbot-trigger-avatar">
-          {isOpen ? <X size={22} /> : <Bot size={22} />}
+          {isOpen ? <X size={22} /> : <Smile size={22} />}
         </span>
         <span className="chatbot-trigger-text">
-          <strong>JM LetVest Assistant</strong>
-          <small>Ask about Guaranteed Rent</small>
+          <strong>JM LetVest Concierge</strong>
+          <small>Friendly local advice</small>
         </span>
         <span className="chatbot-online-pulse" />
       </button>
@@ -183,12 +184,12 @@ export function Chatbot() {
           <div className="chatbot-header">
             <div className="chatbot-brand">
               <div className="chatbot-bot-icon">
-                <Bot size={20} />
+                <Smile size={20} />
               </div>
               <div>
                 <h4>JM LetVest Concierge</h4>
                 <p>
-                  <span className="online-dot" /> Online · West Sussex Specialist
+                  <span className="online-dot" /> Online · Friendly Property Advisor
                 </p>
               </div>
             </div>
@@ -214,7 +215,7 @@ export function Chatbot() {
               <div key={m.id} className={`chatbot-msg ${m.sender}`}>
                 {m.sender === 'bot' && (
                   <div className="chatbot-msg-avatar">
-                    <Bot size={14} />
+                    <Smile size={14} />
                   </div>
                 )}
                 <div className="chatbot-bubble">
@@ -250,7 +251,7 @@ export function Chatbot() {
             {isTyping && (
               <div className="chatbot-msg bot">
                 <div className="chatbot-msg-avatar">
-                  <Bot size={14} />
+                  <Smile size={14} />
                 </div>
                 <div className="chatbot-bubble typing">
                   <span className="dot" />
