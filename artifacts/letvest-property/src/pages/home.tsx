@@ -249,18 +249,19 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [sent, setSent] = useState(false);
-  const [videoPaused, setVideoPaused] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
   const heroVideoRef = useRef<HTMLVideoElement>(null);
 
   useEffect(() => {
     const video = heroVideoRef.current;
     if (!video) return;
-    if (videoPaused) {
+    video.defaultPlaybackRate = 0.5;
+    video.playbackRate = 0.5;
+    if (window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       video.pause();
     } else {
-      void video.play().catch(() => setVideoPaused(true));
+      void video.play().catch(() => { /* Keep the poster if autoplay is unavailable. */ });
     }
-  }, [videoPaused]);
+  }, []);
 
   useScrollReveal();
 
@@ -361,21 +362,6 @@ export default function Home() {
               <source src={asset('hero-house-fronts.mp4')} type="video/mp4" />
             </video>
           </div>
-          <button
-            type="button"
-            className="hero-video-toggle"
-            onClick={() => {
-              const video = heroVideoRef.current;
-              if (video?.paused) {
-                void video.play().then(() => setVideoPaused(false)).catch(() => setVideoPaused(true));
-              } else {
-                video?.pause();
-                setVideoPaused(true);
-              }
-            }}
-          >
-            {videoPaused ? 'Play background video' : 'Pause background video'}
-          </button>
           <div className="container-wide hero-inner">
             <div className="hero-copy">
               <h1 className="display">
@@ -386,14 +372,6 @@ export default function Home() {
                 <strong>JM LetVest Ltd</strong> provides hands-free guaranteed rent
                 and fully managed lettings across West Sussex. Enjoy total peace of mind while we protect your asset.
               </p>
-              <div className="hero-actions">
-                <a className="btn btn-gold btn-lg" href="#guaranteed-rent">
-                  See How Guaranteed Rent Works <ArrowRight size={18} />
-                </a>
-                <a className="btn btn-ghost btn-lg" href="#contact">
-                  Book Free Property Appraisal
-                </a>
-              </div>
             </div>
           </div>
         </section>
@@ -1002,3 +980,4 @@ export default function Home() {
     </div>
   );
 }
+
