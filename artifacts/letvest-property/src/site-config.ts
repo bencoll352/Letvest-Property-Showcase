@@ -4,11 +4,12 @@
 export const siteConfig = {
   companyName: 'JM LetVest Ltd',
   shortName: 'JM LetVest',
-  tagline: 'Guaranteed Rent, Fully Managed Letting & Airbnb Management across West Sussex',
+  tagline: 'Guaranteed Rent & Fully Managed Letting across West Sussex',
 
   // Contact details
   phone: '01903 000000',
-  email: 'hello@jmletvest.co.uk',
+  email: 'info@jmletvest.com',
+  prsMembershipNumber: 'PRS058309',
   baseTown: 'West Sussex, United Kingdom',
 
   // Key performance & trust figures
@@ -33,12 +34,6 @@ export const siteConfig = {
         'Having our rent paid on the 1st of every month without fail has given us total financial peace of mind. JM LetVest take immaculate care of the flat in Worthing.',
       name: 'David & Helen M.',
       detail: 'Landlords, Worthing (Guaranteed Rent agreement)',
-    },
-    {
-      quote:
-        'We transitioned our cottage near Arundel into a managed holiday let with JM LetVest. The booking revenues for Goodwood season exceeded all expectations, and the property is always spotless.',
-      name: 'Marcus T.',
-      detail: 'Property Owner, Arundel (Airbnb & Holiday Let Management)',
     },
     {
       quote:

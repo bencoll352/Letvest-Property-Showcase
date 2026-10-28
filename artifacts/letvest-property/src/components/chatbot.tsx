@@ -37,12 +37,6 @@ const KNOWLEDGE_BASE: { keywords: string[]; answer: string; cta?: { label: strin
     cta: { label: 'Our Property Care Standard', href: '#property-care' },
   },
   {
-    keywords: ['airbnb', 'holiday', 'short stay', 'goodwood', 'short let', 'guest', 'wittering'],
-    answer:
-      'We offer complete hands-off Airbnb & holiday let management across West Sussex! From dynamic pricing during peak seasons (such as the Goodwood Festival of Speed and summer coastal surges) to 24/7 guest check-in, 5-star linen and cleaning, and listing optimization on Airbnb, Booking.com, and Vrbo. You also get an owner portal to block dates for personal use.',
-    cta: { label: 'See Airbnb Management', href: '#services' },
-  },
-  {
     keywords: ['area', 'location', 'where', 'cover', 'chichester', 'worthing', 'crawley', 'horsham', 'arundel', 'bognor'],
     answer:
       'We cover all of West Sussex! Core locations include Chichester, Worthing, Arundel, Horsham, Crawley, Bognor Regis, Littlehampton, Shoreham-by-Sea, The Witterings, Haywards Heath, and the South Downs National Park villages. If your property is in or near West Sussex, we can manage it.',
@@ -51,13 +45,13 @@ const KNOWLEDGE_BASE: { keywords: string[]; answer: string; cta?: { label: strin
   {
     keywords: ['fee', 'cost', 'charge', 'commission', 'price', 'pricing', 'how much'],
     answer:
-      'For our Guaranteed Rent model, there are £0 letting fees and 0% commission deducted — the agreed rent is what you receive. For Fully Managed letting and Airbnb management, our transparent commission models include all marketing, management, inspections, and compliance oversight with zero hidden extras.',
+      'For our Guaranteed Rent model, there are £0 letting fees and 0% commission deducted — the agreed rent is what you receive. For Fully Managed letting, our transparent commission models include all marketing, management, inspections, and compliance oversight with zero hidden extras.',
     cta: { label: 'Compare Options', href: '#compare' },
   },
   {
     keywords: ['valuation', 'appraisal', 'quote', 'contact', 'call', 'speak', 'phone', 'email'],
     answer:
-      'We would be delighted to visit your property or speak on the phone to provide a free, no-obligation rental appraisal comparing all three letting options. You can fill out the form below or call our West Sussex office directly on ' +
+      'We would be delighted to visit your property or speak on the phone to provide a free, no-obligation rental appraisal comparing both letting options. You can fill out the form below or call our West Sussex office directly on ' +
       siteConfig.phone +
       '.',
     cta: { label: 'Request Free Appraisal', href: '#contact' },
@@ -65,7 +59,7 @@ const KNOWLEDGE_BASE: { keywords: string[]; answer: string; cta?: { label: strin
   {
     keywords: ['about', 'who are you', 'jm letvest', 'company', 'brand', 'background'],
     answer:
-      'JM LetVest Ltd is a premier independent West Sussex property letting, rent-to-rent and Airbnb management company. We combine the financial security of guaranteed institutional leases with the genuine care and local insight of a dedicated boutique team based in Sussex.',
+      'JM LetVest Ltd is a premier independent West Sussex property letting and rent-to-rent company. We combine the financial security of guaranteed institutional leases with the genuine care and local insight of a dedicated boutique team based in Sussex.',
     cta: { label: 'Read Our Story', href: '#about' },
   },
 ];
@@ -80,12 +74,11 @@ const INITIAL_MESSAGES: Message[] = [
   {
     id: '2',
     sender: 'bot',
-    text: 'Whether you want Guaranteed Rent paid every single month, boutique Airbnb hosting, or fully managed letting in West Sussex, we are here to help your property thrive with zero hassle.',
+    text: 'Whether you want Guaranteed Rent paid every single month, fully managed letting in West Sussex, we are here to help your property thrive with zero hassle.',
     time: 'Just now',
     options: [
       '💰 How does Guaranteed Rent work?',
       '🛡️ How will you care for my property?',
-      '🏖️ Can I do Airbnb with my property?',
       '📍 Which areas of Sussex do you cover?',
       '📞 Book a free property appraisal',
     ],
@@ -122,7 +115,7 @@ export function Chatbot() {
       cta = match.cta;
     } else {
       answerText =
-        'Thank you for asking! JM LetVest Ltd specializes in 100% Guaranteed Rent (paid every month without fail), fully managed letting, and Airbnb management across West Sussex. Would you like to speak directly with our local property team or book a free appraisal?';
+        'Thank you for asking! JM LetVest Ltd specializes in 100% Guaranteed Rent (paid every month without fail) and fully managed letting across West Sussex. Would you like to speak directly with our local property team or book a free appraisal?';
       cta = { label: 'Book a Free Appraisal', href: '#contact' };
     }
 
@@ -276,12 +269,6 @@ export function Chatbot() {
             >
               🛡️ Property Care
             </button>
-            <button
-              type="button"
-              onClick={() => handleSend('Tell me about Airbnb management')}
-            >
-              🏖️ Airbnb Stays
-            </button>
           </div>
 
           {/* Input Bar */}
@@ -294,7 +281,7 @@ export function Chatbot() {
           >
             <input
               type="text"
-              placeholder="Ask about rent, care, Airbnb..."
+              placeholder="Ask about rent, care, letting..."
               value={input}
               onChange={(e) => setInput(e.target.value)}
               aria-label="Your question for JM LetVest"

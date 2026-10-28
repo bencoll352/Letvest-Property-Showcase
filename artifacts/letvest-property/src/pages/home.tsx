@@ -1,4 +1,4 @@
-import { type FormEvent, useEffect, useState } from 'react';
+import { type FormEvent, useEffect, useRef, useState } from 'react';
 import {
   AlertCircle,
   ArrowRight,
@@ -161,32 +161,15 @@ const services = [
     bestFor: 'Owners seeking high-calibre long-term tenants with hands-off administrative care.',
     cta: 'Get a Rental Valuation',
   },
-  {
-    id: 'airbnb',
-    tag: 'Holiday Lets & Airbnb',
-    title: 'Boutique Short-Let Hosting',
-    image: 'images/south-downs-cottage.jpg',
-    fallback: 'letvest-home.jpg',
-    text: 'Turn your coastal retreat, South Downs cottage, or town apartment into a high-yielding holiday let with dynamic pricing for Goodwood and summer peaks, 5-star cleaning, and 24/7 guest care.',
-    features: [
-      'Dynamic seasonal pricing for peak event yields',
-      '24/7 guest communications & keyless check-in',
-      'Hotel-standard linen, towels & changeovers',
-      'Multi-platform listing on Airbnb, Booking.com & Vrbo',
-      'Owner calendar to reserve your own holiday stays',
-    ],
-    bestFor: 'Holiday homes and prime Sussex properties in coastal, Goodwood, and tourist hotspots.',
-    cta: 'Get Short-Let Estimate',
-  },
 ];
 
 const comparison = [
-  { label: 'Your involvement', values: ['Zero — 100% passive', 'Minimal oversight', 'Minimal — blocked for you'] },
-  { label: 'Monthly income', values: ['Fixed guaranteed rent on the 1st', 'Market rent less agency fees', 'Variable — higher seasonal peaks'] },
-  { label: 'Void period risk', values: ['100% absorbed by JM LetVest', 'Borne by landlord', 'Seasonal fluctuations'] },
-  { label: 'Letting & agent fees', values: ['£0 fees / 0% commission', 'Standard agency % fee', 'Management % on bookings'] },
-  { label: 'Agreement length', values: ['Flexible 1 to 5 years', '6–12 month AST tenancies', 'Flexible management agreement'] },
-  { label: 'Use home yourself?', values: ['No (commercial lease)', 'No (exclusive tenancy)', 'Yes — block personal dates'] },
+  { label: 'Your involvement', values: ['Zero — 100% passive', 'Minimal oversight'] },
+  { label: 'Monthly income', values: ['Fixed guaranteed rent on the 1st', 'Market rent less agency fees'] },
+  { label: 'Void period risk', values: ['100% absorbed by JM LetVest', 'Borne by landlord'] },
+  { label: 'Letting & agent fees', values: ['£0 fees / 0% commission', 'Standard agency % fee'] },
+  { label: 'Agreement length', values: ['Flexible 1 to 5 years', '6–12 month AST tenancies'] },
+  { label: 'Use home yourself?', values: ['No (commercial lease)', 'No (exclusive tenancy)'] },
 ];
 
 
@@ -204,7 +187,7 @@ const compliance = [
 const steps = [
   {
     title: 'Free Property Appraisal',
-    text: 'We visit your property or speak on the phone to provide honest Sussex rental valuation advice across all 3 routes.',
+    text: 'We visit your property or speak on the phone to provide honest Sussex rental valuation advice across both letting routes.',
   },
   {
     title: 'Clear Written Agreement',
@@ -232,10 +215,6 @@ const faqs = [
   {
     q: 'What is the difference between JM LetVest and a standard letting agency?',
     a: 'High-street agencies charge 12%–15% commission plus tenant-finding fees, and if the property sits empty, you get zero income. With JM LetVest Guaranteed Rent, you receive a guaranteed payment every month with no void risk, no agency fees, and direct communication with a dedicated local Sussex property manager.',
-  },
-  {
-    q: 'Can I do Airbnb or holiday lets with my property?',
-    a: 'Yes! Coastal properties (Worthing, Witterings), South Downs cottages (Arundel, Petworth), and Gatwick-area apartments often thrive on Airbnb. We manage the entire hosting cycle: dynamic pricing for Goodwood and summer peaks, guest screening, 24/7 check-in, and 5-star cleaning. You can also block out dates for your own family holidays.',
   },
   {
     q: 'Which areas of West Sussex do you cover?',
@@ -270,6 +249,18 @@ export default function Home() {
   const [scrolled, setScrolled] = useState(false);
   const [openFaq, setOpenFaq] = useState<number | null>(0);
   const [sent, setSent] = useState(false);
+  const [videoPaused, setVideoPaused] = useState(() => window.matchMedia('(prefers-reduced-motion: reduce)').matches);
+  const heroVideoRef = useRef<HTMLVideoElement>(null);
+
+  useEffect(() => {
+    const video = heroVideoRef.current;
+    if (!video) return;
+    if (videoPaused) {
+      video.pause();
+    } else {
+      void video.play().catch(() => setVideoPaused(true));
+    }
+  }, [videoPaused]);
 
   useScrollReveal();
 
@@ -281,6 +272,18 @@ export default function Home() {
   }, []);
 
   const closeMenu = () => setMenuOpen(false);
+
+  useEffect(() => {
+    if (!menuOpen) return;
+    const onKeyDown = (event: KeyboardEvent) => {
+      if (event.key === 'Escape') {
+        setMenuOpen(false);
+        document.querySelector<HTMLButtonElement>('.menu-toggle')?.focus();
+      }
+    };
+    window.addEventListener('keydown', onKeyDown);
+    return () => window.removeEventListener('keydown', onKeyDown);
+  }, [menuOpen]);
 
   const sendEnquiry = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
@@ -306,27 +309,6 @@ export default function Home() {
     <div className="site-shell">
       <a href="#main-content" className="skip-link">Skip to content</a>
 
-      {/* TOP ANNOUNCEMENT BAR */}
-      <div className="top-bar">
-        <div className="container-wide top-bar-inner">
-          <span>
-            <MapPin size={14} aria-hidden="true" />
-            <strong>West Sussex Property Specialists</strong>
-          </span>
-          <span className="top-bar-badge">
-            <Sparkles size={12} /> Main Advantage: 100% Guaranteed Monthly Rent
-          </span>
-          <div className="top-bar-links">
-            <a href={telHref}>
-              <Phone size={14} aria-hidden="true" /> {siteConfig.phone}
-            </a>
-            <a href={`mailto:${siteConfig.email}`}>
-              <Mail size={14} aria-hidden="true" /> {siteConfig.email}
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* STICKY HEADER */}
       <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
         <div className="container-wide header-inner">
@@ -334,7 +316,7 @@ export default function Home() {
             <img
               className="brand-logo"
               src={asset('letvest-logo-sm.png')}
-              alt={`${siteConfig.companyName} – Rent to Rent & Airbnb Management`}
+              alt={`${siteConfig.companyName} – Guaranteed Rent & Fully Managed Letting`}
               width="600"
               height="400"
             />
@@ -367,7 +349,33 @@ export default function Home() {
         <section id="top" className="hero">
           <div className="hero-media" aria-hidden="true">
             <img src={asset('images/sussex-coast.jpg')} alt="" fetchPriority="high" />
+            <video
+              ref={heroVideoRef}
+              muted
+              loop
+              playsInline
+              preload="metadata"
+              poster={asset('images/sussex-coast.jpg')}
+              tabIndex={-1}
+            >
+              <source src={asset('hero-house-fronts.mp4')} type="video/mp4" />
+            </video>
           </div>
+          <button
+            type="button"
+            className="hero-video-toggle"
+            onClick={() => {
+              const video = heroVideoRef.current;
+              if (video?.paused) {
+                void video.play().then(() => setVideoPaused(false)).catch(() => setVideoPaused(true));
+              } else {
+                video?.pause();
+                setVideoPaused(true);
+              }
+            }}
+          >
+            {videoPaused ? 'Play background video' : 'Pause background video'}
+          </button>
           <div className="container-wide hero-inner">
             <div className="hero-copy">
               <h1 className="display">
@@ -375,7 +383,7 @@ export default function Home() {
                 <em> Your income guaranteed.</em>
               </h1>
               <p className="hero-lead">
-                <strong>JM LetVest Ltd</strong> provides hands-free guaranteed rent, bespoke Airbnb management,
+                <strong>JM LetVest Ltd</strong> provides hands-free guaranteed rent
                 and fully managed lettings across West Sussex. Enjoy total peace of mind while we protect your asset.
               </p>
               <div className="hero-actions">
@@ -604,10 +612,10 @@ export default function Home() {
             <div className="section-head center reveal">
               <span className="eyebrow">Tailored Letting Routes</span>
               <h2 className="display">
-                Three ways to let. <em>One trusted partner.</em>
+                Two ways to let. <em>One trusted partner.</em>
               </h2>
               <p>
-                Whether you prefer guaranteed monthly certainty, high-yield short-let hosting, or conventional
+                Whether you prefer guaranteed monthly certainty or conventional
                 managed tenancies, we evaluate your property and advise the optimum route honestly.
               </p>
             </div>
@@ -648,14 +656,14 @@ export default function Home() {
             {/* SIDE-BY-SIDE COMPARISON MATRIX */}
             <div id="compare" className="compare reveal">
               <h3 className="display">Side-by-side comparison</h3>
-              <div className="compare-scroll">
+              <p className="compare-hint">Swipe across to compare both services.</p>
+              <div className="compare-scroll" tabIndex={0} role="region" aria-label="Service comparison, scroll horizontally to view both services">
                 <table>
                   <thead>
                     <tr>
                       <th scope="col"><span className="sr-only">Feature</span></th>
                       <th scope="col" className="hl">Guaranteed Rent (Core)</th>
                       <th scope="col">Fully Managed Letting</th>
-                      <th scope="col">Airbnb &amp; Holiday Lets</th>
                     </tr>
                   </thead>
                   <tbody>
@@ -664,7 +672,6 @@ export default function Home() {
                         <th scope="row">{row.label}</th>
                         <td className="hl"><strong>{row.values[0]}</strong></td>
                         <td>{row.values[1]}</td>
-                        <td>{row.values[2]}</td>
                       </tr>
                     ))}
                   </tbody>
@@ -692,12 +699,11 @@ export default function Home() {
                   West Sussex is our home and our specialty. From the bustling commuter hubs of Worthing and Crawley
                   to the historic beauty of Chichester, Arundel, and the rolling South Downs, each neighbourhood possesses
                   its own distinct rental market and tenant demographics. Our team lives and operates right here in the county,
-                  giving us genuine on-the-ground understanding of tenant demands, seasonal holiday peaks around Goodwood and
-                  the coast, and true market rental values.
+                  giving us genuine on-the-ground understanding of tenant demand, local neighbourhoods, and true market rental values.
                 </p>
                 <p>
                   Whether your property is an executive apartment close to transport links, a suburban family home, or a character
-                  cottage welcoming weekend holidaymakers, our local presence means faster turnaround times, regular in-person
+                  cottage in the South Downs, our local presence means faster turnaround times, regular in-person
                   property care, and trusted relationships with local Sussex tradesmen. We ensure your home is matched with
                   the ideal rental model to maximize returns while safeguarding its long-term condition.
                 </p>
@@ -750,6 +756,13 @@ export default function Home() {
                   <p>{text}</p>
                 </div>
               ))}
+            </div>
+            <div className="gas-safe-standard">
+              <img src={asset('gas-safe-logo.png')} alt="Gas Safe Register" width="148" height="148" loading="lazy" />
+              <div>
+                <h3>Gas safety, handled professionally</h3>
+                <p>Gas safety inspections and gas work are carried out by Gas Safe registered engineers.</p>
+              </div>
             </div>
           </div>
         </section>
@@ -857,7 +870,7 @@ export default function Home() {
               </h2>
               <p>
                 Tell us about your property and we will provide an honest, accurate evaluation comparing Guaranteed
-                Rent, Airbnb holiday lets, and conventional letting options.
+                Rent and fully managed letting options.
               </p>
               <ul className="contact-points">
                 <li><Check size={18} /> Guaranteed monthly rent offer calculation</li>
@@ -899,7 +912,6 @@ export default function Home() {
                   <label htmlFor="c-arrangement">Interested In</label>
                   <select id="c-arrangement" name="arrangement" defaultValue="100% Guaranteed Rent" required>
                     <option value="100% Guaranteed Rent">100% Guaranteed Rent (Recommended)</option>
-                    <option value="Airbnb & Holiday Let Management">Airbnb &amp; Holiday Let Management</option>
                     <option value="Fully Managed Letting">Fully Managed Letting</option>
                     <option value="Not sure – please advise me">Not sure – please advise me</option>
                   </select>
@@ -945,7 +957,6 @@ export default function Home() {
             <h4>Services</h4>
             <ul>
               <li><a href="#guaranteed-rent">Guaranteed Rent</a></li>
-              <li><a href="#services">Airbnb Management</a></li>
               <li><a href="#services">Fully Managed Letting</a></li>
               <li><a href="#property-care">Property Care Standards</a></li>
               <li><a href="#contact">Free Appraisal</a></li>
@@ -966,6 +977,13 @@ export default function Home() {
               <li><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a></li>
               <li>{siteConfig.baseTown}</li>
             </ul>
+          </div>
+        </div>
+        <div className="container-wide prs-membership">
+          <img src={asset('prs-logo.jpg')} alt="Property Redress Scheme" width="4696" height="1968" loading="lazy" />
+          <div>
+            <strong>Property Redress Scheme</strong>
+            <span>Membership number: <b>{siteConfig.prsMembershipNumber}</b></span>
           </div>
         </div>
         <div className="container-wide footer-legal">
