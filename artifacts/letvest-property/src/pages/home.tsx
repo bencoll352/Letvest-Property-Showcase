@@ -1,12 +1,18 @@
 import { type FormEvent, useEffect, useState } from 'react';
 import {
+  AlertCircle,
   ArrowRight,
   BadgeCheck,
   BellRing,
+  Building,
   CalendarCheck,
   Check,
+  CheckCircle2,
+  Clock,
+  Compass,
   FileCheck2,
   Flame,
+  HeartHandshake,
   Home as HomeIcon,
   KeyRound,
   Mail,
@@ -18,12 +24,14 @@ import {
   ShieldCheck,
   Sparkles,
   Star,
+  Users,
   Wallet,
   Wrench,
   X,
   Zap,
 } from 'lucide-react';
 import { siteConfig } from '@/site-config';
+import { Chatbot } from '@/components/chatbot';
 
 const BASE = import.meta.env.BASE_URL;
 const asset = (path: string) => `${BASE}${path.replace(/^\//, '')}`;
@@ -46,7 +54,7 @@ function useScrollReveal() {
           }
         });
       },
-      { threshold: 0.12, rootMargin: '0px 0px -40px 0px' },
+      { threshold: 0.1, rootMargin: '0px 0px -40px 0px' },
     );
     items.forEach((el) => observer.observe(el));
     return () => observer.disconnect();
@@ -54,198 +62,244 @@ function useScrollReveal() {
 }
 
 const navLinks = [
+  { href: '#guaranteed-rent', label: 'Guaranteed Rent' },
+  { href: '#property-care', label: 'Property Care' },
+  { href: '#about', label: 'About JM LetVest' },
   { href: '#services', label: 'Services' },
-  { href: '#peace-of-mind', label: 'Peace of mind' },
-  { href: '#local', label: 'Local knowledge' },
-  { href: '#process', label: 'How it works' },
+  { href: '#local', label: 'West Sussex Areas' },
   { href: '#faq', label: 'FAQs' },
 ];
 
+/* Clean, reassuring landlord commitments (NO cross-through or strikethrough lines) */
 const reassurances = [
   {
-    worry: 'The 2am boiler breakdown',
-    answer: 'Tenants and guests call us, not you. Our vetted local trades are dispatched fast and you get a simple update.',
+    badge: '24/7 Response',
+    title: 'Zero Midnight Emergency Calls',
+    answer:
+      'Tenants and guests call our Sussex 24/7 helpline, never you. Our trusted, vetted local trades are dispatched promptly with pre-agreed repair limits.',
     icon: Wrench,
   },
   {
-    worry: 'Empty months & late rent',
-    answer: 'Thorough referencing, proactive rent chasing — or a fixed monthly rent with our rent-to-rent option.',
+    badge: '100% Guaranteed',
+    title: 'Zero Void Periods & No Rent Delays',
+    answer:
+      'With our signature Guaranteed Rent model, your money arrives on the exact same date each month, into your account, whether the home is occupied or vacant.',
     icon: Wallet,
   },
   {
-    worry: 'Ever-changing legislation',
-    answer: 'Gas, electrical, EPC, deposits, Right to Rent and the Renters’ Rights Act — tracked, scheduled and documented.',
+    badge: 'Legal Protection',
+    title: 'Total Statutory & Regulatory Compliance',
+    answer:
+      'Gas Safety (CP12), EICR, EPC, HMO licensing, Right to Rent, and the Renters’ Rights Act are monitored, scheduled, and renewed for you.',
     icon: ShieldCheck,
   },
   {
-    worry: 'Guest turnover & reviews',
-    answer: 'Hotel-standard cleans, fresh linen and fast guest replies that protect your ratings and your property.',
+    badge: 'Pristine Upkeep',
+    title: 'Hotel-Grade Housekeeping & Inspections',
+    answer:
+      'Professional cleans, crisp linens, respectful guest screening, and regular photographic inspections safeguard your property and its capital value.',
     icon: Sparkles,
+  },
+];
+
+const carePillars = [
+  {
+    icon: FileCheck2,
+    title: 'Photographic Inspections',
+    text: 'Scheduled quarterly walk-throughs and changeover reports with timestamped photos sent straight to your email so you always see your property’s condition.',
+  },
+  {
+    icon: Wrench,
+    title: 'Vetted Sussex Trades',
+    text: 'Longstanding relationships with trusted Gas Safe engineers, NICEIC electricians, and Sussex artisans. Minor repairs handled swiftly with zero agent markups.',
+  },
+  {
+    icon: Sparkles,
+    title: 'Spotless Housekeeping',
+    text: 'Commercial-standard linen laundering, professional carpet cleaning, and meticulous sanitization before every guest check-in or tenant handover.',
+  },
+  {
+    icon: HeartHandshake,
+    title: 'Asset Value Preservation',
+    text: 'We treat your property like our own. Preventive maintenance caught early ensures your home is returned at the end of the term in immaculate condition.',
   },
 ];
 
 const services = [
   {
-    id: 'letting',
-    tag: 'Fully managed letting',
-    title: 'Hands-free, long-term letting',
-    image: 'images/modern-apartment.jpg',
-    fallback: 'letvest-home.jpg',
-    text: 'The complete tenancy journey handled for you — from marketing and referencing to rent collection, inspections and repairs.',
-    features: [
-      'Professional photos, listings & viewings',
-      'Full tenant referencing & Right to Rent checks',
-      'Deposit registration & tenancy paperwork',
-      'Rent collection & monthly statements',
-      'Routine inspections & maintenance',
-    ],
-    bestFor: 'Owners who want a reliable, compliant tenancy with zero day-to-day effort.',
-    cta: 'Get a rental valuation',
-  },
-  {
     id: 'rent-to-rent',
-    tag: 'Rent-to-rent · Guaranteed rent',
-    title: 'A fixed rent, every single month',
+    tag: 'Rent-to-Rent · Core Specialty',
+    title: '100% Guaranteed Rent Every Month',
     image: 'letvest-home.jpg',
     fallback: 'letvest-home.jpg',
-    text: 'We lease your property on a company let and pay you an agreed rent for the full term — whether it is occupied or not.',
+    text: 'Our headline service: We lease your property on a corporate agreement for 3–5 years and pay your agreed rent on time every single month, with zero voids, zero tenant-chasing, and £0 letting fees.',
     features: [
-      'Agreed monthly rent, paid on time',
-      'No void periods or letting fees',
-      'Day-to-day maintenance managed by us',
-      'Property returned in good condition',
-      'Typical terms of 3–5 years',
+      'Fixed monthly rent paid into your account',
+      'Zero void periods — you get paid even when empty',
+      '£0 agency fees and zero tenant-finding commission',
+      'Day-to-day maintenance handled by our local team',
+      'Property returned freshly maintained and clean',
     ],
-    bestFor: 'Landlords who value predictable income and complete hands-off ownership.',
-    cta: 'Ask about guaranteed rent',
+    bestFor: 'Landlords who want guaranteed financial returns and total freedom from day-to-day hassles.',
+    cta: 'Ask About Guaranteed Rent',
     featured: true,
   },
   {
+    id: 'letting',
+    tag: 'Long-Term Letting',
+    title: 'Fully Managed Tenancies',
+    image: 'images/modern-apartment.jpg',
+    fallback: 'letvest-home.jpg',
+    text: 'A traditional letting journey elevated with boutique Sussex care. We handle professional photography, tenant referencing, tenancy paperwork, rent collection, and regulatory compliance.',
+    features: [
+      'Comprehensive tenant vetting & Right to Rent checks',
+      'Deposit protection in government-backed scheme',
+      'Routine photographic property inspections',
+      'Coordinated repairs with vetted Sussex trades',
+      'Transparent monthly financial statements',
+    ],
+    bestFor: 'Owners seeking high-calibre long-term tenants with hands-off administrative care.',
+    cta: 'Get a Rental Valuation',
+  },
+  {
     id: 'airbnb',
-    tag: 'Airbnb & holiday lets',
-    title: 'Short lets, expertly hosted',
+    tag: 'Holiday Lets & Airbnb',
+    title: 'Boutique Short-Let Hosting',
     image: 'images/south-downs-cottage.jpg',
     fallback: 'letvest-home.jpg',
-    text: 'Maximise the potential of your coastal or countryside home with full-service short-let management across Airbnb, Booking.com and more.',
+    text: 'Turn your coastal retreat, South Downs cottage, or town apartment into a high-yielding holiday let with dynamic pricing for Goodwood and summer peaks, 5-star cleaning, and 24/7 guest care.',
     features: [
-      'Listing creation & professional styling',
-      'Dynamic pricing for Goodwood & peak seasons',
-      '24/7 guest communication & check-in',
-      'Cleaning, linen & changeovers',
-      'Owner calendar for your own stays',
+      'Dynamic seasonal pricing for peak event yields',
+      '24/7 guest communications & keyless check-in',
+      'Hotel-standard linen, towels & changeovers',
+      'Multi-platform listing on Airbnb, Booking.com & Vrbo',
+      'Owner calendar to reserve your own holiday stays',
     ],
-    bestFor: 'Coastal, South Downs and Gatwick-area homes with strong visitor demand.',
-    cta: 'Get a short-let estimate',
+    bestFor: 'Holiday homes and prime Sussex properties in coastal, Goodwood, and tourist hotspots.',
+    cta: 'Get Short-Let Estimate',
   },
 ];
 
 const comparison = [
-  { label: 'Your involvement', values: ['Minimal', 'None', 'Minimal'] },
-  { label: 'Income', values: ['Market rent, less fees', 'Fixed agreed rent', 'Variable, often highest'] },
-  { label: 'Void risk', values: ['Low — minimised', 'Carried by Letvest', 'Seasonal'] },
-  { label: 'Typical term', values: ['6–12 month tenancies', '3–5 year agreement', 'Flexible'] },
-  { label: 'Use it yourself?', values: ['No', 'No', 'Yes — block dates'] },
+  { label: 'Your involvement', values: ['Zero — 100% passive', 'Minimal oversight', 'Minimal — blocked for you'] },
+  { label: 'Monthly income', values: ['Fixed guaranteed rent on the 1st', 'Market rent less agency fees', 'Variable — higher seasonal peaks'] },
+  { label: 'Void period risk', values: ['100% absorbed by JM LetVest', 'Borne by landlord', 'Seasonal fluctuations'] },
+  { label: 'Letting & agent fees', values: ['£0 fees / 0% commission', 'Standard agency % fee', 'Management % on bookings'] },
+  { label: 'Agreement length', values: ['Flexible 1 to 5 years', '6–12 month AST tenancies', 'Flexible management agreement'] },
+  { label: 'Use home yourself?', values: ['No (commercial lease)', 'No (exclusive tenancy)', 'Yes — block personal dates'] },
 ];
 
 const areas = [
   {
     name: 'Chichester & The Witterings',
-    headline: 'Festival city meets the coast',
+    headline: 'Cathedral city charm & world-class coast',
     detail:
-      'Goodwood’s Festival of Speed, Revival and Glorious Goodwood, plus West Wittering beach and Chichester Harbour, drive premium short-let demand. In the city, professionals and university staff keep long lets in steady demand.',
-    bestFit: 'Airbnb & holiday lets · Managed letting',
+      'Chichester enjoys continuous demand from hospital consultants, university staff, and professionals. During the summer, West Wittering beach and the world-renowned Goodwood Festival of Speed and Revival drive exceptional premium short-let occupancy.',
+    bestFit: 'Guaranteed Rent · Airbnb Holiday Lets · Long Lets',
     image: 'images/south-downs-cottage.jpg',
   },
   {
-    name: 'Worthing & Shoreham',
-    headline: 'Coastal living, Brighton on the doorstep',
+    name: 'Worthing & Shoreham-by-Sea',
+    headline: 'Thriving coastal hub & commuter hotspot',
     detail:
-      'Regency seafront flats and family homes attract commuters priced out of Brighton & Hove. Strong year-round tenant demand with a growing summer visitor market along the promenade.',
-    bestFit: 'Managed letting · Rent-to-rent',
+      'Worthing offers superb seaside living, a buzzing restaurant scene, and direct train links to Brighton and London. High demand for flats and family houses makes it an ideal territory for fixed guaranteed rent and hands-free tenancies.',
+    bestFit: 'Guaranteed Rent · Fully Managed Lettings',
     image: 'images/sussex-coast.jpg',
   },
   {
-    name: 'Crawley & Gatwick',
-    headline: 'Airport, business and contractor demand',
+    name: 'Arundel & The South Downs',
+    headline: 'Historic castle town & national park haven',
     detail:
-      'Gatwick, Manor Royal business district and major infrastructure projects bring a constant flow of airline crew, contractors and relocating professionals needing quality, flexible accommodation.',
-    bestFit: 'Rent-to-rent · Serviced stays',
+      'Arundel, Midhurst, and Petworth sit nestled along the South Downs. Walkers, romantic weekenders, wedding parties, and Goodwood visitors make period cottages and character townhouses top performers for holiday letting.',
+    bestFit: 'Airbnb & Boutique Holiday Lets · Character Lets',
+    image: 'images/south-downs-cottage.jpg',
+  },
+  {
+    name: 'Crawley & Gatwick Corridor',
+    headline: 'Aviation, corporate & contractor powerhouse',
+    detail:
+      'Anchored by London Gatwick Airport and the thriving Manor Royal business district, Crawley experiences an unceasing requirement for quality corporate stays, flight crew accommodation, and flexible contractor housing.',
+    bestFit: 'Corporate Guaranteed Rent · Serviced Accommodation',
     image: 'images/modern-apartment.jpg',
   },
   {
     name: 'Horsham & Mid Sussex',
-    headline: 'Family homes and London commuters',
+    headline: 'Affluent market towns & London commuters',
     detail:
-      'Horsham, Haywards Heath, Burgess Hill and East Grinstead offer fast rail links to London and excellent schools — ideal for long, stable tenancies with quality tenants.',
-    bestFit: 'Fully managed letting',
+      'Horsham, Haywards Heath, and Burgess Hill consistently rank among the best places to live in the UK. Excellent grammar schools, green parks, and swift 45-minute rail links to London Victoria deliver reliable, respectful family tenancies.',
+    bestFit: 'Fully Managed Letting · Long-Term Guaranteed Rent',
     image: 'letvest-home.jpg',
   },
   {
-    name: 'Arundel & the South Downs',
-    headline: 'Castles, countryside and cottages',
-    detail:
-      'Arundel, Midhurst and Petworth sit within the South Downs National Park — walkers, weddings and weekend-breakers make characterful cottages highly bookable.',
-    bestFit: 'Airbnb & holiday lets',
-    image: 'images/south-downs-cottage.jpg',
-  },
-  {
     name: 'Bognor Regis & Littlehampton',
-    headline: 'Seaside towns on the rise',
+    headline: 'Regenerated coast & high-yield opportunities',
     detail:
-      'Regeneration, sandy beaches and attractive yields make these resort towns a smart choice for both family holiday lets and well-priced long-term rentals.',
-    bestFit: 'Holiday lets · Rent-to-rent',
+      'Featuring sandy beaches, extensive sea-defence regenerations, and university campus developments, these south coast resorts provide exceptional rental yields and steady summer staycation popularity.',
+    bestFit: 'Guaranteed Rent · Holiday Lets',
     image: 'images/sussex-coast.jpg',
   },
 ];
 
 const towns = [
-  'Chichester', 'Worthing', 'Crawley', 'Horsham', 'Bognor Regis', 'Littlehampton',
-  'Shoreham-by-Sea', 'Arundel', 'Haywards Heath', 'Burgess Hill', 'East Grinstead',
+  'Chichester', 'Worthing', 'Arundel', 'Crawley', 'Horsham', 'Bognor Regis',
+  'Littlehampton', 'Shoreham-by-Sea', 'Haywards Heath', 'Burgess Hill', 'East Grinstead',
   'Midhurst', 'Petworth', 'Selsey', 'The Witterings', 'Steyning', 'Lancing', 'Pulborough',
 ];
 
 const compliance = [
-  { icon: Flame, title: 'Gas Safety', text: 'Annual CP12 certificates booked and filed.' },
-  { icon: Zap, title: 'Electrical (EICR)', text: '5-yearly inspections and remedial works.' },
-  { icon: FileCheck2, title: 'EPC & MEES', text: 'Energy ratings checked against minimum standards.' },
-  { icon: KeyRound, title: 'Deposit protection', text: 'Registered in a government-approved scheme.' },
-  { icon: BadgeCheck, title: 'Right to Rent', text: 'Every adult occupier verified and recorded.' },
-  { icon: BellRing, title: 'Smoke & CO alarms', text: 'Tested at the start of every tenancy.' },
-  { icon: HomeIcon, title: 'HMO & licensing', text: 'Local council licensing requirements handled.' },
-  { icon: ShieldCheck, title: 'Renters’ Rights Act', text: 'Processes updated for the new tenancy rules.' },
+  { icon: Flame, title: 'Gas Safety (CP12)', text: 'Annual gas inspections scheduled, certified, and filed on time.' },
+  { icon: Zap, title: 'Electrical (EICR)', text: '5-yearly electrical installation checks and certified safety.' },
+  { icon: FileCheck2, title: 'EPC & MEES Standards', text: 'Energy performance monitoring against current regulations.' },
+  { icon: KeyRound, title: 'Deposit Protection', text: 'Registered in a government-backed custodial scheme.' },
+  { icon: BadgeCheck, title: 'Right to Rent Checks', text: 'Rigorous legal status confirmation on every adult occupier.' },
+  { icon: BellRing, title: 'Smoke & CO Alarms', text: 'Tested, logged, and compliant before every single move-in.' },
+  { icon: HomeIcon, title: 'HMO Licensing', text: 'Council approvals, room sizes, and amenities verified.' },
+  { icon: ShieldCheck, title: 'Renters’ Rights Act', text: 'Documentation proactively aligned with updated UK legislation.' },
 ];
 
 const steps = [
-  { title: 'Free appraisal', text: 'We visit your property and give honest local advice on rent, demand and the best model for you.' },
-  { title: 'Tailored proposal', text: 'A clear written proposal — fees, rent, responsibilities and terms — with no hidden extras.' },
-  { title: 'Ready to let', text: 'We handle compliance, photography, styling and listings, then find the right tenants or guests.' },
-  { title: 'Relax', text: 'Monthly statements, regular updates and a local team you can reach whenever you need us.' },
+  {
+    title: 'Free Property Appraisal',
+    text: 'We visit your property or speak on the phone to provide honest Sussex rental valuation advice across all 3 routes.',
+  },
+  {
+    title: 'Clear Written Agreement',
+    text: 'A straightforward, transparent contract setting out your guaranteed monthly rent, dates, and property care terms.',
+  },
+  {
+    title: 'Compliance & Staging',
+    text: 'We complete any required safety certificates, deep clean, and style the home ready for immediate occupancy.',
+  },
+  {
+    title: 'Sit Back & Get Paid',
+    text: 'Your rent arrives guaranteed on the exact agreed date each month, while our local Sussex team cares for everything.',
+  },
 ];
 
 const faqs = [
   {
+    q: 'How does Guaranteed Rent with JM LetVest work?',
+    a: 'Under our Guaranteed Rent (Rent-to-Rent) service, JM LetVest Ltd acts as your commercial tenant on a 3 to 5 year corporate lease. We pay your agreed rent directly into your bank on the same date every single month — whether the property is occupied or empty. We take 100% of the void risk, and there are £0 letting agent fees or management commissions deducted.',
+  },
+  {
+    q: 'How do you care for and protect my property?',
+    a: 'We treat your property as our own. We conduct regular photographic inspections, employ vetted local Sussex trades (plumbing, heating, electrics), perform preventive maintenance, and ensure commercial-grade cleaning. At the end of our agreement, we hand the property back to you in equal or better condition.',
+  },
+  {
+    q: 'What is the difference between JM LetVest and a standard letting agency?',
+    a: 'High-street agencies charge 12%–15% commission plus tenant-finding fees, and if the property sits empty, you get zero income. With JM LetVest Guaranteed Rent, you receive a guaranteed payment every month with no void risk, no agency fees, and direct communication with a dedicated local Sussex property manager.',
+  },
+  {
+    q: 'Can I do Airbnb or holiday lets with my property?',
+    a: 'Yes! Coastal properties (Worthing, Witterings), South Downs cottages (Arundel, Petworth), and Gatwick-area apartments often thrive on Airbnb. We manage the entire hosting cycle: dynamic pricing for Goodwood and summer peaks, guest screening, 24/7 check-in, and 5-star cleaning. You can also block out dates for your own family holidays.',
+  },
+  {
     q: 'Which areas of West Sussex do you cover?',
-    a: 'We manage properties right across West Sussex — from Chichester, the Witterings and Bognor Regis in the west, through Arundel, Littlehampton, Worthing and Shoreham, up to Horsham, Crawley, Haywards Heath and East Grinstead. If you are just over the border, ask anyway.',
+    a: 'We cover the entire county of West Sussex, including Chichester, Worthing, Arundel, Crawley, Horsham, Bognor Regis, Littlehampton, Shoreham, Midhurst, Petworth, and surrounding villages. If your property is in or near West Sussex, we would be delighted to manage it.',
   },
   {
-    q: 'How does guaranteed rent (rent-to-rent) work?',
-    a: 'Letvest leases your property on a company let agreement and pays you a fixed monthly rent for the agreed term, regardless of occupancy. We then manage and let the property ourselves. All payment terms, responsibilities and conditions are set out clearly in your written agreement before you sign.',
-  },
-  {
-    q: 'Is my property suitable for Airbnb?',
-    a: 'Coastal, South Downs and Gatwick-area homes often perform very well, but it depends on location, layout, mortgage and lease terms, and local planning. We will give you an honest short-let estimate — and tell you if a long let would serve you better.',
-  },
-  {
-    q: 'Who handles repairs and maintenance?',
-    a: 'We do. We use a trusted network of local, insured tradespeople and agree a spending limit with you, so small jobs are fixed quickly and larger works always come to you first.',
-  },
-  {
-    q: 'What does it cost?',
-    a: 'Fees depend on the service and your property. Every proposal sets out exactly what is included, what it costs, the contract length and the notice terms — no surprises, ever.',
-  },
-  {
-    q: 'Can I switch from a long let to Airbnb, or vice versa?',
-    a: 'Yes. Because we offer all three models, we can recommend a change when the market shifts and manage the transition for you.',
+    q: 'Are there any hidden fees or charges?',
+    a: 'None whatsoever. All financial arrangements, services, and responsibilities are written clearly into your agreement before you sign. On our Guaranteed Rent model, the agreed rent is exactly what lands in your bank account.',
   },
 ];
 
@@ -295,9 +349,10 @@ export default function Home() {
       `Property location: ${form.get('location') || 'Not provided'}`,
       `Interested in: ${form.get('arrangement')}`,
       '',
-      `${form.get('message') || ''}`,
+      `Property details / priorities:`,
+      `${form.get('message') || 'None'}`,
     ].join('\n');
-    const subject = `Property enquiry – ${form.get('arrangement')}`;
+    const subject = `Property Enquiry for JM LetVest – ${form.get('arrangement')}`;
     window.location.href = `mailto:${siteConfig.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
     setSent(true);
   };
@@ -309,20 +364,38 @@ export default function Home() {
     <div className="site-shell">
       <a href="#main-content" className="skip-link">Skip to content</a>
 
+      {/* TOP ANNOUNCEMENT BAR */}
       <div className="top-bar">
         <div className="container-wide top-bar-inner">
-          <span><MapPin size={14} aria-hidden="true" /> Local property experts across West Sussex</span>
+          <span>
+            <MapPin size={14} aria-hidden="true" />
+            <strong>West Sussex Property Specialists</strong>
+          </span>
+          <span className="top-bar-badge">
+            <Sparkles size={12} /> Main Advantage: 100% Guaranteed Monthly Rent
+          </span>
           <div className="top-bar-links">
-            <a href={telHref}><Phone size={14} aria-hidden="true" /> {siteConfig.phone}</a>
-            <a href={`mailto:${siteConfig.email}`}><Mail size={14} aria-hidden="true" /> {siteConfig.email}</a>
+            <a href={telHref}>
+              <Phone size={14} aria-hidden="true" /> {siteConfig.phone}
+            </a>
+            <a href={`mailto:${siteConfig.email}`}>
+              <Mail size={14} aria-hidden="true" /> {siteConfig.email}
+            </a>
           </div>
         </div>
       </div>
 
+      {/* STICKY HEADER */}
       <header className={`site-header${scrolled ? ' scrolled' : ''}`}>
         <div className="container-wide header-inner">
           <a href="#top" aria-label={`${siteConfig.companyName} home`} className="brand">
-            <img className="brand-logo" src={asset('letvest-logo-sm.png')} alt={`${siteConfig.companyName} – Rent to Rent and Airbnb Management`} width="600" height="400" />
+            <img
+              className="brand-logo"
+              src={asset('letvest-logo-sm.png')}
+              alt={`${siteConfig.companyName} – Rent to Rent & Airbnb Management`}
+              width="600"
+              height="400"
+            />
           </a>
           <button
             className="menu-toggle"
@@ -336,60 +409,75 @@ export default function Home() {
           </button>
           <nav id="main-nav" className={`nav-links${menuOpen ? ' open' : ''}`} aria-label="Main navigation">
             {navLinks.map((l) => (
-              <a key={l.href} href={l.href} onClick={closeMenu}>{l.label}</a>
+              <a key={l.href} href={l.href} onClick={closeMenu}>
+                {l.label}
+              </a>
             ))}
             <a className="btn btn-gold nav-cta" href="#contact" onClick={closeMenu}>
-              Free appraisal <ArrowRight size={16} />
+              Free Appraisal <ArrowRight size={16} />
             </a>
           </nav>
         </div>
       </header>
 
       <main id="main-content">
-        {/* HERO */}
+        {/* HERO SECTION */}
         <section id="top" className="hero">
           <div className="hero-media" aria-hidden="true">
             <img src={asset('images/sussex-coast.jpg')} alt="" fetchPriority="high" />
           </div>
           <div className="container-wide hero-inner">
             <div className="hero-copy">
-              <span className="eyebrow eyebrow-light">West Sussex Letting &amp; Property Management</span>
+              <div className="hero-highlight-pill">
+                <Sparkles size={15} />
+                <span>#1 Advantage: Rent Paid Guaranteed Every Single Month</span>
+              </div>
               <h1 className="display">
-                Your property in expert local hands.
-                <em> Your mind at rest.</em>
+                Your Sussex property cared for like our own.
+                <em> Your income guaranteed.</em>
               </h1>
               <p className="hero-lead">
-                Fully managed letting, guaranteed-rent and Airbnb management from a team that lives and works
-                in West Sussex — so your investment performs while you get on with life.
+                <strong>JM LetVest Ltd</strong> provides hands-free guaranteed rent, bespoke Airbnb management,
+                and fully managed lettings across West Sussex. Enjoy total peace of mind while we protect your asset.
               </p>
               <div className="hero-actions">
-                <a className="btn btn-gold btn-lg" href="#contact">Book a free appraisal <ArrowRight size={18} /></a>
-                <a className="btn btn-ghost btn-lg" href="#services">Explore our services</a>
+                <a className="btn btn-gold btn-lg" href="#guaranteed-rent">
+                  See How Guaranteed Rent Works <ArrowRight size={18} />
+                </a>
+                <a className="btn btn-ghost btn-lg" href="#contact">
+                  Book Free Property Appraisal
+                </a>
               </div>
               <ul className="hero-ticks">
-                <li><Check size={16} /> Fully compliant</li>
-                <li><Check size={16} /> No hidden fees</li>
-                <li><Check size={16} /> Local, responsive team</li>
+                <li><Check size={16} /> Rent paid on time every month</li>
+                <li><Check size={16} /> Zero void periods &amp; zero agency fees</li>
+                <li><Check size={16} /> 24/7 Sussex property care</li>
+                <li><Check size={16} /> Full statutory compliance</li>
               </ul>
             </div>
 
-            <aside className="hero-card" aria-label="Why landlords choose Letvest">
+            <aside className="hero-card" aria-label="Why landlords choose JM LetVest">
               <div className="hero-card-stars" aria-hidden="true">
-                {Array.from({ length: 5 }).map((_, i) => <Star key={i} size={16} fill="currentColor" />)}
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} size={16} fill="currentColor" />
+                ))}
               </div>
-              <p className="hero-card-title">Peace of mind, built in</p>
+              <p className="hero-card-title">The JM LetVest Standard</p>
               <ul>
-                <li><ShieldCheck size={18} /> Every certificate tracked &amp; renewed</li>
-                <li><Wrench size={18} /> Trusted local tradespeople on call</li>
-                <li><CalendarCheck size={18} /> Monthly statements &amp; clear updates</li>
+                <li><Wallet size={18} /> <strong>Guaranteed Rent:</strong> Paid on the same date every month</li>
+                <li><ShieldCheck size={18} /> <strong>Care Commitment:</strong> Regular photographic reports</li>
+                <li><Wrench size={18} /> <strong>Local Trades:</strong> Vetted Sussex plumbers, electricians &amp; handymen</li>
+                <li><CalendarCheck size={18} /> <strong>Zero Headaches:</strong> No tenant chasing or midnight emergencies</li>
               </ul>
-              <a href={telHref} className="hero-card-call"><Phone size={16} /> Speak to a local expert</a>
+              <a href={telHref} className="hero-card-call">
+                <Phone size={16} /> Speak to our Sussex team
+              </a>
             </aside>
           </div>
         </section>
 
-        {/* STATS */}
-        <section className="stats" aria-label="Letvest at a glance">
+        {/* STATS STRIP */}
+        <section className="stats" aria-label="JM LetVest performance highlights">
           <div className="container-wide stats-grid">
             {siteConfig.stats.map((s) => (
               <div key={s.label} className="stat reveal">
@@ -400,27 +488,233 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PEACE OF MIND */}
+        {/* =================================================================
+            CORE ADVANTAGE SPOTLIGHT: 100% GUARANTEED MONTHLY RENT
+            ================================================================= */}
+        <section id="guaranteed-rent" className="section guaranteed-spotlight">
+          <div className="container-wide spotlight-grid">
+            <div className="spotlight-copy reveal">
+              <span className="spotlight-badge">
+                <Sparkles size={14} /> Our Core Landlord Advantage
+              </span>
+              <h2 className="display">
+                Your rent paid guaranteed <em>every single month.</em>
+              </h2>
+              <p className="spotlight-lead">
+                With traditional agents, an empty month means zero income. With <strong>JM LetVest Ltd</strong>,
+                we become your dependable commercial tenant. You receive your agreed rent on the exact same date
+                every single month — whether your property is occupied or empty.
+              </p>
+              <div className="spotlight-benefits">
+                <div className="benefit-item">
+                  <Wallet size={24} />
+                  <h4>100% Predictable Income</h4>
+                  <p>Guaranteed bank transfer on the agreed date every single month. Never chase late rent again.</p>
+                </div>
+                <div className="benefit-item">
+                  <ShieldCheck size={24} />
+                  <h4>Zero Void Periods</h4>
+                  <p>We absorb 100% of the void risk between occupants. Your income never stops.</p>
+                </div>
+                <div className="benefit-item">
+                  <CheckCircle2 size={24} />
+                  <h4>£0 Letting &amp; Agency Fees</h4>
+                  <p>No tenant-finding charges, no marketing fees, and zero management commission deducted.</p>
+                </div>
+                <div className="benefit-item">
+                  <Clock size={24} />
+                  <h4>1 to 5 Year Contracts</h4>
+                  <p>Secure long-term certainty with flexible commercial lease terms tailored to your goals.</p>
+                </div>
+              </div>
+              <a href="#contact" className="btn btn-gold btn-lg">
+                Get Your Guaranteed Rent Offer <ArrowRight size={18} />
+              </a>
+            </div>
+
+            <div className="spotlight-card reveal">
+              <div className="spotlight-card-head">
+                <h3>Conventional Letting vs JM LetVest</h3>
+                <span>Guaranteed</span>
+              </div>
+              <div className="compare-pills">
+                <div className="compare-pill bad">
+                  <span>Traditional Letting Agent:</span>
+                  <strong>Void periods = £0 income</strong>
+                </div>
+                <div className="compare-pill good">
+                  <span>JM LetVest Guarantee:</span>
+                  <strong>100% Paid Every Month</strong>
+                </div>
+                <div className="compare-pill bad">
+                  <span>Traditional Letting Agent:</span>
+                  <strong>12%–15% commission deducted</strong>
+                </div>
+                <div className="compare-pill good">
+                  <span>JM LetVest Guarantee:</span>
+                  <strong>£0 Agency Fees Deducted</strong>
+                </div>
+                <div className="compare-pill bad">
+                  <span>Traditional Letting Agent:</span>
+                  <strong>Tenant calls you for midnight repairs</strong>
+                </div>
+                <div className="compare-pill good">
+                  <span>JM LetVest Guarantee:</span>
+                  <strong>24/7 Local Sussex Care Handled</strong>
+                </div>
+              </div>
+              <p className="spotlight-card-note">
+                Every detail is documented in a clear commercial agreement. Enjoy pure, hands-off passive income
+                with total financial security.
+              </p>
+              <a href={telHref} className="btn btn-navy btn-block">
+                <Phone size={16} /> Discuss Your Rent: {siteConfig.phone}
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* =================================================================
+            YOUR PROPERTY WILL BE CARED FOR (HIGH-TRUST STEWARDSHIP)
+            ================================================================= */}
+        <section id="property-care" className="section care-section">
+          <div className="container-wide">
+            <div className="section-head center reveal">
+              <span className="eyebrow">Our Uncompromising Commitment</span>
+              <h2 className="display">
+                Your property will be cared for. <em>Like it was our own.</em>
+              </h2>
+              <p>
+                A rental property is not just an investment; it is a valuable asset you have worked hard to build.
+                At JM LetVest, we treat every hallway, kitchen, and garden with the utmost pride and vigilance.
+              </p>
+            </div>
+
+            <div className="care-grid">
+              {carePillars.map((c, i) => {
+                const Icon = c.icon;
+                return (
+                  <article key={c.title} className="care-card reveal" style={{ transitionDelay: `${i * 90}ms` }}>
+                    <div className="care-card-icon">
+                      <Icon size={24} aria-hidden="true" />
+                    </div>
+                    <h3>{c.title}</h3>
+                    <p>{c.text}</p>
+                  </article>
+                );
+              })}
+            </div>
+
+            <div className="care-pledge-banner reveal">
+              <div>
+                <span className="eyebrow">The JM LetVest Handback Guarantee</span>
+                <h3 className="display">Returned in pristine condition at the end of the term.</h3>
+                <p>
+                  Unlike hands-off agencies that leave landlords facing hefty redecoration bills after tenancies,
+                  JM LetVest continually maintains, cleans, and services your home throughout our tenure. We pledge
+                  to return your property clean, intact, and ready for whatever you choose next.
+                </p>
+              </div>
+              <div style={{ textAlign: 'center' }}>
+                <a href="#contact" className="btn btn-navy btn-lg">
+                  Speak to Our Property Care Team <ArrowRight size={18} />
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        {/* =================================================================
+            ABOUT JM LETVEST LTD (BRAND IDENTITY & LOCAL KNOWLEDGE)
+            ================================================================= */}
+        <section id="about" className="section about-section">
+          <div className="container-wide about-grid">
+            <div className="about-media reveal">
+              <Img src="letvest-home.jpg" alt="Elegantly maintained living room in a West Sussex home" />
+              <div className="about-badge-floating">
+                <strong>JM LetVest Ltd</strong>
+                <span>Independent · Local · West Sussex</span>
+              </div>
+            </div>
+
+            <div className="about-copy reveal">
+              <span className="eyebrow">About JM LetVest Ltd</span>
+              <h2 className="display">
+                Born in West Sussex. <em>Dedicated to landlords.</em>
+              </h2>
+              <p>
+                <strong>JM LetVest Ltd</strong> was founded with a singular purpose: to give property owners across
+                West Sussex genuine financial predictability and superior property management without the bloated
+                fees and detached service of corporate high-street chains.
+              </p>
+              <p>
+                We live, work, and operate right here in West Sussex. We know the rhythm of the local housing market —
+                from peak summer demand in coastal Worthing and the Witterings, to the vibrant festival weeks of
+                Goodwood, to steady professional commuters in Chichester, Horsham, and Crawley.
+              </p>
+
+              <div className="about-pillars">
+                <div className="about-pillar">
+                  <strong>Personal Accountability</strong>
+                  <span>Direct founder-level access. You deal with someone who knows your property personally.</span>
+                </div>
+                <div className="about-pillar">
+                  <strong>Unrivalled Local Mastery</strong>
+                  <span>Targeted strategies tailored to your exact postcode and tenant demographic.</span>
+                </div>
+                <div className="about-pillar">
+                  <strong>Zero Hidden Surcharges</strong>
+                  <span>Transparent agreements, honest valuations, and ethical UK property standards.</span>
+                </div>
+                <div className="about-pillar">
+                  <strong>Asset Growth &amp; Care</strong>
+                  <span>We focus on maintaining and enhancing the long-term capital appeal of your property.</span>
+                </div>
+              </div>
+
+              <a href="#contact" className="btn btn-navy">
+                Meet the Team &amp; Get Started <ArrowRight size={16} />
+              </a>
+            </div>
+          </div>
+        </section>
+
+        {/* =================================================================
+            PEACE OF MIND (CLEAN - ZERO STRIKE-THROUGH WRITING)
+            ================================================================= */}
         <section id="peace-of-mind" className="section peace">
           <div className="container-wide peace-grid">
             <div className="peace-intro reveal">
-              <span className="eyebrow">Peace of mind</span>
-              <h2 className="display">Hand over the hassle.<br /><em>Keep the rewards.</em></h2>
+              <span className="eyebrow">Peace of Mind</span>
+              <h2 className="display">
+                Hand over the hassle.<br />
+                <em>Keep the rewards.</em>
+              </h2>
               <p>
-                Being a landlord shouldn’t mean late-night calls, chasing rent or worrying about the latest
-                regulations. With Letvest, experienced local professionals take care of every detail — and
-                you stay informed without being involved.
+                Being a landlord shouldn’t mean late-night emergency repairs, chasing missed rent, or stressing over
+                constantly changing UK legislation. With JM LetVest, you stay completely informed while we manage
+                every operational detail.
               </p>
               <div className="peace-image">
-                <Img src="letvest-home.jpg" alt="An elegant, well-maintained living room in a managed Sussex home" />
+                <Img
+                  src="images/modern-apartment.jpg"
+                  fallback="letvest-home.jpg"
+                  alt="A bright, modern rental apartment maintained to hotel standards"
+                />
               </div>
             </div>
-            <div className="worry-list">
-              {reassurances.map(({ worry, answer, icon: Icon }, i) => (
-                <article key={worry} className="worry reveal" style={{ transitionDelay: `${i * 80}ms` }}>
-                  <div className="worry-icon"><Icon size={22} aria-hidden="true" /></div>
+
+            <div className="reassurance-list">
+              {reassurances.map(({ badge, title, answer, icon: Icon }, i) => (
+                <article key={title} className="reassurance-card reveal" style={{ transitionDelay: `${i * 80}ms` }}>
+                  <div className="reassurance-icon">
+                    <Icon size={22} aria-hidden="true" />
+                  </div>
                   <div>
-                    <h3><span className="strike">{worry}</span></h3>
+                    <div className="reassurance-title-wrap">
+                      <span className="reassurance-badge">{badge}</span>
+                      <h3>{title}</h3>
+                    </div>
                     <p>{answer}</p>
                   </div>
                 </article>
@@ -429,18 +723,30 @@ export default function Home() {
           </div>
         </section>
 
-        {/* SERVICES */}
+        {/* =================================================================
+            SERVICES (THREE CONSIDERED WAYS TO LET)
+            ================================================================= */}
         <section id="services" className="section services">
           <div className="container-wide">
             <div className="section-head center reveal">
-              <span className="eyebrow">Our services</span>
-              <h2 className="display">Three ways to let. <em>One trusted partner.</em></h2>
-              <p>Whether you want steady long-term tenants, a fixed monthly income or the higher returns of short lets, we’ll recommend the right route for your property — honestly.</p>
+              <span className="eyebrow">Tailored Letting Routes</span>
+              <h2 className="display">
+                Three ways to let. <em>One trusted partner.</em>
+              </h2>
+              <p>
+                Whether you prefer guaranteed monthly certainty, high-yield short-let hosting, or conventional
+                managed tenancies, we evaluate your property and advise the optimum route honestly.
+              </p>
             </div>
+
             <div className="service-grid">
               {services.map((s, i) => (
-                <article key={s.id} className={`service-card reveal${s.featured ? ' featured' : ''}`} style={{ transitionDelay: `${i * 100}ms` }}>
-                  {s.featured && <span className="ribbon">Most popular</span>}
+                <article
+                  key={s.id}
+                  className={`service-card reveal${s.featured ? ' featured' : ''}`}
+                  style={{ transitionDelay: `${i * 100}ms` }}
+                >
+                  {s.featured && <span className="ribbon">Most Popular · Guaranteed</span>}
                   <div className="service-media">
                     <Img src={s.image} fallback={s.fallback} alt="" />
                     <span className="service-tag">{s.tag}</span>
@@ -449,53 +755,71 @@ export default function Home() {
                     <h3 className="display">{s.title}</h3>
                     <p>{s.text}</p>
                     <ul>
-                      {s.features.map((f) => <li key={f}><Check size={16} aria-hidden="true" /> {f}</li>)}
+                      {s.features.map((f) => (
+                        <li key={f}>
+                          <Check size={16} aria-hidden="true" /> {f}
+                        </li>
+                      ))}
                     </ul>
-                    <p className="best-for"><strong>Best for:</strong> {s.bestFor}</p>
-                    <a href="#contact" className={`btn ${s.featured ? 'btn-gold' : 'btn-navy'} btn-block`}>{s.cta} <ArrowRight size={16} /></a>
+                    <p className="best-for">
+                      <strong>Best for:</strong> {s.bestFor}
+                    </p>
+                    <a href="#contact" className={`btn ${s.featured ? 'btn-gold' : 'btn-navy'} btn-block`}>
+                      {s.cta} <ArrowRight size={16} />
+                    </a>
                   </div>
                 </article>
               ))}
             </div>
 
-            <div className="compare reveal">
-              <h3 className="display">Not sure which suits you?</h3>
+            {/* SIDE-BY-SIDE COMPARISON MATRIX */}
+            <div id="compare" className="compare reveal">
+              <h3 className="display">Side-by-side comparison</h3>
               <div className="compare-scroll">
                 <table>
                   <thead>
                     <tr>
                       <th scope="col"><span className="sr-only">Feature</span></th>
-                      <th scope="col">Managed letting</th>
-                      <th scope="col" className="hl">Guaranteed rent</th>
-                      <th scope="col">Airbnb &amp; holiday lets</th>
+                      <th scope="col" className="hl">Guaranteed Rent (Core)</th>
+                      <th scope="col">Fully Managed Letting</th>
+                      <th scope="col">Airbnb &amp; Holiday Lets</th>
                     </tr>
                   </thead>
                   <tbody>
                     {comparison.map((row) => (
                       <tr key={row.label}>
                         <th scope="row">{row.label}</th>
-                        {row.values.map((v, i) => <td key={i} className={i === 1 ? 'hl' : undefined}>{v}</td>)}
+                        <td className="hl"><strong>{row.values[0]}</strong></td>
+                        <td>{row.values[1]}</td>
+                        <td>{row.values[2]}</td>
                       </tr>
                     ))}
                   </tbody>
                 </table>
               </div>
-              <p className="compare-note">Every arrangement is confirmed in a clear written agreement — rent, fees, responsibilities and exit terms included.</p>
+              <p className="compare-note">
+                Every commercial arrangement is backed by a transparent written agreement with zero hidden charges.
+              </p>
             </div>
           </div>
         </section>
 
-        {/* LOCAL KNOWLEDGE */}
+        {/* =================================================================
+            LOCAL KNOWLEDGE (WEST SUSSEX EXPERTISE)
+            ================================================================= */}
         <section id="local" className="section local">
           <div className="container-wide">
             <div className="local-head reveal">
               <div>
-                <span className="eyebrow eyebrow-light">Local knowledge</span>
-                <h2 className="display">We know West Sussex <em>street by street.</em></h2>
+                <span className="eyebrow eyebrow-light">West Sussex Expertise</span>
+                <h2 className="display">
+                  We know West Sussex <em>street by street.</em>
+                </h2>
               </div>
               <p>
-                From Goodwood weekends to Gatwick contractors and Horsham commuters, demand varies town to town.
-                Our local insight means accurate pricing, faster lets and the right strategy for your postcode.
+                From festival crowds at Goodwood to corporate contractors near Gatwick and coastal commuters along
+                the Worthing promenade, each market has unique dynamics. Our hyper-local knowledge ensures your
+                property achieves peak returns.
               </p>
             </div>
 
@@ -515,35 +839,53 @@ export default function Home() {
                   </button>
                 ))}
               </div>
-              <div className="area-detail" id="area-panel" role="tabpanel" aria-labelledby={`area-tab-${activeArea}`} key={area.name}>
+              <div
+                className="area-detail"
+                id="area-panel"
+                role="tabpanel"
+                aria-labelledby={`area-tab-${activeArea}`}
+                key={area.name}
+              >
                 <div className="area-image">
-                  <Img src={area.image} fallback="letvest-home.jpg" alt="" />
+                  <Img src={area.image} fallback="letvest-home.jpg" alt={area.name} />
                 </div>
                 <div className="area-copy">
                   <span className="area-kicker">{area.name}</span>
                   <h3 className="display">{area.headline}</h3>
                   <p>{area.detail}</p>
-                  <div className="area-fit"><Sparkles size={16} aria-hidden="true" /> <span><strong>Best fit:</strong> {area.bestFit}</span></div>
+                  <div className="area-fit">
+                    <Sparkles size={16} aria-hidden="true" />
+                    <span><strong>Recommended model:</strong> {area.bestFit}</span>
+                  </div>
                 </div>
               </div>
             </div>
 
             <div className="towns reveal">
-              <span className="towns-label">Areas we cover</span>
+              <span className="towns-label">Sussex Towns We Cover</span>
               <ul>
-                {towns.map((t) => <li key={t}>{t}</li>)}
+                {towns.map((t) => (
+                  <li key={t}>{t}</li>
+                ))}
               </ul>
             </div>
           </div>
         </section>
 
-        {/* COMPLIANCE / EXPERIENCE */}
+        {/* =================================================================
+            COMPLIANCE (AUTHORITATIVE UK LEGISLATION)
+            ================================================================= */}
         <section className="section compliance">
           <div className="container-wide">
             <div className="section-head reveal">
-              <span className="eyebrow">Experience you can rely on</span>
-              <h2 className="display">Fully compliant. <em>Fully covered.</em></h2>
-              <p>There are more than 170 laws and regulations affecting landlords in England. We keep track of every one that applies to your property, so you never have to.</p>
+              <span className="eyebrow">Professional Standards</span>
+              <h2 className="display">
+                Fully compliant. <em>Fully covered.</em>
+              </h2>
+              <p>
+                With over 170 pieces of legislation governing residential property in England, compliance is
+                paramount. JM LetVest monitors, schedules, and certifies every required safety check.
+              </p>
             </div>
             <div className="compliance-grid">
               {compliance.map(({ icon: Icon, title, text }, i) => (
@@ -557,12 +899,17 @@ export default function Home() {
           </div>
         </section>
 
-        {/* PROCESS */}
+        {/* =================================================================
+            HOW IT WORKS (4 SIMPLE STEPS)
+            ================================================================= */}
         <section id="process" className="section process">
           <div className="container-wide">
             <div className="section-head center reveal">
-              <span className="eyebrow">How it works</span>
-              <h2 className="display">Up and running in <em>four simple steps.</em></h2>
+              <span className="eyebrow">How It Works</span>
+              <h2 className="display">
+                Up and running in <em>four simple steps.</em>
+              </h2>
+              <p>A completely straightforward transition with zero friction.</p>
             </div>
             <ol className="steps">
               {steps.map((s, i) => (
@@ -576,20 +923,27 @@ export default function Home() {
           </div>
         </section>
 
-        {/* TESTIMONIALS – only rendered once genuine reviews are added in site-config.ts */}
+        {/* =================================================================
+            TESTIMONIALS
+            ================================================================= */}
         {siteConfig.testimonials.length > 0 && (
           <section className="section testimonials">
             <div className="container-wide">
               <div className="section-head center reveal">
-                <span className="eyebrow">What our landlords say</span>
-                <h2 className="display">Trusted by owners <em>across Sussex.</em></h2>
+                <span className="eyebrow">Landlord Feedback</span>
+                <h2 className="display">
+                  Trusted by property owners <em>across Sussex.</em>
+                </h2>
               </div>
               <div className="testimonial-grid">
                 {siteConfig.testimonials.map((t) => (
                   <figure key={t.name} className="testimonial reveal">
                     <Quote size={28} aria-hidden="true" />
-                    <blockquote>{t.quote}</blockquote>
-                    <figcaption><strong>{t.name}</strong><span>{t.detail}</span></figcaption>
+                    <blockquote>“{t.quote}”</blockquote>
+                    <figcaption>
+                      <strong>{t.name}</strong>
+                      <span>{t.detail}</span>
+                    </figcaption>
                   </figure>
                 ))}
               </div>
@@ -597,13 +951,20 @@ export default function Home() {
           </section>
         )}
 
-        {/* FAQ */}
+        {/* =================================================================
+            FAQS
+            ================================================================= */}
         <section id="faq" className="section faq">
           <div className="container-wide faq-grid">
             <div className="section-head reveal">
-              <span className="eyebrow">FAQs</span>
-              <h2 className="display">Questions landlords <em>ask us.</em></h2>
-              <p>Can’t see your question? Call us on <a href={telHref}>{siteConfig.phone}</a> — you’ll speak to someone who knows your area.</p>
+              <span className="eyebrow">Frequently Asked Questions</span>
+              <h2 className="display">
+                Everything you need <em>to know.</em>
+              </h2>
+              <p>
+                Have a specific question about your property? Call our West Sussex team on{' '}
+                <a href={telHref}>{siteConfig.phone}</a> or use our live digital assistant below.
+              </p>
             </div>
             <div className="faq-list">
               {faqs.map((item, index) => (
@@ -629,76 +990,118 @@ export default function Home() {
           </div>
         </section>
 
-        {/* CONTACT */}
+        {/* =================================================================
+            CONTACT / FREE APPRAISAL FORM
+            ================================================================= */}
         <section id="contact" className="section contact">
           <div className="container-wide contact-grid">
             <div className="contact-copy reveal">
-              <span className="eyebrow eyebrow-light">Free, no-obligation appraisal</span>
-              <h2 className="display">Let’s talk about <em>your property.</em></h2>
+              <span className="eyebrow eyebrow-light">No-Obligation Property Review</span>
+              <h2 className="display">
+                Request your free <em>rental appraisal.</em>
+              </h2>
               <p>
-                Tell us a little about your property and we’ll come back with honest local advice on rental value,
-                demand and the best way to let — usually within one working day.
+                Tell us about your property and we will provide an honest, accurate evaluation comparing Guaranteed
+                Rent, Airbnb holiday lets, and conventional letting options.
               </p>
               <ul className="contact-points">
-                <li><Check size={18} /> Accurate, local rental valuation</li>
-                <li><Check size={18} /> Side-by-side comparison of all three options</li>
-                <li><Check size={18} /> No pressure, no obligation</li>
+                <li><Check size={18} /> Guaranteed monthly rent offer calculation</li>
+                <li><Check size={18} /> Full property care plan discussion</li>
+                <li><Check size={18} /> Fast response within 1 business day</li>
               </ul>
               <div className="contact-direct">
-                <a href={telHref}><span className="cd-icon"><Phone size={18} /></span><span><small>Call us</small>{siteConfig.phone}</span></a>
-                <a href={`mailto:${siteConfig.email}`}><span className="cd-icon"><Mail size={18} /></span><span><small>Email us</small>{siteConfig.email}</span></a>
+                <a href={telHref}>
+                  <span className="cd-icon"><Phone size={18} /></span>
+                  <span><small>Call us directly</small>{siteConfig.phone}</span>
+                </a>
+                <a href={`mailto:${siteConfig.email}`}>
+                  <span className="cd-icon"><Mail size={18} /></span>
+                  <span><small>Email our desk</small>{siteConfig.email}</span>
+                </a>
               </div>
             </div>
 
             <form className="contact-form reveal" onSubmit={sendEnquiry}>
-              <h3 className="display">Request your free appraisal</h3>
+              <h3 className="display">Book Your Free Appraisal</h3>
               <div className="form-grid">
-                <div className="field"><label htmlFor="c-name">Your name</label><input id="c-name" name="name" autoComplete="name" required /></div>
-                <div className="field"><label htmlFor="c-phone">Phone</label><input id="c-phone" name="phone" type="tel" autoComplete="tel" /></div>
-                <div className="field full"><label htmlFor="c-email">Email address</label><input id="c-email" name="email" type="email" autoComplete="email" required /></div>
-                <div className="field"><label htmlFor="c-location">Property town or postcode</label><input id="c-location" name="location" placeholder="e.g. Worthing, BN11" /></div>
                 <div className="field">
-                  <label htmlFor="c-arrangement">I’m interested in</label>
-                  <select id="c-arrangement" name="arrangement" defaultValue="" required>
-                    <option value="" disabled>Select an option</option>
-                    <option>Fully managed letting</option>
-                    <option>Guaranteed rent / rent-to-rent</option>
-                    <option>Airbnb / holiday-let management</option>
-                    <option>Not sure – advise me</option>
+                  <label htmlFor="c-name">Your Full Name</label>
+                  <input id="c-name" name="name" autoComplete="name" placeholder="e.g. John Smith" required />
+                </div>
+                <div className="field">
+                  <label htmlFor="c-phone">Phone Number</label>
+                  <input id="c-phone" name="phone" type="tel" autoComplete="tel" placeholder="e.g. 07123 456789" />
+                </div>
+                <div className="field full">
+                  <label htmlFor="c-email">Email Address</label>
+                  <input id="c-email" name="email" type="email" autoComplete="email" placeholder="e.g. name@example.com" required />
+                </div>
+                <div className="field">
+                  <label htmlFor="c-location">Property Town or Postcode</label>
+                  <input id="c-location" name="location" placeholder="e.g. Worthing, Chichester, BN11" />
+                </div>
+                <div className="field">
+                  <label htmlFor="c-arrangement">Interested In</label>
+                  <select id="c-arrangement" name="arrangement" defaultValue="100% Guaranteed Rent" required>
+                    <option value="100% Guaranteed Rent">100% Guaranteed Rent (Recommended)</option>
+                    <option value="Airbnb & Holiday Let Management">Airbnb &amp; Holiday Let Management</option>
+                    <option value="Fully Managed Letting">Fully Managed Letting</option>
+                    <option value="Not sure – please advise me">Not sure – please advise me</option>
                   </select>
                 </div>
-                <div className="field full"><label htmlFor="c-message">About your property</label><textarea id="c-message" name="message" placeholder="Bedrooms, current situation, anything you’d like us to know…" /></div>
+                <div className="field full">
+                  <label htmlFor="c-message">Tell Us About Your Property</label>
+                  <textarea
+                    id="c-message"
+                    name="message"
+                    placeholder="Number of bedrooms, current rental status, your goals or questions..."
+                  />
+                </div>
               </div>
-              <button className="btn btn-gold btn-lg btn-block" type="submit">Send my enquiry <ArrowRight size={18} /></button>
+              <button className="btn btn-gold btn-lg btn-block" type="submit">
+                Request Free Appraisal <ArrowRight size={18} />
+              </button>
               <p className="form-note">
-                {sent
-                  ? <>Your email app should now open with your enquiry ready to send. Nothing happened? Email <a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a> or call <a href={telHref}>{siteConfig.phone}</a>.</>
-                  : 'Your details are only used to respond to your enquiry.'}
+                {sent ? (
+                  <>
+                    Your email client has opened with your inquiry ready to send. Or call us directly on{' '}
+                    <a href={telHref}>{siteConfig.phone}</a>.
+                  </>
+                ) : (
+                  'Your details are strictly confidential and used solely to prepare your property appraisal.'
+                )}
               </p>
             </form>
           </div>
         </section>
       </main>
 
+      {/* FOOTER */}
       <footer className="site-footer">
         <div className="container-wide footer-grid">
           <div className="footer-brand">
             <img src={asset('letvest-logo-sm.png')} alt={siteConfig.companyName} width="600" height="400" />
-            <p>{siteConfig.tagline}. Experienced, local and fully compliant property management you can trust.</p>
+            <p>
+              {siteConfig.companyName} — {siteConfig.tagline}. Local expertise, guaranteed rental returns, and
+              uncompromising property care across West Sussex.
+            </p>
           </div>
           <div>
             <h4>Services</h4>
             <ul>
-              <li><a href="#services">Fully managed letting</a></li>
-              <li><a href="#services">Guaranteed rent</a></li>
-              <li><a href="#services">Airbnb management</a></li>
-              <li><a href="#contact">Free appraisal</a></li>
+              <li><a href="#guaranteed-rent">Guaranteed Rent</a></li>
+              <li><a href="#services">Airbnb Management</a></li>
+              <li><a href="#services">Fully Managed Letting</a></li>
+              <li><a href="#property-care">Property Care Standards</a></li>
+              <li><a href="#contact">Free Appraisal</a></li>
             </ul>
           </div>
           <div>
-            <h4>Areas</h4>
+            <h4>Sussex Locations</h4>
             <ul>
-              {['Chichester', 'Worthing', 'Crawley', 'Horsham', 'Bognor Regis', 'Arundel'].map((t) => <li key={t}><a href="#local">{t}</a></li>)}
+              {['Chichester', 'Worthing', 'Arundel', 'Crawley', 'Horsham', 'Bognor Regis'].map((t) => (
+                <li key={t}><a href="#local">{t}</a></li>
+              ))}
             </ul>
           </div>
           <div>
@@ -716,7 +1119,13 @@ export default function Home() {
         </div>
       </footer>
 
-      <a className="mobile-call" href={telHref} aria-label={`Call ${siteConfig.companyName}`}><Phone size={20} /></a>
+      {/* FLOATING CHATBOT WIDGET */}
+      <Chatbot />
+
+      {/* FLOATING MOBILE PHONE CALL BUTTON */}
+      <a className="mobile-call" href={telHref} aria-label={`Call ${siteConfig.companyName}`}>
+        <Phone size={20} />
+      </a>
     </div>
   );
 }

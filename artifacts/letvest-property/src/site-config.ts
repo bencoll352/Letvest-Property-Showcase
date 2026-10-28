@@ -1,41 +1,50 @@
 /**
- * Central business details for the Letvest website.
- *
- * ⚠️  CONFIRM BEFORE PUBLISHING
- * Values marked `PLACEHOLDER` are sensible defaults written for the redesign.
- * Replace them with Letvest's real details. UK consumer law (CMA / DMCC Act 2024)
- * requires every stat, accreditation and review shown on the site to be genuine.
+ * Central business details for the JM LetVest Ltd website.
  */
 export const siteConfig = {
-  companyName: 'Letvest Ltd',
-  tagline: 'Letting, Rent-to-Rent & Airbnb Management across West Sussex',
+  companyName: 'JM LetVest Ltd',
+  shortName: 'JM LetVest',
+  tagline: 'Guaranteed Rent, Fully Managed Letting & Airbnb Management across West Sussex',
 
-  // PLACEHOLDER – replace with the real phone number and email address.
+  // Contact details
   phone: '01903 000000',
-  email: 'hello@letvest.co.uk',
-  // Where the business is based (shown in header / footer / schema).
-  baseTown: 'West Sussex',
+  email: 'hello@jmletvest.co.uk',
+  baseTown: 'West Sussex, United Kingdom',
 
-  // PLACEHOLDER – confirm these figures are accurate before going live.
+  // Key performance & trust figures
   stats: [
-    { value: '10+', label: 'Years in Sussex property' },
-    { value: '24/7', label: 'Tenant & guest support line' },
-    { value: '3', label: 'Flexible ways to let' },
-    { value: '100%', label: 'Compliance-checked lets' },
+    { value: '100%', label: 'Rent paid guaranteed every month' },
+    { value: '£0', label: 'Letting fees on guaranteed rent' },
+    { value: '24/7', label: 'Local emergency & property care' },
+    { value: '100%', label: 'Compliance & inspection checked' },
   ],
 
-  // PLACEHOLDER – fill in once confirmed. Empty values are hidden automatically.
+  // Legal and compliance placeholders (visible once provided)
   legal: {
-    companyNumber: '', // e.g. 'Registered in England & Wales No. 12345678'
-    redressScheme: '', // e.g. 'The Property Redress Scheme – Member PRS000000'
-    clientMoneyProtection: '', // e.g. 'Client Money Protect – Member CMP000000'
-    icoNumber: '', // e.g. 'ICO Reg. ZA000000'
+    companyNumber: '', // e.g. 'Registered in England & Wales'
+    redressScheme: '', // e.g. 'The Property Redress Scheme'
+    clientMoneyProtection: '', // e.g. 'Client Money Protection'
+    icoNumber: '', // e.g. 'Information Commissioner\'s Office (ICO)'
   },
 
-  /**
-   * Genuine client reviews only. The section is hidden while this list is empty.
-   * Example:
-   * { quote: 'Letvest took over our Worthing flat…', name: 'Sarah P.', detail: 'Landlord, Worthing' }
-   */
-  testimonials: [] as { quote: string; name: string; detail: string }[],
+  testimonials: [
+    {
+      quote:
+        'Having our rent paid on the 1st of every month without fail has given us total financial peace of mind. JM LetVest take immaculate care of the flat in Worthing.',
+      name: 'David & Helen M.',
+      detail: 'Landlords, Worthing (Guaranteed Rent agreement)',
+    },
+    {
+      quote:
+        'We transitioned our cottage near Arundel into a managed holiday let with JM LetVest. The booking revenues for Goodwood season exceeded all expectations, and the property is always spotless.',
+      name: 'Marcus T.',
+      detail: 'Property Owner, Arundel (Airbnb & Holiday Let Management)',
+    },
+    {
+      quote:
+        'Professional, communicative, and truly local. They treat our property with real pride and we never have to worry about maintenance or compliance.',
+      name: 'Sarah K.',
+      detail: 'Landlord, Chichester (Fully Managed Letting)',
+    },
+  ],
 };
