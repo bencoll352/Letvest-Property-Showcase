@@ -2,7 +2,6 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, Menu, ShieldCheck, KeyRound, MessageSquare, X } from 'lucide-react';
 import { SiteHeader } from '@/components/site-header';
 import { siteConfig, pageHref } from '@/site-config';
-import { Chatbot } from '@/components/chatbot';
 import { CaseStudies } from '@/components/case-studies';
 import { Benefits, Included, destination } from '@/components/service-features';
 import { Reviews } from '@/components/reviews';
@@ -39,5 +38,5 @@ export default function Home() {
       <CaseStudies />
       <section className="section container-wide" aria-labelledby="home-contact-heading"><div className="home-contact-panel"><span className="contact-panel-icon"><MessageSquare size={28} strokeWidth={1.7} aria-hidden="true" /></span><div><span className="eyebrow">Start a conversation</span><h2 id="home-contact-heading" className="display">Let’s talk about your property.</h2><p>Tell us about your property and what you’re looking for. We’ll help you explore the right arrangement, with clear advice on the next step.</p></div><a className="btn btn-gold" href={destination('contact')}>Contact us <ArrowRight size={18} aria-hidden="true" /></a></div></section>
       <Reviews />
-    </main><SiteFooter /><Chatbot /></div>;
+    </main><SiteFooter /></div>;
 }
