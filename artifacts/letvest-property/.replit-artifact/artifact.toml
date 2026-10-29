@@ -1,0 +1,28 @@
+kind = "web"
+previewPath = "/"
+title = "Letvest Ltd."
+description = "A professional branded website for Letvest Ltd., helping property owners understand rent-to-rent, Airbnb management, and the advantages of a hands-off property service."
+version = "1.0.0"
+id = "artifacts/letvest-property"
+router = "path"
+
+[[services]]
+name = "web"
+paths = [ "/" ]
+localPort = 22080
+
+[services.development]
+run = "pnpm --filter @workspace/letvest-property run dev"
+
+[services.production]
+build = [ "pnpm", "--filter", "@workspace/letvest-property", "run", "build" ]
+serve = "static"
+publicDir = "artifacts/letvest-property/dist/public"
+
+[[services.production.rewrites]]
+from = "/*"
+to = "/index.html"
+
+[services.env]
+PORT = "22080"
+BASE_PATH = "/"
