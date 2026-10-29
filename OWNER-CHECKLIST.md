@@ -14,4 +14,4 @@ The design uses the existing approved site information. No prices, terms, locati
 - Verify current legislation and commencement dates from official sources; network policy blocked live government source checks during this task.
 - Approve final indexing separately once the outstanding launch information is complete. Deployment retains noindex.
 
-Preview reviews advance every five seconds, pause on hover/focus and manual pause, and do not auto-advance with reduced motion.
+Preview reviews advance every 4.5 seconds, pause on hover/focus and manual pause, and do not auto-advance with reduced motion.
