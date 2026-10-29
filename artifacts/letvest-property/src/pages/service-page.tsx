@@ -1,3 +1,4 @@
+import { rentToRentFaqs, lettingsFaqs } from "@/components/service-faqs";
 import { useEffect } from "react";
 import { ArrowRight, Check } from "lucide-react";
 import { LandlordGuidance } from "@/components/landlord-guidance";
@@ -65,43 +66,7 @@ function ServiceDetails({ rentToRent }: { rentToRent: boolean }) {
         "Agreed rent collection and property oversight",
         "Maintenance coordination and clear updates",
       ];
-  const faqs = rentToRent
-    ? [
-        [
-          "How is Rent to Rent different from managed letting?",
-          "JM LetVest leases the property from you and arranges its agreed onward use. Under conventional managed letting, you let directly to the residential tenant and appoint us to manage the agreed tasks.",
-        ],
-        [
-          "What happens if the property is empty?",
-          "The agreed rent is payable under the contract. Check the provisions covering void periods, payment obligations, exclusions and any circumstances that allow the arrangement to end.",
-        ],
-        [
-          "Who pays for repairs and bills?",
-          "Your proposal identifies the utilities and bills covered by JM LetVest. Repairs, major works, spending approvals and exclusions are set out separately; no blanket repair cover is promised.",
-        ],
-        [
-          "Who will live in my property?",
-          "We discuss the proposed occupant profile and screening process with you. Permitted use and any occupancy restrictions must be recorded in the agreement.",
-        ],
-      ]
-    : [
-        [
-          "Can I choose the level of management?",
-          "We discuss the support you need and confirm the service scope in writing, including inspections, rent collection, maintenance coordination and updates.",
-        ],
-        [
-          "Is my rent guaranteed?",
-          "No. Under Fully Managed Lettings the tenant pays the rent, and arrears or empty periods can affect the income you receive. Rent to Rent is a separate contractual arrangement.",
-        ],
-        [
-          "What will management cost?",
-          "Ask for a written proposal detailing landlord fees, any additional charges and the payment schedule before you instruct us. This website does not quote a standard fee.",
-        ],
-        [
-          "Can you help me find a home?",
-          "Yes. Send your preferred area, budget and requirements to info@jmletvest.com. We can discuss suitable properties and arrange viewings where homes are available.",
-        ],
-      ];
+  const faqs = rentToRent ? rentToRentFaqs : lettingsFaqs;
   return (
     <>
       <section
@@ -168,7 +133,7 @@ function ServiceDetails({ rentToRent }: { rentToRent: boolean }) {
         </div>
       </section>
       {rentToRent && <Payments />}
-      <Included />
+      <Included service={rentToRent ? "rent-to-rent" : "lettings"} />
       <section className="section container-wide service-questions">
         <div>
           <span className="eyebrow">Before you decide</span>
