@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Menu, X } from 'lucide-react';
 import { destination } from './service-features';
-const links=[['rent-to-rent','Rent to Rent'],['lettings','Lettings'],['about','About us'],['industry-news','Landlord Guides & Updates']];
+const links=[['rent-to-rent','Rent to Rent'],['about','About us'],['industry-news','Landlord Guides & Updates']];
 export function SiteHeader(){
  const [open,setOpen]=useState(false);const button=useRef<HTMLButtonElement>(null);const current=new URLSearchParams(location.search).get('view');
  useEffect(()=>{const close=(event:KeyboardEvent)=>{if(event.key==='Escape'&&open){setOpen(false);button.current?.focus();}};document.addEventListener('keydown',close);return()=>document.removeEventListener('keydown',close);},[open]);

@@ -1,7 +1,7 @@
 export const rentToRentFaqs = [
   [
-    "How does Rent to Rent differ from managed letting?",
-    "JM LetVest leases the property from you and arranges its agreed onward use. With managed letting, you let directly to the residential tenant and appoint us to manage the agreed tasks. The written agreement identifies the parties, permitted use and responsibilities.",
+    "How does Rent to Rent work?",
+    "JM LetVest leases the property from you and arranges its agreed onward use. We arrange rooms for working professionals and NHS/key workers. The written agreement identifies the parties, permitted use and responsibilities.",
   ],
   [
     "What happens during vacant periods or if an occupant does not pay?",
@@ -29,7 +29,7 @@ export const rentToRentFaqs = [
   ],
   [
     "Who will live in my property?",
-    "We serve working professionals and healthcare professionals, among other suitable occupant groups. Ask for the proposed occupant profile, screening process, occupancy limits and permitted use in writing.",
+    "We provide rooms for working professionals and NHS/key workers, not family accommodation. Ask for the proposed occupant profile, screening process, occupancy limits and permitted use in writing.",
   ],
   [
     "Do I need consent before proceeding?",

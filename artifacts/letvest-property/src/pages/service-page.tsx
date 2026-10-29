@@ -144,9 +144,9 @@ function ServiceDetails({ rentToRent }: { rentToRent: boolean }) {
           </h2>
           <a
             className="text-link"
-            href={destination(rentToRent ? "lettings" : "rent-to-rent")}
+            href={destination("contact")}
           >
-            Compare {rentToRent ? "Fully Managed Lettings" : "Rent to Rent"}{" "}
+            Discuss your property{" "}
             <ArrowRight size={16} aria-hidden="true" />
           </a>
         </div>

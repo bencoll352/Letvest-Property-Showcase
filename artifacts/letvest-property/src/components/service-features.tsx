@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 export const destination = (page: string) =>
   `${import.meta.env.BASE_URL}?view=${page}`;
-export function Benefits(){return <section className="section"><div className="container-wide"><div className="section-head"><span className="eyebrow">A personal approach</span><h2 className="display">Less to manage. More room to plan.</h2></div><div className="benefit-grid">{[{Icon:FileText,title:'Rental options explained clearly',text:'Compare contractual rental income with conventional managed letting.'},{Icon:KeyRound,title:'Tenant finding and management',text:'Agree the right level of support for your property and priorities.'},{Icon:Wrench,title:'Care and maintenance coordination',text:'Clear responsibilities, reporting and approval arrangements.'},{Icon:MessagesSquare,title:'Personal communication',text:'A family-run business with straightforward conversations at its heart.'}].map(({Icon,title,text})=><article key={title}><Icon aria-hidden="true"/><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>}
+export function Benefits(){return <section className="section"><div className="container-wide"><div className="section-head"><span className="eyebrow">A personal approach</span><h2 className="display">Less to manage. More room to plan.</h2></div><div className="benefit-grid">{[{Icon:FileText,title:'Rental options explained clearly',text:'Understand the agreed rent, payment schedule and contract terms.'},{Icon:KeyRound,title:'Room occupant management',text:'Agree the right level of support for your property and priorities.'},{Icon:Wrench,title:'Care and maintenance coordination',text:'Clear responsibilities, reporting and approval arrangements.'},{Icon:MessagesSquare,title:'Personal communication',text:'A family-run business with straightforward conversations at its heart.'}].map(({Icon,title,text})=><article key={title}><Icon aria-hidden="true"/><h3>{title}</h3><p>{text}</p></article>)}</div></div></section>}
 export function Included({
   service,
 }: {
@@ -96,7 +96,7 @@ export function Included({
                 ? "Your written proposal confirms the agreed rent, payment schedule and bills covered, alongside maintenance responsibilities and any exclusions."
                 : service === "lettings"
                   ? "Your proposal sets out the management scope, landlord fees, rent collection and responsibilities for bills and repairs. Rental income is paid by the tenant and is not guaranteed."
-                  : "Rent to Rent includes agreed rent and the bills specified in your contract. Lettings fees and bill responsibilities are agreed separately; managed letting does not include guaranteed rental income."}
+                  : "Rent to Rent includes agreed rent and the bills specified in your contract. Check payment terms, maintenance responsibilities, limits and exclusions before signing."}
             </p>
           </div>
           <a href={destination("contact")} className="btn care-summary-button">
