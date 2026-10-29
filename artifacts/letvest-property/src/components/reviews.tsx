@@ -4,7 +4,6 @@ import {
   ChevronRight,
   Pause,
   Play,
-  Star,
   MessageSquare,
 } from "lucide-react";
 
@@ -37,10 +36,15 @@ export const sampleReviews: CustomerReview[] = [
 }));
 
 export function Reviews({
-  reviews = customerReviews,
+  reviews = customerReviews.length
+    ? customerReviews
+    : sampleReviews.slice(0, 3),
 }: {
   reviews?: CustomerReview[];
 }) {
+  const isSample = reviews.some(
+    (review) => review.source === "Layout demonstration only",
+  );
   const items = reviews
     .filter(
       (review) =>
@@ -137,12 +141,18 @@ export function Reviews({
         <div className="reviews-heading">
           <div>
             <span className="eyebrow">
-              {import.meta.env.DEV
-                ? "Review layout preview"
-                : "In our customers’ words"}
+              {isSample ? "Review layout preview" : "In our customers’ words"}
             </span>
             <h2 className="display">
-              Personal service.<em>Real experiences.</em>
+              {isSample ? (
+                <>
+                  Customer reviews.<em>Layout preview.</em>
+                </>
+              ) : (
+                <>
+                  Personal service.<em>Real experiences.</em>
+                </>
+              )}
             </h2>
           </div>
           <div className="reviews-controls">
@@ -169,10 +179,10 @@ export function Reviews({
             </button>
           </div>
         </div>
-        {import.meta.env.DEV && (
+        {isSample && (
           <p className="sample-notice">
-            Sample reviews — not customer testimonials. Demonstration content is
-            hidden in the published build.
+            Illustrative sample reviews for design preview only. These are not
+            genuine customer testimonials.
           </p>
         )}
         <div
@@ -189,15 +199,7 @@ export function Reviews({
         >
           {items.map((review, i) => (
             <figure className="review-card" key={`${review.attribution}-${i}`}>
-              <span
-                className="review-stars"
-                aria-label="Five stars — sample rating"
-              >
-                {Array.from({ length: 5 }, (_, i) => (
-                  <Star key={i} size={17} aria-hidden="true" />
-                ))}
-              </span>
-              {import.meta.env.DEV && (
+              {isSample && (
                 <small>Sample review — not a customer testimonial</small>
               )}
               <blockquote>{review.quote}</blockquote>
