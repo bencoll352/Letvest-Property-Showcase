@@ -1315,3 +1315,8 @@ body, .care-section, .process, .faq { background: #fff; }
 .service-hero .hero-media img { animation:none; object-position:center 55%; }
 .reviews-section .sample-notice { padding:16px 20px; border:1px solid var(--line); border-radius:10px; background:#f3f6f4; color:var(--ink); line-height:1.7; }
 .review-card>small { display:block; font-weight:600; color:var(--steel); margin-bottom:16px; }
+
+.review-stars { display:flex;gap:5px; color:#b37b20; margin-bottom:18px; }
+.review-stars svg { fill:currentColor; }
+.reviews-track { scroll-snap-type:x mandatory; }
+.review-card { scroll-snap-align:start; }

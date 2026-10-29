@@ -5,6 +5,7 @@ import {
   Pause,
   Play,
   MessageSquare,
+  Star,
 } from "lucide-react";
 
 export interface CustomerReview {
@@ -36,9 +37,7 @@ export const sampleReviews: CustomerReview[] = [
 }));
 
 export function Reviews({
-  reviews = customerReviews.length
-    ? customerReviews
-    : sampleReviews.slice(0, 3),
+  reviews = customerReviews.length ? customerReviews : sampleReviews,
 }: {
   reviews?: CustomerReview[];
 }) {
@@ -199,6 +198,19 @@ export function Reviews({
         >
           {items.map((review, i) => (
             <figure className="review-card" key={`${review.attribution}-${i}`}>
+              <span
+                className="review-stars"
+                role="img"
+                aria-label={
+                  isSample
+                    ? "Five stars — illustrative sample rating"
+                    : "Five stars"
+                }
+              >
+                {Array.from({ length: 5 }, (_, star) => (
+                  <Star key={star} size={20} aria-hidden="true" />
+                ))}
+              </span>
               {isSample && (
                 <small>Sample review — not a customer testimonial</small>
               )}

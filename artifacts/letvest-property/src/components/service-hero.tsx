@@ -1,6 +1,3 @@
-import { ArrowRight } from "lucide-react";
-import { destination } from "./service-features";
-
 export function ServiceHero({ rentToRent }: { rentToRent: boolean }) {
   return (
     <section className="hero service-hero">
@@ -28,17 +25,6 @@ export function ServiceHero({ rentToRent }: { rentToRent: boolean }) {
               ? "Agreed rent. Bills covered as agreed. A personal approach that takes the day-to-day work off your hands."
               : "From finding a tenant to looking after the details, we help you manage your property with confidence."}
           </p>
-          <div className="hero-actions">
-            <a className="btn btn-gold" href={destination("contact")}>
-              {rentToRent
-                ? "Request your rental offer"
-                : "Book a free appraisal"}{" "}
-              <ArrowRight size={18} aria-hidden="true" />
-            </a>
-            <a className="btn btn-outline-navy" href="#service-detail">
-              Explore the service
-            </a>
-          </div>
           <p className="service-hero-note">
             {rentToRent
               ? "Rental income and bill cover are subject to your property-specific contract."
