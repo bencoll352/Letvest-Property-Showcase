@@ -1135,5 +1135,36 @@ body, .care-section, .process, .faq { background: #fff; }
 .registration-label { width: 150px; padding: 18px 12px; text-align: center; background: #edf6f2; color: var(--navy-700); border-radius: 10px; font-size: 1.05rem; font-weight: 700; }
 @media (max-width: 680px) { .family-members { grid-template-columns: minmax(0,1fr); } .trust-badge { grid-template-columns: minmax(0,1fr); gap: 18px; padding: 20px; } .personal-cta .btn { width: 100%; } }
 /* Keep anchor headings clear of the full-height logo header. */
+/* Editorial imagery and a consistent rhythm across the landlord journey. */
+.service-card { display: flex; flex-direction: column; border: 1px solid var(--line); box-shadow: 0 12px 40px -28px rgba(0,59,69,.35); }
+.service-media { aspect-ratio: 16 / 9; }
+.service-media img { display: block; }
+.service-body { flex: 1; }
+.service-body .btn { align-self: flex-start; }
+.story-layout { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(24px,4vw,48px); margin: 32px 0; }
+.story-image, .local-landscape { margin: 0; }
+.story-image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; }
+.story-image figcaption, .local-landscape figcaption { font-size: .75rem; color: var(--text); margin-top: 8px; }
+.story-copy h3 { font-size: clamp(1.8rem,3vw,2.5rem); line-height: 1.15; color: var(--ink); margin: 16px 0; }
+.story-copy p { line-height: 1.75; margin: 0 0 16px; }
+.text-link { color: var(--navy-700); font-weight: 600; text-underline-offset: 4px; }
+.commitment-grid { display: grid; grid-template-columns: repeat(4,minmax(0,1fr)); gap: 20px; padding-block: 28px; border-block: 1px solid var(--line); }
+.commitment-grid svg { color: var(--steel); margin-bottom: 14px; }
+.commitment-grid h3 { font-size: 1rem; color: var(--ink); margin: 0 0 8px; }
+.commitment-grid p { margin: 0; line-height: 1.65; font-size: .9rem; }
+.local-landscape { margin-bottom: 28px; }
+.local-landscape img { display: block; width: 100%; aspect-ratio: 21 / 8; object-fit: cover; border-radius: 18px; }
+.care-section { background: #f7faf9; }
+.care-card h3 { color: var(--ink); }
+.faq-trigger { text-align: left; gap: 20px; }
+.faq-trigger svg { flex-shrink: 0; }
+:is(a,button,input,select,textarea):focus-visible { outline: 3px solid var(--steel); outline-offset: 4px; }
+@media (max-width: 900px) { .commitment-grid { grid-template-columns: repeat(2,minmax(0,1fr)); } }
+@media (max-width: 680px) {
+ .story-layout { grid-template-columns: minmax(0,1fr); }
+ .commitment-grid { gap: 24px 16px; }
+ .local-landscape img { aspect-ratio: 16 / 10; }
+ .service-body .btn { width: 100%; }
+}
 :root { scroll-padding-top: 112px; }
 @media (max-width: 680px) { :root { scroll-padding-top: 92px; } }

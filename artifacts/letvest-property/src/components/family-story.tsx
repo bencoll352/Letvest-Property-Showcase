@@ -1,13 +1,9 @@
-import { siteConfig } from '@/site-config';
+import { HeartHandshake, MapPin, MessagesSquare, House } from 'lucide-react';
 const asset=(path:string)=>`${import.meta.env.BASE_URL}${path.replace(/^\//,'')}`;
 export function FamilyStory(){
- const family=siteConfig.family;
- const members=family.members.filter(member=>member.approved&&member.name.trim()&&member.role.trim()&&member.biography.trim());
- if(!members.length&&!family.introductionApproved)return null;
- return <section className="family-story" aria-labelledby="family-heading"><h3 className="display" id="family-heading">Meet the people behind JM LetVest</h3>{family.introductionApproved&&family.introduction&&<p className="family-introduction">{family.introduction}</p>}<div className="family-members">{members.map(member=><article className="family-member" key={member.name}>{member.photographApproved&&member.photograph.trim()&&<img src={asset(member.photograph)} alt={member.name} width="480" height="560" loading="lazy" />}<div><h4>{member.name}</h4><p className="family-role">{member.role}</p><p>{member.biography}</p></div></article>)}</div>{family.storyApproved&&family.relationship.trim()&&family.reasonForStarting.trim()&&family.westSussexConnection.trim()&&<div className="family-origin"><h4>Why we started JM LetVest</h4><p>{family.relationship}</p><p>{family.reasonForStarting}</p><p>{family.westSussexConnection}</p></div>}</section>;
+ return <div className="story-layout"><figure className="story-image"><img src={asset('letvest-home.jpg')} alt="Residential property exterior" width="960" height="720" loading="lazy" /><figcaption>Property imagery for illustration.</figcaption></figure><div className="story-copy"><span className="eyebrow">Local roots. Personal service.</span><h3 className="display">A family-run business.<br />A local understanding.</h3><p>Born and bred in West Sussex, we bring local knowledge and a personal approach to helping landlords care for their properties.</p><p>Every home and every landlord is different. We take the time to understand your priorities, explain your options and agree the practical details with you.</p><a className="text-link" href="#contact">Tell us about your property →</a></div></div>;
 }
 export function FamilyCommitments(){
- const commitments=siteConfig.family.commitments.filter(commitment=>commitment.approved&&commitment.title.trim()&&commitment.detail.trim());
- if(!commitments.length)return null;
- return <section className="family-commitments" aria-labelledby="commitment-heading"><h3 className="display" id="commitment-heading">What this means for you</h3><div className="agreement-grid">{commitments.map(commitment=><article className="care-card" key={commitment.title}><h4>{commitment.title}</h4><p>{commitment.detail}</p></article>)}</div></section>;
+ const items=[{Icon:MapPin,title:'Local knowledge',detail:'An understanding of West Sussex and its communities.'},{Icon:HeartHandshake,title:'Personal service',detail:'A family-run approach centred on your priorities.'},{Icon:MessagesSquare,title:'Clear communication',detail:'Straightforward conversations about your property and options.'},{Icon:House,title:'Practical support',detail:'Property care and responsibilities agreed from the outset.'}];
+ return <div className="commitment-grid">{items.map(({Icon,title,detail})=><article key={title}><Icon size={24} aria-hidden="true" /><h3>{title}</h3><p>{detail}</p></article>)}</div>;
 }
