@@ -92,7 +92,7 @@ export function Reviews({
   };
   useEffect(() => {
     if (paused || interacting || reduced || items.length < 2) return;
-    const timer = window.setInterval(() => move(1), 14000);
+    const timer = window.setInterval(() => move(1), 4500);
     return () => clearInterval(timer);
   }, [paused, interacting, reduced, items.length]);
   if (!items.length)
