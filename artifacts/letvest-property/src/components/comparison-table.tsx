@@ -82,16 +82,20 @@ export function ComparisonTable() {
                     <strong>{row.feature}</strong>
                   </th>
                   <td className="traditional-cell">
-                    <span className="cell-icon cross" aria-hidden="true">
-                      <X size={16} />
-                    </span>
-                    <span>{row.traditional}</span>
+                    <div className="cell-inner">
+                      <span className="cell-icon cross" aria-hidden="true">
+                        <X size={16} />
+                      </span>
+                      <span>{row.traditional}</span>
+                    </div>
                   </td>
                   <td className="letvest-cell">
-                    <span className="cell-icon check" aria-hidden="true">
-                      <Check size={16} strokeWidth={2.4} />
-                    </span>
-                    <span>{row.letvest}</span>
+                    <div className="cell-inner">
+                      <span className="cell-icon check" aria-hidden="true">
+                        <Check size={16} strokeWidth={2.4} />
+                      </span>
+                      <span>{row.letvest}</span>
+                    </div>
                   </td>
                 </tr>
               ))}
