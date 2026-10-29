@@ -1135,6 +1135,8 @@ body, .care-section, .process, .faq { background: #fff; }
 .registration-label { width: 150px; padding: 18px 12px; text-align: center; background: #edf6f2; color: var(--navy-700); border-radius: 10px; font-size: 1.05rem; font-weight: 700; }
 @media (max-width: 680px) { .family-members { grid-template-columns: minmax(0,1fr); } .trust-badge { grid-template-columns: minmax(0,1fr); gap: 18px; padding: 20px; } .personal-cta .btn { width: 100%; } }
 /* Keep anchor headings clear of the full-height logo header. */
+.brand-banner { background: #004b55 !important; }
+.service-page-house { display: block; width: 100%; max-height: 440px; object-fit: cover; border-radius: 18px; margin: 24px 0; }
 .brand-banner { background: #123b50; color: white; padding: 38px 0; }
 .brand-banner > div, .included-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 48px; align-items: center; }
 .brand-banner h2 { color: white; font-size: clamp(1.5rem,2.6vw,2.2rem); line-height: 1.25; margin: 0; }
