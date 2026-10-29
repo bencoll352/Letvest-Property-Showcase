@@ -42,6 +42,7 @@ jobs:
         env:
           PORT: 5173
           BASE_PATH: '/Letvest-Property-Showcase/'
+          PUBLICATION_READY: 'true'
         run: |
           pnpm --filter @workspace/letvest-property run build
 
