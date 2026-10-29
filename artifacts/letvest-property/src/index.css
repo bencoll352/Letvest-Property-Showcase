@@ -1339,3 +1339,27 @@ body, .care-section, .process, .faq { background: #fff; }
 .home-contact-panel .btn { white-space:nowrap; }
 @media(max-width:1000px){.care-summary,.home-contact-panel{grid-template-columns:60px minmax(0,1fr);gap:24px}.care-summary-button,.home-contact-panel>.btn{grid-column:2;justify-self:start}}
 @media(max-width:680px){.care-summary,.home-contact-panel{grid-template-columns:1fr;padding:26px;gap:20px}.care-summary-button,.home-contact-panel>.btn{grid-column:1;width:100%;white-space:normal;text-align:center}.care-summary-copy p{font-size:1rem}.service-card-icon{width:54px;height:54px}}
+
+/* Lighter proposal panels with a distinct title and action rail. */
+.care-summary { position:relative;display:grid;grid-template-columns:52px minmax(0,1fr) auto;gap:24px;padding:32px;background:#fff;color:#33433d;border:1px solid #d8e6df;border-left:5px solid #157262;border-radius:14px;box-shadow:0 8px 24px #183d2c06; }
+.care-summary-icon { width:52px;height:52px;border:0;border-radius:12px;background:#eaf4ee;color:#146253;align-self:start; }
+.care-summary-copy h3 { color:#154d40;font-family:var(--app-font-serif);font-size:clamp(1.25rem,2vw,1.65rem);margin:0 0 10px; }
+.care-summary-copy p { color:#414c47;font-size:1rem;line-height:1.75;max-width:700px; }
+.care-summary .care-summary-button { background:#f0f6f2;border:1px solid #cadfd3;color:#154d40;border-radius:9px;white-space:normal;text-align:center;max-width:200px; }
+.care-summary .care-summary-button:hover { background:#dfeee5; }
+.reviews-section .sample-notice { padding:0 0 18px;border:0;background:transparent;border-radius:0;font-size:.85rem;color:#59645e;max-width:720px;line-height:1.6; }
+.contact-grid { align-items:start;gap:64px; }
+.contact-introduction h2 { font-size:clamp(2rem,4vw,3.2rem);line-height:1.15;margin:18px 0 24px; }
+.contact-opening { font-size:1.15rem;line-height:1.85;max-width:560px;color:#414c47; }
+.contact-email-card { margin-top:32px;padding:24px 0;border-top:1px solid var(--line);border-bottom:1px solid var(--line); }
+.contact-email-card>span { font-size:.8rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;display:block;margin-bottom:14px; }
+.contact-email-card>a { display:flex;align-items:center;gap:12px;flex-wrap:wrap;font-size:clamp(1.1rem,2.2vw,1.5rem);font-weight:600;color:#154d40;text-decoration:none; }
+.contact-email-card p { margin:16px 0 0;line-height:1.7; }
+.contact-enquiry-options { display:grid;gap:20px; }
+.contact-enquiry-options article { border:1px solid #d6e5dc;border-radius:16px;padding:30px;background:#f7faf8; }
+.contact-enquiry-options h3 { margin:14px 0;font-family:var(--app-font-serif);font-size:1.6rem;color:#154d40;line-height:1.3; }
+.contact-enquiry-options article p { color:#414c47;line-height:1.8;margin:0 0 24px; }
+.contact-enquiry-options .btn { white-space:normal;text-align:center; }
+.contact-email-help { font-size:.85rem;line-height:1.7;margin:0; }
+@media(max-width:1050px){.care-summary{grid-template-columns:52px minmax(0,1fr)}.care-summary .care-summary-button{grid-column:2;justify-self:start;max-width:none}.contact-grid{gap:36px}}
+@media(max-width:680px){.care-summary{grid-template-columns:1fr;padding:24px;gap:18px}.care-summary .care-summary-button{grid-column:1;width:100%}.contact-enquiry-options article{padding:24px}.contact-email-card>a{overflow-wrap:anywhere}.contact-grid{gap:30px}}

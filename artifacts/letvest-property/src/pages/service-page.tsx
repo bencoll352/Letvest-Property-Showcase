@@ -237,14 +237,21 @@ export default function ServicePage({ view }: { view: string }) {
         )}
         {view === "contact" && (
           <section className="section container-wide contact-grid">
-            <div>
-              <h2 className="display">Let’s start a conversation.</h2>
-              <p>
-                Landlord, property owner or looking for a home? Email your
-                requirements and we will discuss the next step.
+            <div className="contact-introduction">
+              <span className="eyebrow">Property enquiries · West Sussex</span>
+              <h2 className="display">Let’s find your next step.</h2>
+              <p className="contact-opening">
+                Whether you own a property or you’re looking for a home, tell us
+                what you need. We’ll help you explore the options and explain
+                how we can help.
               </p>
-              <a href="mailto:info@jmletvest.com">info@jmletvest.com</a>
-              <p>West Sussex, United Kingdom</p>
+              <div className="contact-email-card">
+                <span>Email our team</span>
+                <a href="mailto:info@jmletvest.com">
+                  info@jmletvest.com <ArrowRight size={20} aria-hidden="true" />
+                </a>
+                <p>Serving landlords and tenants across West Sussex.</p>
+              </div>
             </div>
             <EnquiryForm />
           </section>

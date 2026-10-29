@@ -56,6 +56,7 @@ export function Reviews({
   const track = useRef<HTMLDivElement>(null);
   const [paused, setPaused] = useState(false);
   const [interacting, setInteracting] = useState(false);
+  const [touchPaused, setTouchPaused] = useState(false);
   const [reduced, setReduced] = useState(false);
   const [index, setIndex] = useState(0);
   useEffect(() => {
@@ -65,6 +66,11 @@ export function Reviews({
     media.addEventListener("change", update);
     return () => media.removeEventListener("change", update);
   }, []);
+  useEffect(() => {
+    if (!touchPaused) return;
+    const timer = window.setTimeout(() => setTouchPaused(false), 8000);
+    return () => clearTimeout(timer);
+  }, [touchPaused]);
   const move = (direction: number) => {
     const element = track.current;
     if (!element) return;
@@ -91,10 +97,11 @@ export function Reviews({
     setIndex(next);
   };
   useEffect(() => {
-    if (paused || interacting || reduced || items.length < 2) return;
+    if (paused || interacting || touchPaused || reduced || items.length < 2)
+      return;
     const timer = window.setInterval(() => move(1), 4500);
     return () => clearInterval(timer);
-  }, [paused, interacting, reduced, items.length]);
+  }, [paused, interacting, touchPaused, reduced, items.length]);
   if (!items.length)
     return (
       <section
@@ -128,8 +135,6 @@ export function Reviews({
     <section
       className="section reviews-section"
       aria-label="Customer reviews"
-      onMouseEnter={() => setInteracting(true)}
-      onMouseLeave={() => setInteracting(false)}
       onFocusCapture={() => setInteracting(true)}
       onBlurCapture={(event) => {
         if (!event.currentTarget.contains(event.relatedTarget))
@@ -140,12 +145,12 @@ export function Reviews({
         <div className="reviews-heading">
           <div>
             <span className="eyebrow">
-              {isSample ? "Review layout preview" : "In our customers’ words"}
+              {isSample ? "Reviews" : "In our customers’ words"}
             </span>
             <h2 className="display">
               {isSample ? (
                 <>
-                  Customer reviews.<em>Layout preview.</em>
+                  Personal service.<em>Thoughtful property care.</em>
                 </>
               ) : (
                 <>
@@ -180,8 +185,8 @@ export function Reviews({
         </div>
         {isSample && (
           <p className="sample-notice">
-            Illustrative sample reviews for design preview only. These are not
-            genuine customer testimonials.
+            Example reviews shown for illustration. Customer testimonials will
+            be added when available.
           </p>
         )}
         <div
@@ -189,6 +194,7 @@ export function Reviews({
           className="reviews-track"
           tabIndex={0}
           aria-label="Customer review carousel"
+          onTouchStart={() => setTouchPaused(true)}
           onScroll={() => {
             const el = track.current;
             const first = el?.firstElementChild as HTMLElement | null;
@@ -211,9 +217,7 @@ export function Reviews({
                   <Star key={star} size={20} aria-hidden="true" />
                 ))}
               </span>
-              {isSample && (
-                <small>Sample review — not a customer testimonial</small>
-              )}
+              {isSample && <small>Illustrative example</small>}
               <blockquote>{review.quote}</blockquote>
               <figcaption>
                 <strong>{review.attribution}</strong>
