@@ -1250,3 +1250,32 @@ body, .care-section, .process, .faq { background: #fff; }
 }
 :root { scroll-padding-top: 112px; }
 @media (max-width: 680px) { :root { scroll-padding-top: 92px; } }
+
+/* Compact footer credentials; detailed explanations live on About us. */
+.footer-standards { margin-top:32px; padding:24px 0; display:flex; flex-wrap:wrap; align-items:center; justify-content:space-between; gap:24px; }
+.footer-badges { display:flex; flex-wrap:wrap; align-items:center; gap:28px; }
+.footer-badge { display:flex; align-items:center; gap:12px; font-size:.78rem; }
+.footer-badge img { width:76px; height:44px; object-fit:contain; }
+.footer-badge span { display:grid; gap:4px; }
+.footer-badge strong { font-size:.75rem; font-weight:500; }
+.footer-badge .footer-ico { display:grid; place-items:center; width:54px; height:44px; border:1px solid var(--line); border-radius:8px; color:var(--ink); font-weight:800; font-size:1.15rem; }
+.footer-standards>.text-link { font-size:.8rem; }
+.footer-legal { margin-top:0; }
+.renter-resources { padding:32px 0 56px; }
+.renter-resources>h2,.guidance-title { color:var(--ink); font-size:clamp(1.6rem,3vw,2.2rem); line-height:1.25; }
+.resource-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:28px; }
+.resource-card { padding:28px; border:1px solid var(--line); border-top:3px solid var(--gold); border-radius:16px; background:#f8faf9; display:flex; flex-direction:column; }
+.resource-top { display:flex; justify-content:space-between; align-items:center; gap:12px; }
+.resource-number { font-size:2.5rem; color:var(--steel); opacity:.55; font-weight:300; }
+.resource-card h3 { font-size:1.4rem; line-height:1.35; margin:24px 0 12px; color:var(--ink); }
+.resource-card p { line-height:1.7; margin:0 0 28px; }
+.resource-card a { display:flex; gap:8px; align-items:center; margin-top:auto; color:var(--steel); font-weight:600; text-underline-offset:4px; }
+.news-briefings { grid-template-columns:repeat(3,minmax(0,1fr)); gap:24px; margin-top:28px; }
+.news-briefing { padding:28px; background:#fff; border-radius:16px; box-shadow:0 5px 20px #122f2910; }
+.news-briefing h2 { font-size:1.25rem; }
+.news-briefing .eyebrow { align-self:flex-start; padding:6px 9px; border-radius:5px; background:#eef4f3; letter-spacing:.04em; }
+.news-briefing details { margin:4px 0 24px; }
+.news-briefing summary { cursor:pointer; font-weight:600; color:var(--steel); }
+.news-source { margin-top:auto; }
+@media(max-width:1000px){.news-briefings{grid-template-columns:repeat(2,minmax(0,1fr))}.resource-grid{gap:16px}.resource-card{padding:22px}}
+@media(max-width:680px){.resource-grid,.news-briefings{grid-template-columns:1fr}.footer-badges{display:grid;gap:20px}.footer-standards{align-items:flex-start;flex-direction:column}.resource-card h3{margin-top:16px}.news-briefing{padding:24px}}
