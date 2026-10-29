@@ -31,9 +31,7 @@ export function TrustBadges({ compact = false }: { compact?: boolean }) {
           className="footer-badge"
           href={reg.icoVerified ? verificationLinks.ico : pageHref("privacy")}
         >
-          <span className="footer-ico" aria-hidden="true">
-            ICO
-          </span>
+          <img src={asset("ico-logo.png")} alt="Information Commissioner's Office" />
           <span>
             Data protection
             <strong>
@@ -92,9 +90,14 @@ export function TrustBadges({ compact = false }: { compact?: boolean }) {
       </article>
       {reg.icoNumber && reg.icoVerified ? (
         <article className="trust-badge">
-          <div className="registration-label" aria-hidden="true">
-            ICO
-          </div>
+          <img
+            src={asset("ico-logo.png")}
+            alt="Information Commissioner's Office"
+            width="160"
+            height="90"
+            style={{ objectFit: "contain", maxHeight: "70px" }}
+            loading="lazy"
+          />
           <div>
             <h3>Data protection registration</h3>
             <p>
@@ -109,11 +112,14 @@ export function TrustBadges({ compact = false }: { compact?: boolean }) {
         </article>
       ) : (
         <article className="trust-badge">
-          <div className="registration-label" aria-hidden="true">
-            Data
-            <br />
-            protection
-          </div>
+          <img
+            src={asset("ico-logo.png")}
+            alt="Information Commissioner's Office"
+            width="160"
+            height="90"
+            style={{ objectFit: "contain", maxHeight: "70px" }}
+            loading="lazy"
+          />
           <div>
             <h3>Privacy and the ICO</h3>
             <p>

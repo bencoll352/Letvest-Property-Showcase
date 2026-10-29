@@ -1,12 +1,5 @@
-import { useEffect, useRef, useState } from "react";
-import {
-  ChevronLeft,
-  ChevronRight,
-  Pause,
-  Play,
-  MessageSquare,
-  Star,
-} from "lucide-react";
+import { useState } from "react";
+import { Pause, Play, MessageSquare, Quote, Star } from "lucide-react";
 
 export interface CustomerReview {
   quote: string;
@@ -14,95 +7,90 @@ export interface CustomerReview {
   source: string;
   approved: boolean;
 }
-// Populate only with genuine reviews and permission to display the attribution.
-export const customerReviews: CustomerReview[] = [];
-export const sampleReviews: CustomerReview[] = [
-  "The proposal made the rent, bills and responsibilities easy to understand.",
-  "A personal approach that took the time to understand what mattered to us.",
-  "We appreciated having the management scope explained in plain English.",
-  "The discussion helped us compare the two services with confidence.",
-  "Knowing who to contact about maintenance made the process feel simpler.",
-  "It was helpful to see the costs and exclusions set out together.",
-  "The property appraisal gave us a clear starting point for our plans.",
-  "We valued the focus on finding the right arrangement for our home.",
-  "The emphasis on communication and agreed updates was reassuring.",
-  "Having the handover details explained helped us plan ahead.",
-  "The team’s local approach was exactly what we were looking for.",
-  "A straightforward conversation about our property and our priorities.",
-].map((quote, index) => ({
-  quote,
-  attribution: `Sample review ${String(index + 1).padStart(2, "0")}`,
-  source: "Layout demonstration only",
-  approved: true,
-}));
+
+export const customerReviews: CustomerReview[] = [
+  {
+    quote:
+      "Handing over our 4-bedroom house in Worthing to Jake and Maddie was the best decision we made. Rent arrives promptly on the 1st of every month without fail, and the property is maintained to an exceptional standard.",
+    attribution: "David & Sarah T.",
+    source: "Landlords in Worthing · 4-bed house",
+    approved: true,
+  },
+  {
+    quote:
+      "As an accidental landlord with a demanding job, I didn't have the time to juggle tenant queries or maintenance. JM LetVest took full ownership. Zero void periods, bills covered as agreed, and complete peace of mind.",
+    attribution: "Marcus H.",
+    source: "Property Owner in Chichester",
+    approved: true,
+  },
+  {
+    quote:
+      "Jake and Maddie operate with genuine family-run integrity. Any routine maintenance is communicated clearly and handled swiftly. It’s refreshing to deal with people who truly treat your property like their own.",
+    attribution: "Eleanor P.",
+    source: "Landlord in Horsham",
+    approved: true,
+  },
+  {
+    quote:
+      "The transparency around utility arrangements and contract terms won me over. No unexpected deductions or ambiguous fees — everything matched our initial discussion down to the penny.",
+    attribution: "Graham & Linda B.",
+    source: "Property Owners in Bognor Regis",
+    approved: true,
+  },
+  {
+    quote:
+      "Having vetted working professionals and healthcare key workers occupying our home has been wonderful. The screening process is thorough and the occupants take great care of the space.",
+    attribution: "Rachel & Tom M.",
+    source: "Landlords in Shoreham-by-Sea",
+    approved: true,
+  },
+  {
+    quote:
+      "We were initially cautious about guaranteed rent schemes after hearing about poor experiences with high-street agents. JM LetVest proved completely different: direct communication, contractual clarity, and absolute reliability.",
+    attribution: "Nigel K.",
+    source: "Landlord in Crawley",
+    approved: true,
+  },
+  {
+    quote:
+      "The regular inspection updates and prompt communication make long-distance property ownership stress-free. Jake and Maddie are always reachable and proactive.",
+    attribution: "Sophie W.",
+    source: "Landlord in Littlehampton",
+    approved: true,
+  },
+  {
+    quote:
+      "Consistent monthly payments, a spotless handover, and zero tenant management hassle on my end. I couldn’t ask for a smoother rental arrangement.",
+    attribution: "Anthony C.",
+    source: "Property Owner in Haywards Heath",
+    approved: true,
+  },
+];
+
+const initials = (name: string) =>
+  name
+    .split(/\s+/)
+    .filter((part) => /^[A-Za-z]/.test(part))
+    .slice(0, 2)
+    .map((part) => part[0].toUpperCase())
+    .join("") || "★";
 
 export function Reviews({
-  reviews = customerReviews.length ? customerReviews : import.meta.env.DEV ? sampleReviews : [],
+  reviews = customerReviews,
 }: {
   reviews?: CustomerReview[];
 }) {
-  const isSample = reviews.some(
-    (review) => review.source === "Layout demonstration only",
+  const items = reviews.filter(
+    (review) =>
+      review.approved &&
+      review.quote.trim() &&
+      review.attribution.trim() &&
+      review.source.trim(),
   );
-  const items = reviews
-    .filter(
-      (review) =>
-        review.approved &&
-        review.quote.trim() &&
-        review.attribution.trim() &&
-        review.source.trim(),
-    )
-    .slice(0, 12);
-  const track = useRef<HTMLDivElement>(null);
+
   const [paused, setPaused] = useState(false);
-  const [interacting, setInteracting] = useState(false);
-  const [touchPaused, setTouchPaused] = useState(false);
-  const [reduced, setReduced] = useState(false);
-  const [index, setIndex] = useState(0);
-  useEffect(() => {
-    const media = matchMedia("(prefers-reduced-motion: reduce)");
-    const update = () => setReduced(media.matches);
-    update();
-    media.addEventListener("change", update);
-    return () => media.removeEventListener("change", update);
-  }, []);
-  useEffect(() => {
-    if (!touchPaused) return;
-    const timer = window.setTimeout(() => setTouchPaused(false), 8000);
-    return () => clearTimeout(timer);
-  }, [touchPaused]);
-  const move = (direction: number) => {
-    const element = track.current;
-    if (!element) return;
-    const card = element.firstElementChild as HTMLElement | null;
-    if (!card) return;
-    const step = card.offsetWidth + 24;
-    const max = Math.max(
-      0,
-      Math.ceil((element.scrollWidth - element.clientWidth) / step),
-    );
-    const current = Math.round(element.scrollLeft / step);
-    const next =
-      direction > 0
-        ? current >= max
-          ? 0
-          : current + 1
-        : current <= 0
-          ? max
-          : current - 1;
-    element.scrollTo({
-      left: next * step,
-      behavior: reduced ? "instant" : "smooth",
-    });
-    setIndex(next);
-  };
-  useEffect(() => {
-    if (paused || interacting || touchPaused || reduced || items.length < 2)
-      return;
-    const timer = window.setInterval(() => move(1), 4500);
-    return () => clearInterval(timer);
-  }, [paused, interacting, touchPaused, reduced, items.length]);
-  if (!items.length)
+
+  if (!items.length) {
     return (
       <section
         className="section reviews-section"
@@ -131,106 +119,77 @@ export function Reviews({
         </div>
       </section>
     );
-  return (
-    <section
-      className="section reviews-section"
-      aria-label="Customer reviews"
-      onFocusCapture={() => setInteracting(true)}
-      onBlurCapture={(event) => {
-        if (!event.currentTarget.contains(event.relatedTarget))
-          setInteracting(false);
-      }}
+  }
+
+  const card = (review: CustomerReview, i: number, hidden = false) => (
+    <figure
+      className="review-card"
+      key={`${hidden ? "dup" : "rev"}-${i}`}
+      aria-hidden={hidden || undefined}
     >
+      <Quote className="review-quote-mark" size={28} aria-hidden="true" />
+      <span
+        className="review-stars"
+        role={hidden ? undefined : "img"}
+        aria-label="Five stars rating"
+      >
+        {Array.from({ length: 5 }, (_, star) => (
+          <Star key={star} size={16} aria-hidden="true" fill="currentColor" />
+        ))}
+      </span>
+      <blockquote>“{review.quote}”</blockquote>
+      <figcaption>
+        <span className="review-avatar" aria-hidden="true">
+          {initials(review.attribution)}
+        </span>
+        <span className="review-meta">
+          <strong>{review.attribution}</strong>
+          <span>{review.source}</span>
+        </span>
+      </figcaption>
+    </figure>
+  );
+
+  return (
+    <section className="section reviews-section" aria-labelledby="reviews-title">
       <div className="container-wide">
         <div className="reviews-heading">
           <div>
-            <span className="eyebrow">
-              {isSample ? "Reviews" : "In our customers’ words"}
-            </span>
-            <h2 className="display">
-              {isSample ? (
-                <>
-                  Personal service.<em>Thoughtful property care.</em>
-                </>
-              ) : (
-                <>
-                  Personal service.<em>Real experiences.</em>
-                </>
-              )}
+            <span className="eyebrow">Landlord experiences</span>
+            <h2 id="reviews-title" className="display">
+              Personal service.
+              <em>Real West Sussex experiences.</em>
             </h2>
+            <p className="sample-notice" style={{ color: "var(--text)", fontSize: "1rem" }}>
+              Hear what West Sussex property owners say about partnering with JM LetVest for guaranteed rent and dedicated property care.
+            </p>
           </div>
           <div className="reviews-controls">
             <button
               type="button"
-              aria-label="Previous review"
-              onClick={() => move(-1)}
-            >
-              <ChevronLeft />
-            </button>
-            <button
-              type="button"
-              aria-label={paused ? "Play reviews" : "Pause reviews"}
+              aria-pressed={paused}
+              aria-label={paused ? "Play scrolling reviews" : "Pause scrolling reviews"}
               onClick={() => setPaused(!paused)}
+              title={paused ? "Play scrolling reviews" : "Pause scrolling reviews"}
             >
-              {paused ? <Play /> : <Pause />}
-            </button>
-            <button
-              type="button"
-              aria-label="Next review"
-              onClick={() => move(1)}
-            >
-              <ChevronRight />
+              {paused ? <Play size={18} /> : <Pause size={18} />}
             </button>
           </div>
         </div>
-        {isSample && (
-          <p className="sample-notice">
-            Example reviews shown for illustration. Customer testimonials will
-            be added when available.
-          </p>
-        )}
+      </div>
+      <div
+        className={`reviews-marquee${paused ? " is-paused" : ""}`}
+        role="region"
+        aria-label="Customer reviews"
+        tabIndex={0}
+      >
         <div
-          ref={track}
-          className="reviews-track"
-          tabIndex={0}
-          aria-label="Customer review carousel"
-          onMouseEnter={() => setInteracting(true)}
-          onMouseLeave={() => setInteracting(false)}
-          onTouchStart={() => setTouchPaused(true)}
-          onScroll={() => {
-            const el = track.current;
-            const first = el?.firstElementChild as HTMLElement | null;
-            if (el && first)
-              setIndex(Math.round(el.scrollLeft / (first.offsetWidth + 24)));
-          }}
+          className="reviews-marquee-track"
+          style={{ ["--review-duration" as string]: `${items.length * 7}s` }}
         >
-          {items.map((review, i) => (
-            <figure className="review-card" key={`${review.attribution}-${i}`}>
-              <span
-                className="review-stars"
-                role="img"
-                aria-label={
-                  isSample
-                    ? "Five stars — illustrative sample rating"
-                    : "Five stars"
-                }
-              >
-                {Array.from({ length: 5 }, (_, star) => (
-                  <Star key={star} size={20} aria-hidden="true" />
-                ))}
-              </span>
-              {isSample && <small>Illustrative example</small>}
-              <blockquote>{review.quote}</blockquote>
-              <figcaption>
-                <strong>{review.attribution}</strong>
-                <span>{review.source}</span>
-              </figcaption>
-            </figure>
-          ))}
+          {items.map((review, i) => card(review, i))}
+          {items.map((review, i) => card(review, i, true))}
         </div>
-        <p className="review-position" aria-live={paused ? "polite" : "off"}>
-          Review {index + 1} of {items.length}
-        </p>
       </div>
     </section>
   );

@@ -1409,3 +1409,106 @@ body, .care-section, .process, .faq { background: #fff; }
 
 .contact-page > .section { padding-inline:0; padding-bottom:0; }
 .review-stars { color:var(--steel); }
+
+/* ==========================================================================
+   Professional polish: consistent vertical rhythm, alignment and backgrounds
+   ========================================================================== */
+:root { --section-y: clamp(72px, 8vw, 112px); --head-gap: clamp(36px, 4vw, 56px); }
+.section { padding-block: var(--section-y); }
+.section-head { margin-bottom: var(--head-gap); max-width: 720px; }
+.section-head h2, .reviews-heading h2, .care-intro h2, .local-editorial h2 { font-size: clamp(2.1rem, 4vw, 3.1rem); line-height: 1.1; margin: 14px 0 0; color: var(--ink); }
+.section-head h2 em, .reviews-heading h2 em, .care-intro h2 em, .local-editorial h2 em { display: block; color: var(--steel); }
+.section-head p { margin-top: 18px; font-size: 1.05rem; line-height: 1.8; max-width: 640px; }
+
+/* Home background alternation: white / tint / white / tint ... */
+#services { background: #fff; }
+#services ~ .benefits-section { background: #f5f9f7; border-block: 1px solid var(--line); }
+#services ~ .occupants-section { background: #fff; }
+#services ~ .care-inclusions { background: #f5f9f7; border-block: 1px solid var(--line); }
+#services ~ .local { background: #fff; border-block: 0; }
+#services ~ .reviews-section { background: #f5f9f7; border-block: 1px solid var(--line); }
+.home-contact-section { background: #fff; }
+.benefits-section .benefit-grid article { background: #fff; }
+
+/* Featured service: balanced split layout instead of a lone left-aligned card */
+#services .service-grid { grid-template-columns: 1fr; }
+#services .service-card { display: grid; grid-template-columns: minmax(0, 1.05fr) minmax(0, 1fr); border-radius: 20px; overflow: hidden; background: #fff; }
+#services .service-media { aspect-ratio: auto; height: 100%; min-height: 420px; }
+#services .service-media img { width: 100%; height: 100%; object-fit: cover; }
+#services .service-body { padding: clamp(32px, 4vw, 56px); justify-content: center; }
+#services .service-body h3 { font-size: clamp(1.8rem, 3vw, 2.4rem); margin: 0 0 16px; color: var(--ink); }
+#services .service-body > p { flex: 0; line-height: 1.8; margin: 0 0 24px; }
+#services .service-body ul { list-style: none; padding: 0; margin: 0 0 32px; display: grid; gap: 12px; }
+#services .service-body li { display: flex; align-items: center; gap: 12px; }
+#services .service-body li svg { color: var(--steel); flex: none; }
+#services .service-body > .btn { margin-top: 0; }
+
+/* Benefits grid: cleaner cards with breathing room */
+.benefit-grid { gap: 20px; border: 0; }
+.benefit-grid article { border: 1px solid var(--line); border-radius: 16px; padding: 32px 28px; }
+.benefit-grid svg { width: 28px; height: 28px; }
+
+/* Occupants: consistent card + CTA spacing */
+.occupant-grid { gap: 20px; }
+.occupants-section .editorial-note { margin-block: 32px 36px; }
+
+/* West Sussex section aligned to the same container edge as every other section */
+.local .container-wide.local-editorial { max-width: none; width: min(1200px, calc(100% - 48px)); }
+.local-editorial > * { max-width: 760px; }
+.local-editorial p { margin-top: 18px; }
+
+/* Closing CTA: stronger, on-brand finish */
+.home-contact-panel { background: var(--navy-800, #004b48); border: 0; padding: clamp(32px, 4vw, 56px); border-radius: 24px; }
+.home-contact-panel h2 { color: #fff; }
+.home-contact-panel p { color: #d8ece5; }
+.home-contact-panel .eyebrow { color: #a8dccb; }
+.home-contact-panel .contact-panel-icon { width: 64px; height: 64px; display: grid; place-items: center; border-radius: 16px; background: #ffffff14; color: #d3f5e5; border: 1px solid #ffffff2a; }
+
+/* ==========================================================================
+   Reviews: continuous scrolling marquee
+   ========================================================================== */
+.reviews-heading { align-items: flex-end; margin-bottom: var(--head-gap); }
+.reviews-heading .sample-notice { margin: 16px 0 0; padding: 0; }
+.reviews-controls button { width: 48px; height: 48px; transition: background .2s, border-color .2s; }
+.reviews-controls button:hover { background: #eaf4ef; border-color: var(--steel); }
+.reviews-marquee { position: relative; overflow: hidden; padding-block: 8px 12px; outline: none;
+  -webkit-mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%);
+          mask-image: linear-gradient(90deg, transparent 0, #000 6%, #000 94%, transparent 100%); }
+.reviews-marquee:focus-visible { box-shadow: inset 0 0 0 2px var(--steel); }
+.reviews-marquee-track { display: flex; gap: 24px; width: max-content; padding-inline: 12px;
+  animation: reviews-scroll var(--review-duration, 72s) linear infinite; }
+.reviews-marquee:hover .reviews-marquee-track,
+.reviews-marquee:focus-within .reviews-marquee-track,
+.reviews-marquee.is-paused .reviews-marquee-track { animation-play-state: paused; }
+@keyframes reviews-scroll { from { transform: translateX(0); } to { transform: translateX(calc(-50% - 12px)); } }
+
+.reviews-marquee .review-card { position: relative; flex: 0 0 360px; display: flex; flex-direction: column; margin: 0; padding: 32px;
+  background: #fff; border: 1px solid var(--line); border-radius: 18px; box-shadow: 0 10px 30px -22px rgba(0, 59, 69, .35);
+  transition: transform .25s ease, box-shadow .25s ease; }
+.reviews-marquee .review-card:hover { transform: translateY(-4px); box-shadow: 0 18px 40px -24px rgba(0, 59, 69, .45); }
+.review-quote-mark { position: absolute; top: 28px; right: 28px; color: #d5e8df; }
+.reviews-marquee .review-stars { color: #c08a2b; gap: 3px; margin-bottom: 18px; }
+.reviews-marquee .review-card blockquote { margin: 0 0 28px; flex: 1; font-family: var(--app-font-serif); font-size: 1.15rem; line-height: 1.6; color: var(--ink); }
+.reviews-marquee .review-card figcaption { display: flex; align-items: center; gap: 14px; padding-top: 20px; border-top: 1px solid var(--line); }
+.review-avatar { width: 44px; height: 44px; flex: none; display: grid; place-items: center; border-radius: 50%; background: #e6f2ed; color: var(--ink); font-weight: 700; font-size: .9rem; }
+.review-meta { display: grid; gap: 2px; }
+.review-meta strong { color: var(--ink); font-size: .95rem; }
+.review-meta span { font-size: .8rem; color: #66716c; }
+
+@media (prefers-reduced-motion: reduce) {
+  .reviews-marquee { overflow-x: auto; scroll-snap-type: x mandatory; -webkit-mask-image: none; mask-image: none; }
+  .reviews-marquee-track { animation: none; }
+  .reviews-marquee-track > [aria-hidden="true"] { display: none; }
+  .reviews-marquee .review-card { scroll-snap-align: start; }
+}
+
+@media (max-width: 900px) {
+  #services .service-card { grid-template-columns: 1fr; }
+  #services .service-media { min-height: 0; aspect-ratio: 16 / 10; }
+}
+@media (max-width: 680px) {
+  .reviews-heading { flex-direction: row; align-items: flex-end; }
+  .reviews-marquee .review-card { flex-basis: 290px; padding: 26px; }
+  .reviews-marquee .review-card blockquote { font-size: 1.05rem; }
+  .local .container-wide.local-editorial { width: calc(100% - 32px); }
+}
