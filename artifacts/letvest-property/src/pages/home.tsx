@@ -2,6 +2,9 @@ import { useEffect, useRef, useState } from 'react';
 import { ArrowRight, Check, Menu, ShieldCheck, KeyRound, MessageSquare, X } from 'lucide-react';
 import { SiteHeader } from '@/components/site-header';
 import { siteConfig, pageHref } from '@/site-config';
+import { HowItWorks } from '@/components/how-it-works';
+import { ComparisonTable } from '@/components/comparison-table';
+import { HomeFaqs } from '@/components/home-faqs';
 import { CaseStudies } from '@/components/case-studies';
 import { Benefits, Included, destination } from '@/components/service-features';
 import { Reviews } from '@/components/reviews';
@@ -30,12 +33,15 @@ export default function Home() {
       <section className="section services" id="services"><div className="container-wide"><div className="section-head"><span className="eyebrow">Rent to Rent</span><h2 className="display">Your property.<em>A simpler rental arrangement.</em></h2><p>Agreed rental income, utilities covered as specified in your contract and day-to-day room management.</p></div><div className="service-grid">
         <article className="service-card"><div className="service-media"><img src={asset('images/english-brick-homes.jpg')} alt="Traditional English red-brick house with a front garden" width="960" height="600" loading="lazy" /></div><div className="service-body"><span className="service-card-icon"><ShieldCheck size={30} strokeWidth={1.7} aria-hidden="true" /></span><h3 className="display">Rent to Rent</h3><p>We offer to lease your property for an agreed contractual period and pay you the agreed rent. Enjoy a more hands-off arrangement, with protection from void periods and occupant non-payment subject to your contract.</p><ul><li><Check size={18} /> Guaranteed rent under the agreed contract</li><li><Check size={18} /> Utilities and bills covered as agreed</li><li><Check size={18} /> Clear terms, responsibilities and exclusions</li></ul><a href={destination('rent-to-rent')} className="btn btn-outline-navy">Explore Rent to Rent</a></div></article>
       </div></div></section>
+      <HowItWorks />
+      <ComparisonTable />
       <Benefits />
       <section className="section occupants-section" id="occupants"><div className="container-wide"><div className="section-head"><span className="eyebrow">A home with an agreed purpose</span><h2 className="display">Who will occupy<em>your property?</em></h2><p>We provide rooms for working professionals and NHS/key workers. Suitability depends on screening, affordability and the agreed use. We do not provide family accommodation.</p></div><div className="occupant-grid">{groups.map(group => <article className="care-card" key={group.name}><h3>{group.name}</h3><p>{group.description}</p></article>)}</div><div className="editorial-note"><h3>Screening and property use</h3><p>{siteConfig.screening}</p><p>Ask for the proposed occupant profile, occupancy limits and permitted use in writing. Our service is for room accommodation, with the occupancy and use agreed in writing.</p></div><AppraisalLink /></div></section>
       <Included />
       <section className="section local" id="local"><div className="container-wide local-editorial"><span className="eyebrow">West Sussex</span><h2 className="display">Start with the property.<em>Understand the local fit.</em></h2><p>Location, condition, access and the type of home all affect its suitability. Tell us about your West Sussex property so we can discuss the service and occupant profile that may fit.</p><p>From coastal neighbourhoods to inland communities, start with a conversation about your home and what you need from letting it.</p></div></section>
       <CaseStudies />
       <Reviews />
+      <HomeFaqs />
       <section className="section home-contact-section" aria-labelledby="home-contact-heading"><div className="container-wide"><div className="home-contact-panel"><span className="contact-panel-icon"><MessageSquare size={28} strokeWidth={1.7} aria-hidden="true" /></span><div><span className="eyebrow">Start a conversation</span><h2 id="home-contact-heading" className="display">Let’s talk about your property.</h2><p>Tell us about your property and what you’re looking for. We’ll help you explore the right arrangement, with clear advice on the next step.</p></div><a className="btn btn-gold" href={destination('contact')}>Contact us <ArrowRight size={18} aria-hidden="true" /></a></div></div></section>
     </main><SiteFooter /></div>;
 }
