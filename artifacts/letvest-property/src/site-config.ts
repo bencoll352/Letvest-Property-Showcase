@@ -9,6 +9,10 @@ export const siteConfig = {
   tagline: 'Guaranteed Rent & Fully Managed Letting across West Sussex',
   email: 'info@jmletvest.com', baseTown: 'West Sussex, United Kingdom',
   occupants: [
+    { name: 'Key workers', description: 'People working in education, emergency services and essential local roles, subject to suitability and referencing.', approved: true },
+    { name: 'Relocating employees', description: 'People moving to West Sussex for work and seeking a suitable local home.', approved: true },
+    { name: 'Local families', description: 'Households seeking a home near work, schools and local amenities.', approved: true },
+    { name: 'Employer-arranged accommodation', description: 'Accommodation enquiries for employees, where the property and contractual use are suitable. No employer partnership is implied.', approved: true },
     { name: 'Working professionals', description: 'Homes for people working in the area.', approved: true },
     { name: 'Healthcare professionals', description: 'Homes for people working in healthcare. This does not imply an NHS or employer partnership.', approved: true },
   ] satisfies OccupantGroup[],
