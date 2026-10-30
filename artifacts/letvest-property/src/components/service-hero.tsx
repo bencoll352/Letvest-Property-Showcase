@@ -3,7 +3,7 @@ export function ServiceHero({ rentToRent }: { rentToRent: boolean }) {
     <section className="hero service-hero">
       <div className="hero-media" aria-hidden="true">
         <img
-          src={`${import.meta.env.BASE_URL}images/${rentToRent ? "english-brick-homes.jpg" : "english-family-home.jpg"}`}
+          src={`${import.meta.env.BASE_URL}images/english-family-home.jpg`}
           alt=""
           fetchPriority="high"
         />
