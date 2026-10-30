@@ -56,12 +56,12 @@ export function FamilyStory() {
   return (
     <div className="about-editorial-wrap">
       <div className="story-layout">
-        <figure className="story-image">
+        <figure className="story-image about-home-image">
           <img
-            src={asset("images/south-downs-cottage.jpg")}
-            alt="Idyllic West Sussex countryside cottage near the South Downs"
-            width="960"
-            height="720"
+            src={asset("images/about-home.jpg")}
+            alt="Red-brick home with white sash windows and a flowering front garden"
+            width="1672"
+            height="940"
             loading="lazy"
           />
           <figcaption>West Sussex communities are at the heart of our service.</figcaption>

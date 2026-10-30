@@ -1269,6 +1269,7 @@ body, .care-section, .process, .faq { background: #fff; }
 .story-layout { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: clamp(24px,4vw,48px); margin: 32px 0; }
 .story-image, .local-landscape { margin: 0; }
 .story-image img { display: block; width: 100%; aspect-ratio: 4 / 3; object-fit: cover; border-radius: 18px; }
+.story-image.about-home-image img { aspect-ratio: 1672 / 940; height: auto; }
 .story-image figcaption, .local-landscape figcaption { font-size: .75rem; color: var(--text); margin-top: 8px; }
 .story-copy h3 { font-size: clamp(1.8rem,3vw,2.5rem); line-height: 1.15; color: var(--ink); margin: 16px 0; }
 .story-copy p { line-height: 1.75; margin: 0 0 16px; }
