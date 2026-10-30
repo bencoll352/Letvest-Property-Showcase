@@ -53,7 +53,7 @@ export function ComparisonTable() {
         <div className="section-head">
           <span className="eyebrow">Clear Landlord Comparison</span>
           <h2 id="comparison-heading" className="display">
-            High-Street Agency vs JM LetVest.
+            A clearer choice for landlords.
             <em>See the difference side by side.</em>
           </h2>
           <p>

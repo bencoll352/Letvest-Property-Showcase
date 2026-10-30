@@ -1698,3 +1698,16 @@ body, .care-section, .process, .faq { background: #fff; }
 .local-photo-showcase { align-self:stretch; }
 .local-grid { gap:32px; align-items:center; }
 @media(max-width:680px){.payments-intro{grid-template-columns:1fr}.payments-photo{min-height:220px}.payments-intro .section-head{padding:24px}.site-shell main > .section{padding-block:32px}}
+
+/* Consistent section rhythm, including nested service sections. */
+.site-shell main .section:not(.hero) { padding-top:36px; padding-bottom:36px; margin-top:0; margin-bottom:0; }
+.site-shell main .section + .section { margin-top:0; }
+.site-shell .section-head { margin-bottom:28px; }
+#comparison-heading { max-width:100%; overflow-wrap:normal; font-size:clamp(2rem,3.5vw,3.4rem); }
+#local { background:white; }
+#local .local-grid { display:grid; grid-template-columns:1.1fr 1fr; gap:0; background:white; min-height:480px; }
+#local .local-editorial { order:2; padding:40px; }
+#local .local-photo-showcase { order:1; min-height:480px; display:flex; }
+#local .local-photo-frame { width:100%; height:100%; border:0; border-radius:20px 0 0 20px; overflow:hidden; box-shadow:none; }
+#local .local-photo-frame img { width:100%; height:100%; object-fit:cover; }
+@media(max-width:680px){.site-shell main .section:not(.hero){padding-block:24px}#local .local-grid{grid-template-columns:1fr}#local .local-editorial{padding:28px 0;order:2}#local .local-photo-showcase{min-height:260px}#local .local-photo-frame{border-radius:16px}#local .local-photo-frame img{height:280px}}
