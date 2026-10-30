@@ -15,11 +15,11 @@ export const siteConfig = {
   screening: 'Occupants are screened before an arrangement proceeds. Ask us for the checks proposed for your property; the process depends on the letting arrangement.',
   responsibilities: [] as Responsibility[],
   family: {
-    introductionApproved: true, introduction: 'JM LetVest is a family-run business owned by Jake and Maddie Mallender. They are parents to a young son.',
+    introductionApproved: true, introduction: 'JM LetVest is a family-run business owned by the JM LetVest team Mallender. They are parents to a young son.',
     storyApproved: false, relationship: '', reasonForStarting: '', westSussexConnection: '',
     members: [
-      { approved: true, name: 'Jake Mallender', role: 'Owner', photograph: '', photographApproved: false, biography: 'Jake has always lived in West Sussex.' },
-      { approved: true, name: 'Maddie Mallender', role: 'Owner', photograph: '', photographApproved: false, biography: 'Maddie has always lived in West Sussex.' },
+      { approved: true, name: 'JM LetVest', role: 'Owner', photograph: '', photographApproved: false, biography: 'Our team has local roots in West Sussex.' },
+      { approved: true, name: 'JM LetVest', role: 'Owner', photograph: '', photographApproved: false, biography: 'Our team has local roots in West Sussex.' },
     ] as FamilyMember[],
     commitments: [] as FamilyCommitment[],
   },

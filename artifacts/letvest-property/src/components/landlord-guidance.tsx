@@ -251,7 +251,7 @@ export function LandlordGuidance() {
             <div>
               <h3>Have questions about licensing or compliance for your home?</h3>
               <p>
-                Jake &amp; Maddie offer informal, confidential conversations to help you assess your property's readiness under current regulations.
+                the JM LetVest team offer informal, confidential conversations to help you assess your property's readiness under current regulations.
               </p>
             </div>
           </div>

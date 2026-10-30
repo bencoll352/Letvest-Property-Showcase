@@ -1688,3 +1688,13 @@ body, .care-section, .process, .faq { background: #fff; }
   .guidance-consultation-banner { flex-direction: column; align-items: flex-start; padding: 28px 24px; }
   .guidance-consultation-banner .btn { width: 100%; text-align: center; }
 }
+.payments-intro { display:grid; grid-template-columns:1fr 1fr; background:#f3f8f5; border-radius:20px; overflow:hidden; margin-bottom:32px; }
+.payments-photo { min-height:320px; background-size:cover; background-position:center; }
+.payments-intro .section-head { padding:36px; margin:0; align-self:center; }
+.site-shell main > .section { padding-block:48px; }
+.service-questions { margin-block:0; }
+.local-photo-frame { border-radius:0; box-shadow:none; }
+.local-photo-frame img { width:100%; height:100%; object-fit:cover; }
+.local-photo-showcase { align-self:stretch; }
+.local-grid { gap:32px; align-items:center; }
+@media(max-width:680px){.payments-intro{grid-template-columns:1fr}.payments-photo{min-height:220px}.payments-intro .section-head{padding:24px}.site-shell main > .section{padding-block:32px}}

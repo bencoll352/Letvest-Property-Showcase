@@ -24,7 +24,7 @@ export function AboutHero() {
             <em>Local roots you can rely on.</em>
           </h1>
           <p className="hero-lead">
-            JM LetVest was founded by Jake &amp; Maddie with a clear vision: to provide West Sussex property owners with guaranteed rental certainty, zero agency deductions, and hands-on property care delivered by people who truly care.
+            JM LetVest was founded by the JM LetVest team with a clear vision: to provide West Sussex property owners with guaranteed rental certainty, zero agency deductions, and hands-on property care delivered by people who truly care.
           </p>
           <div className="hero-metrics-grid" aria-label="Key highlights">
             <div className="metric-pill">
@@ -41,7 +41,7 @@ export function AboutHero() {
             </div>
             <div className="metric-pill">
               <strong>Direct Accountability</strong>
-              <span>Personal contact with Jake &amp; Maddie</span>
+              <span>Personal contact with the JM LetVest team</span>
             </div>
           </div>
         </div>
@@ -80,11 +80,11 @@ export function FamilyStory() {
             <blockquote>
               “We don’t view properties as mere transactions. Every home we manage represents years of hard work by its owner. Our promise is personal accountability: whenever you call, you speak directly with us.”
             </blockquote>
-            <cite>— Jake &amp; Maddie, Co-Founders of JM LetVest</cite>
+            <cite>— the JM LetVest team, Co-Founders of JM LetVest</cite>
           </div>
           <div style={{ marginTop: '24px' }}>
             <a className="btn btn-outline-navy" href={destination("contact")}>
-              Speak Directly with Jake &amp; Maddie <ArrowRight size={17} aria-hidden="true" />
+              Speak Directly with the JM LetVest team <ArrowRight size={17} aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -105,7 +105,7 @@ export function FamilyCommitments() {
       Icon: HeartHandshake,
       title: "Direct Founder Accountability",
       detail:
-        "No call-centres or junior negotiators. You have Jake and Maddie's personal contact details throughout your entire agreement.",
+        "No call-centres or junior negotiators. You have the team’s personal contact details throughout your entire agreement.",
     },
     {
       Icon: ShieldCheck,

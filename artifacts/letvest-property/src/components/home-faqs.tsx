@@ -95,7 +95,7 @@ export function HomeFaqs() {
             </span>
             <div>
               <h3>Have a specific question about your property?</h3>
-              <p>Jake and Maddie are always happy to discuss your home and explain how the numbers work.</p>
+              <p>the JM LetVest team are always happy to discuss your home and explain how the numbers work.</p>
             </div>
           </div>
           <a className="btn btn-outline-navy" href={`mailto:${siteConfig.email}?subject=Question%20about%20my%20property`}>

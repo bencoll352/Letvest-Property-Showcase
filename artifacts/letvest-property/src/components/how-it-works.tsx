@@ -48,9 +48,6 @@ export function HowItWorks() {
             <article className="step-timeline-card" key={num}>
               <div className="step-timeline-header">
                 <span className="step-number" aria-hidden="true">{num}</span>
-                <span className="step-icon-wrap" aria-hidden="true">
-                  <Icon size={22} strokeWidth={1.8} />
-                </span>
               </div>
               <h3>{title}</h3>
               <p>{desc}</p>

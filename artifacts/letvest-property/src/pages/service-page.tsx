@@ -231,7 +231,7 @@ function ServiceDetails({ rentToRent }: { rentToRent: boolean }) {
               <div>
                 <h3>Need specific details for your property?</h3>
                 <p>
-                  Jake &amp; Maddie are always on hand to discuss your property
+                  the JM LetVest team are always on hand to discuss your property
                   and explain how the contract details and payments work.
                 </p>
               </div>
