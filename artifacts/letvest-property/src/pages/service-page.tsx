@@ -280,14 +280,14 @@ export default function ServicePage({ view }: { view: string }) {
               <FamilyCommitments />
               <div className="standards-section-block">
                 <div className="section-head">
-                  <span className="eyebrow">Verified Compliance</span>
+                  <span className="eyebrow">Professional information</span>
                   <h2 className="display">
                     Professional standards<em>and property care.</em>
                   </h2>
                   <p>
-                    Clear responsibilities underpin our service. We adhere to
-                    statutory data protection, verified redress schemes, and
-                    recognized client money protection standards.
+                    Read our registration information, privacy notice and complaints
+                    procedure, and understand how safety checks and property-care
+                    responsibilities are agreed.
                   </p>
                 </div>
                 <TrustBadges />

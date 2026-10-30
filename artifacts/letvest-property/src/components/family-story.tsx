@@ -1,4 +1,4 @@
-import { HeartHandshake, MapPin, MessagesSquare, House, ShieldCheck, CheckCircle2, ArrowRight } from "lucide-react";
+import { HeartHandshake, MapPin, MessagesSquare, House, ArrowRight } from "lucide-react";
 import { destination } from "@/components/service-features";
 
 const asset = (path: string) =>
@@ -10,7 +10,9 @@ export function AboutHero() {
       <div className="hero-media" aria-hidden="true">
         <img
           src={asset("images/sussex-coast.jpg")}
-          alt="Scenic West Sussex coastline and South Downs landscape"
+          alt=""
+          width="1600"
+          height="900"
           fetchPriority="high"
         />
       </div>
@@ -20,28 +22,28 @@ export function AboutHero() {
             West Sussex Born &amp; Bred · Family-Run Business
           </span>
           <h1 className="display">
-            A personal approach.
+            A personal approach to your property.
             <em>Local roots you can rely on.</em>
           </h1>
           <p className="hero-lead">
-            JM LetVest was founded by the JM LetVest team with a clear vision: to provide West Sussex property owners with guaranteed rental certainty, zero agency deductions, and hands-on property care delivered by people who truly care.
+            JM LetVest is a family-run business with roots in West Sussex. Born and bred in the area, we bring local knowledge and a personal approach to helping landlords care for their properties.
           </p>
           <div className="hero-metrics-grid" aria-label="Key highlights">
             <div className="metric-pill">
-              <strong>100% Guaranteed</strong>
-              <span>Rent on the 1st of every month</span>
+              <strong>Local understanding</strong>
+              <span>Rooted in West Sussex</span>
             </div>
             <div className="metric-pill">
-              <strong>0% Commission</strong>
-              <span>No monthly cuts or setup fees</span>
+              <strong>Family-run service</strong>
+              <span>A personal approach to your property</span>
             </div>
             <div className="metric-pill">
-              <strong>West Sussex Local</strong>
-              <span>Active across coastal &amp; market towns</span>
+              <strong>Clear communication</strong>
+              <span>Straightforward conversations</span>
             </div>
             <div className="metric-pill">
-              <strong>Direct Accountability</strong>
-              <span>Personal contact with the JM LetVest team</span>
+              <strong>Practical support</strong>
+              <span>Property care with agreed responsibilities</span>
             </div>
           </div>
         </div>
@@ -65,26 +67,20 @@ export function FamilyStory() {
           <figcaption>West Sussex communities are at the heart of our service.</figcaption>
         </figure>
         <div className="story-copy">
-          <span className="eyebrow">Our Story &amp; Ethos</span>
+          <span className="eyebrow">Our approach</span>
           <h2 className="display">
-            Why we started JM LetVest.
-            <em>A different way to treat property.</em>
+            Local roots. Personal service.
+            <em>Care for the home behind the investment.</em>
           </h2>
           <p>
-            Having lived and worked across West Sussex our entire lives, we saw first-hand the frustrations landlords face with traditional high-street letting agents: rising void periods, opaque commission deductions, impersonal call centres, and tenancies that left properties neglected.
+            Understanding the area starts with understanding your property. From coastal neighbourhoods to inland towns, local knowledge helps us discuss the location, the home and the arrangement that may suit it.
           </p>
           <p>
-            We created JM LetVest to offer something genuine. A contractual partnership where we lease your home, guarantee your rental income every single month without fail, and treat your property with the same care and respect we give our own.
+            We keep conversations straightforward, with clear responsibilities and practical property support. Through our Rent to Rent service, we lease suitable properties and pay the agreed rent for a contractual period. Your written agreement sets out payment terms, utilities and the scope of property care.
           </p>
-          <div className="story-quote-card">
-            <blockquote>
-              “We don’t view properties as mere transactions. Every home we manage represents years of hard work by its owner. Our promise is personal accountability: whenever you call, you speak directly with us.”
-            </blockquote>
-            <cite>— the JM LetVest team, Co-Founders of JM LetVest</cite>
-          </div>
           <div style={{ marginTop: '24px' }}>
             <a className="btn btn-outline-navy" href={destination("contact")}>
-              Speak Directly with the JM LetVest team <ArrowRight size={17} aria-hidden="true" />
+              Speak with our team <ArrowRight size={17} aria-hidden="true" />
             </a>
           </div>
         </div>
@@ -97,27 +93,27 @@ export function FamilyCommitments() {
   const items = [
     {
       Icon: MapPin,
-      title: "Genuine Local Knowledge",
+      title: "West Sussex local knowledge",
       detail:
-        "Deep understanding of West Sussex property values, community dynamics, and transport links from Chichester to Shoreham.",
+        "Local understanding helps us discuss your property’s location, suitability and the needs of prospective occupants.",
     },
     {
       Icon: HeartHandshake,
-      title: "Direct Founder Accountability",
+      title: "Family-run, personal service",
       detail:
-        "No call-centres or junior negotiators. You have the team’s personal contact details throughout your entire agreement.",
+        "Speak with the JM LetVest team about your property, your priorities and the next steps.",
     },
     {
-      Icon: ShieldCheck,
-      title: "Complete Financial Transparency",
+      Icon: MessagesSquare,
+      title: "Clear communication",
       detail:
-        "Fixed contractual rent paid on the 1st of the month, agreed utility cover, zero commission, and £0 surprise tenant-find fees.",
+        "Understand the proposed rent, bills and responsibilities before you agree, with the details set out in writing.",
     },
     {
       Icon: House,
-      title: "Meticulous Property Upkeep",
+      title: "Hands-on property support",
       detail:
-        "Regular professional cleaning, thorough photographic inspections, and rapid minor repairs handled at our expense.",
+        "Property care and maintenance coordination within the agreed scope, with repair approvals and costs clearly assigned.",
     },
   ];
 
@@ -126,10 +122,10 @@ export function FamilyCommitments() {
       <div className="section-head">
         <span className="eyebrow">Our Guiding Standards</span>
         <h2 id="commitments-heading" className="display">
-          What you can always expect<em>from our family team.</em>
+          Our family team.<em>Four guiding principles.</em>
         </h2>
         <p>
-          Four core principles shape every agreement, conversation, and property inspection we conduct.
+          Local understanding, personal service and clear responsibilities guide how we work with landlords.
         </p>
       </div>
       <div className="commitment-grid">

@@ -1628,6 +1628,9 @@ body, .care-section, .process, .faq { background: #fff; }
 .guidance-hero-tags span { display: inline-flex; align-items: center; padding: 7px 16px; border-radius: 999px; background: rgba(255, 255, 255, 0.14); backdrop-filter: blur(8px); border: 1px solid rgba(255, 255, 255, 0.24); color: #e4f7f0; font-size: .86rem; font-weight: 600; }
 
 /* About Page Refinements */
+.about-hero .metric-pill { background: #fff; border-color: var(--line); }
+.about-hero .metric-pill strong { color: var(--ink); }
+.about-hero .metric-pill span { color: var(--text); }
 .about-page-wrap { padding-block: 48px 32px; }
 .about-editorial-wrap { margin-bottom: 56px; }
 .story-quote-card { margin-top: 28px; padding: 24px 28px; background: #f2f7f5; border-left: 4px solid var(--steel); border-radius: 0 14px 14px 0; }
