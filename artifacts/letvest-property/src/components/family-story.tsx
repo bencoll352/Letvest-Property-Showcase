@@ -26,7 +26,7 @@ export function AboutHero() {
             <em>Local roots you can rely on.</em>
           </h1>
           <p className="hero-lead">
-            JM LetVest is a family-run business with roots in West Sussex. Born and bred in the area, we bring local knowledge and a personal approach to helping landlords care for their properties.
+            JM LetVest was founded by a team with a clear vision: to provide West Sussex property owners with guaranteed rental certainty, zero agency deductions, and hands-on property care delivered by people who truly care.
           </p>
           <div className="hero-metrics-grid" aria-label="Key highlights">
             <div className="metric-pill">

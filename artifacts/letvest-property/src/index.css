@@ -1715,8 +1715,12 @@ body, .care-section, .process, .faq { background: #fff; }
 #local .local-photo-frame img { width:100%; height:100%; object-fit:cover; }
 @media(max-width:680px){.site-shell main .section:not(.hero){padding-block:24px}#local .local-grid{grid-template-columns:1fr}#local .local-editorial{padding:28px 0;order:2}#local .local-photo-showcase{min-height:260px}#local .local-photo-frame{border-radius:16px}#local .local-photo-frame img{height:280px}}
 
-/* A compact banner straddles the hero and the white content below. */
-.site-shell .brand-banner { position:relative; z-index:2; width:75%; max-width:1120px; margin:-32px auto 0; padding:24px 28px; border-radius:18px; box-shadow:0 10px 24px #003e3c12; }
+/* Equal grid tracks center the banner on the video/white boundary at any height. */
+.home-hero-stage { position:relative; isolation:isolate; display:grid; grid-template-columns:minmax(0,1fr); grid-template-rows:auto repeat(2,minmax(0,1fr)); }
+.home-hero-stage > .hero-media { grid-area:1 / 1 / 3 / 2; }
+.home-hero-stage > .hero { grid-area:1 / 1 / 2 / 2; }
+.home-hero-stage > .brand-banner { grid-area:2 / 1 / 4 / 2; }
+.site-shell .brand-banner { position:relative; z-index:2; width:75%; max-width:1120px; margin:0 auto; padding:24px 28px; border-radius:18px; box-shadow:0 10px 24px #003e3c12; }
 .site-shell .brand-banner > .container-wide { width:100%; padding:0; gap:28px; }
 .site-shell .brand-banner h2 { font-size:clamp(1.3rem,2vw,1.8rem); }
 .site-shell .brand-banner p { font-size:.92rem; line-height:1.65; }
@@ -1724,4 +1728,4 @@ body, .care-section, .process, .faq { background: #fff; }
 .comparison-table thead th,.reviews-marquee .review-card blockquote,.story-quote-card blockquote { font-family:Arial,Helvetica,sans-serif; font-style:normal; }
 .site-shell .service-step-grid h3,.site-shell .step-timeline-card h3,.site-shell .care-detail h3,.site-shell .benefit-grid h3,.site-shell .commitment-card h3 { color:#202927; font-weight:700; }
 .site-shell .comparison-table tbody td,.site-shell .review-card blockquote,.site-shell .service-checklist li { color:#303936; }
-@media(max-width:680px){.site-shell .brand-banner{width:calc(100% - 32px);padding:22px;margin-top:-22px}.site-shell .brand-banner > .container-wide{gap:16px}.service-hero,.about-hero,.guidance-hero{border-bottom-right-radius:50% 30px}}
+@media(max-width:680px){.site-shell .brand-banner{width:calc(100% - 32px);padding:22px}.site-shell .brand-banner > .container-wide{gap:16px}.service-hero,.about-hero,.guidance-hero{border-bottom-right-radius:50% 30px}}
