@@ -9,10 +9,10 @@ export function AboutHero() {
     <section className="hero service-hero about-hero">
       <div className="hero-media" aria-hidden="true">
         <img
-          src={asset("images/sussex-coast.jpg")}
+          src={asset("images/about-hero-home.png")}
           alt=""
-          width="1600"
-          height="900"
+          width="1672"
+          height="941"
           fetchPriority="high"
         />
       </div>
@@ -55,17 +55,7 @@ export function AboutHero() {
 export function FamilyStory() {
   return (
     <div className="about-editorial-wrap">
-      <div className="story-layout">
-        <figure className="story-image about-home-image">
-          <img
-            src={asset("images/about-home.jpg")}
-            alt="Red-brick home with white sash windows and a flowering front garden"
-            width="1672"
-            height="940"
-            loading="lazy"
-          />
-          <figcaption>West Sussex communities are at the heart of our service.</figcaption>
-        </figure>
+      <div className="story-layout about-story-layout">
         <div className="story-copy">
           <span className="eyebrow">Our approach</span>
           <h2 className="display">
@@ -128,7 +118,18 @@ export function FamilyCommitments() {
           Local understanding, personal service and clear responsibilities guide how we work with landlords.
         </p>
       </div>
-      <div className="commitment-grid">
+      <div className="standards-layout">
+        <figure className="standards-image">
+          <img
+            src={asset("images/about-home-care.jpg")}
+            alt="Hands gently protecting a small wooden home"
+            width="541"
+            height="460"
+            loading="lazy"
+          />
+          <figcaption>West Sussex communities are at the heart of our service.</figcaption>
+        </figure>
+        <div className="commitment-grid">
         {items.map(({ Icon, title, detail }) => (
           <article className="commitment-card" key={title}>
             <div className="commitment-icon-wrap" aria-hidden="true">
@@ -138,6 +139,7 @@ export function FamilyCommitments() {
             <p>{detail}</p>
           </article>
         ))}
+        </div>
       </div>
     </section>
   );

@@ -1730,3 +1730,23 @@ body, .care-section, .process, .faq { background: #fff; }
 .site-shell .service-step-grid h3,.site-shell .step-timeline-card h3,.site-shell .care-detail h3,.site-shell .benefit-grid h3,.site-shell .commitment-card h3 { color:#202927; font-weight:700; }
 .site-shell .comparison-table tbody td,.site-shell .review-card blockquote,.site-shell .service-checklist li { color:#303936; }
 @media(max-width:680px){.site-shell .brand-banner{width:calc(100% - 32px);padding:22px}.site-shell .brand-banner > .container-wide{gap:16px}.service-hero,.about-hero,.guidance-hero{border-bottom-right-radius:50% 30px}}
+
+/* About: story followed by image and guiding standards. */
+.about-story-layout { display: block; max-width: 920px; margin-inline: auto; }
+.about-story-layout .story-copy { max-width: none; }
+.standards-layout { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr); gap: clamp(24px, 4vw, 56px); align-items: stretch; margin-top: 32px; }
+.standards-image { margin: 0; display: flex; flex-direction: column; }
+.standards-image img { width: 100%; flex: 1; min-height: 0; object-fit: cover; object-position: center; border-radius: 18px; }
+.standards-image figcaption { margin-top: 10px; font-size: .75rem; color: var(--text); }
+.standards-layout .commitment-grid { grid-template-columns: 1fr; gap: 20px; margin: 0; }
+.standards-layout .commitment-card { position: relative; border: 0; border-radius: 0; border-bottom: 4px solid var(--ink); padding: 12px 0 20px 64px; box-shadow: none; transform: none; }
+.standards-layout .commitment-card:nth-child(2) { border-bottom-color: var(--steel); }
+.standards-layout .commitment-card:nth-child(3) { border-bottom-color: #69a798; }
+.standards-layout .commitment-card:nth-child(4) { border-bottom-color: #b5cec5; }
+.standards-layout .commitment-icon-wrap { position: absolute; top: 12px; left: 0; margin: 0; }
+.standards-layout .commitment-icon-wrap svg { margin: 0; }
+.about-hero .hero-media img { object-position: 65% center; }
+@media (max-width: 760px) {
+  .standards-layout { grid-template-columns: 1fr; }
+  .standards-image img { flex: none; height: auto; aspect-ratio: 541 / 460; object-fit: contain; }
+}
