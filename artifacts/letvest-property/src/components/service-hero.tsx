@@ -1,9 +1,9 @@
 export function ServiceHero({ rentToRent }: { rentToRent: boolean }) {
   return (
-    <section className="hero service-hero">
+    <section className={`hero service-hero${rentToRent ? " rent-to-rent-hero" : ""}`}>
       <div className="hero-media" aria-hidden="true">
         <img
-          src={`${import.meta.env.BASE_URL}images/english-family-home.jpg`}
+          src={`${import.meta.env.BASE_URL}images/${rentToRent ? "rent-to-rent-terrace.png" : "english-family-home.jpg"}`}
           alt=""
           fetchPriority="high"
         />

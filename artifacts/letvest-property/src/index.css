@@ -1750,3 +1750,11 @@ body, .care-section, .process, .faq { background: #fff; }
   .standards-layout { grid-template-columns: 1fr; }
   .standards-image img { flex: none; height: auto; aspect-ratio: 1122 / 1402; object-fit: contain; }
 }
+
+/* Keep the terrace entrance and bay windows prominent in the Rent to Rent hero. */
+.rent-to-rent-hero .hero-media img { transform: scale(1.45); transform-origin: 85% 65%; object-position: 85% 65%; }
+@media (max-width: 680px) {
+  .rent-to-rent-hero .hero-media img { transform: scale(1.15); transform-origin: 80% 60%; object-position: 80% 60%; }
+}
+
+.occupant-grid .care-card { border-bottom: 3px solid var(--gold); }
