@@ -1748,5 +1748,5 @@ body, .care-section, .process, .faq { background: #fff; }
 .about-hero .hero-media img { object-position: 65% center; }
 @media (max-width: 760px) {
   .standards-layout { grid-template-columns: 1fr; }
-  .standards-image img { flex: none; height: auto; aspect-ratio: 541 / 460; object-fit: contain; }
+  .standards-image img { flex: none; height: auto; aspect-ratio: 1122 / 1402; object-fit: contain; }
 }

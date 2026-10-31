@@ -28,24 +28,7 @@ export function AboutHero() {
           <p className="hero-lead">
             JM LetVest was founded by a team with a clear vision: to provide West Sussex property owners with guaranteed rental certainty, zero agency deductions, and hands-on property care delivered by people who truly care.
           </p>
-          <div className="hero-metrics-grid" aria-label="Key highlights">
-            <div className="metric-pill">
-              <strong>Local understanding</strong>
-              <span>Rooted in West Sussex</span>
-            </div>
-            <div className="metric-pill">
-              <strong>Family-run service</strong>
-              <span>A personal approach to your property</span>
-            </div>
-            <div className="metric-pill">
-              <strong>Clear communication</strong>
-              <span>Straightforward conversations</span>
-            </div>
-            <div className="metric-pill">
-              <strong>Practical support</strong>
-              <span>Property care with agreed responsibilities</span>
-            </div>
-          </div>
+
         </div>
       </div>
     </section>
@@ -121,10 +104,10 @@ export function FamilyCommitments() {
       <div className="standards-layout">
         <figure className="standards-image">
           <img
-            src={asset("images/about-home-care.jpg")}
+            src={asset("images/about-home-care-original.png")}
             alt="Hands gently protecting a small wooden home"
-            width="541"
-            height="460"
+            width="1122"
+            height="1402"
             loading="lazy"
           />
           <figcaption>West Sussex communities are at the heart of our service.</figcaption>

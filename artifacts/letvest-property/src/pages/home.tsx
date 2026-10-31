@@ -14,7 +14,7 @@ function AppraisalLink() { return <a className="btn btn-gold" href={destination(
 export function SiteFooter() {
   const reg = siteConfig.registrations;
   return <footer className="site-footer"><div className="container-wide footer-grid">
-    <div className="footer-brand"><img src={asset('letvest-logo-current.svg')} alt={siteConfig.companyName} width="600" height="400" /><p>Guaranteed Rent and property management in West Sussex. Clear arrangements, considered property care.</p></div>
+    <div className="footer-brand"><img src={asset('letvest-logo-property-management.png')} alt={siteConfig.companyName} width="1536" height="1024" /><p>Guaranteed Rent and property management in West Sussex. Clear arrangements, considered property care.</p></div>
     <div><h4>Explore</h4><ul><li><a href={`${import.meta.env.BASE_URL}#services`}>Explore Rent to Rent</a></li><li><a href={destination("about")}>About us</a></li><li><a href={pageHref('professional-standards')}>Professional Standards</a></li><li><a href={pageHref('privacy')}>Privacy notice</a></li><li><a href={pageHref('complaints')}>Complaints procedure</a></li></ul></div>
     <div><h4>Contact</h4><a href={`mailto:${siteConfig.email}`}>{siteConfig.email}</a><p>{siteConfig.baseTown}</p></div>
   </div>
