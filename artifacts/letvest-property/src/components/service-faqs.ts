@@ -1,5 +1,13 @@
 export const rentToRentFaqs = [
   [
+    "Is Rent to Rent suitable for my property?",
+    "We assess location, condition, layout and the proposed room use before making an offer. Permissions and any safety, licensing or planning requirements must be considered for the individual property.",
+  ],
+  [
+    "What does the agreement cover?",
+    "Your proposal sets out rent, payment dates, the contractual period, specified bills and property-care responsibilities. Review permitted use, maintenance approvals, exclusions and handover terms before proceeding.",
+  ],
+  [
     "How does Rent to Rent work?",
     "JM LetVest leases the property from you and arranges its agreed onward use. We arrange rooms for working professionals and NHS/key workers. The written agreement identifies the parties, permitted use and responsibilities.",
   ],
@@ -29,7 +37,7 @@ export const rentToRentFaqs = [
   ],
   [
     "Who will live in my property?",
-    "We provide rooms for working professionals and NHS/key workers, not family accommodation. Ask for the proposed occupant profile, screening process, occupancy limits and permitted use in writing.",
+    "We provide rooms for working professionals and NHS/key workers, not family accommodation. Occupants are subject to screening and suitability. Ask for the proposed occupant profile, screening process, occupancy limits and permitted use in writing.",
   ],
   [
     "Do I need consent before proceeding?",
@@ -40,8 +48,8 @@ export const rentToRentFaqs = [
     "We serve healthcare professionals but do not claim an NHS partnership or a relationship with a particular employer.",
   ],
   [
-    "How can I request an appraisal?",
-    "Use the Contact us page or email info@jmletvest.com. We can discuss the property’s suitability, your priorities and proposed terms before you decide whether to proceed.",
+    "How do I get started or request an appraisal?",
+    "Use the Contact us page or email info@jmletvest.com with the property location, type, bedrooms, condition and availability. We can discuss suitability, your priorities and proposed terms before you decide whether to proceed. The offer and start date depend on the property.",
   ],
 ];
 export const lettingsFaqs = [
@@ -86,7 +94,7 @@ export const lettingsFaqs = [
     "We welcome enquiries from healthcare professionals but do not claim an NHS partnership or a relationship with a particular employer.",
   ],
   [
-    "How can I request an appraisal?",
+    "How do I get started or request an appraisal?",
     "Visit the Contact us page or email info@jmletvest.com. An appraisal lets us discuss your property, letting expectations and service requirements without committing you to proceed.",
   ],
 ];

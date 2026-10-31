@@ -166,10 +166,33 @@ function ServiceDetails({ rentToRent }: { rentToRent: boolean }) {
           </a>
         </section>
       )}
+      {rentToRent && (
+        <section className="section container-wide" id="service-suitability" aria-labelledby="suitability-heading">
+          <div className="section-head">
+            <span className="eyebrow">Before we make an offer</span>
+            <h2 className="display" id="suitability-heading">Is your property a fit?</h2>
+            <p>We assess the home and its proposed use before agreeing a lease. An enquiry does not commit you to an arrangement.</p>
+          </div>
+          <div className="agreement-grid">
+            <article className="care-card"><h3>The home and its readiness</h3><p>Share the postcode, property type, bedroom count, layout, current condition and availability. Tell us about existing occupation and any repairs or preparation needed so these can be discussed before a start date is agreed.</p></article>
+            <article className="care-card"><h3>Occupants and permitted use</h3><p>We provide rooms for working professionals and NHS/key workers, not family accommodation. Agree the occupant profile, screening checks and occupancy limits in writing. We do not claim an NHS or employer partnership.</p></article>
+            <article className="care-card"><h3>Permissions and safety</h3><p>Check mortgage conditions, any superior lease and your insurance cover. Confirm the safety records and any licensing or planning requirements for the intended use. A company lease does not remove applicable legal duties.</p></article>
+            <article className="care-card"><h3>Your written proposal</h3><p>Review the rental amount, commencement date, payment frequency and lease term. Confirm vacant-period and non-payment cover, charges, exclusions and termination terms. There is no standard rent, start date or contract length quoted here.</p></article>
+          </div>
+        </section>
+      )}
       {rentToRent && <Payments />}
       <Included service={rentToRent ? "rent-to-rent" : "lettings"} />
 
-      {/* Styled accordion matching homepage layout and spacing */}
+      {rentToRent && (
+        <section className="section container-wide" aria-labelledby="handover-heading">
+          <div className="section-head"><span className="eyebrow">Start well. Finish clearly.</span><h2 className="display" id="handover-heading">Agree the handover and exit.</h2></div>
+          <div className="agreement-grid">
+            <article className="care-card"><h3>Before the keys change hands</h3><p>Agree the inventory and condition record, keys and access, meter readings, safety documents and outstanding work. Confirm which accounts transfer and when rental payments and management responsibilities begin.</p></article>
+            <article className="care-card"><h3>During the lease and at its end</h3><p>Set out who reports issues, who approves expenditure and how emergencies are handled. Agree notice requirements, the condition expected on return, fair wear and tear, final account checks and responsibility for any end-of-term costs.</p></article>
+          </div>
+        </section>
+      )}
       <section
         className="section home-faqs-section service-faqs-section"
         id="service-faqs"
@@ -231,7 +254,7 @@ function ServiceDetails({ rentToRent }: { rentToRent: boolean }) {
               <div>
                 <h3>Need specific details for your property?</h3>
                 <p>
-                  the JM LetVest team are always on hand to discuss your property
+                  The JM LetVest team can discuss your property
                   and explain how the contract details and payments work.
                 </p>
               </div>

@@ -3,48 +3,11 @@ import { destination } from "@/components/service-features";
 
 export function ComparisonTable() {
   const rows = [
-    {
-      feature: "Monthly Rental Income",
-      traditional: "At risk of tenant rent arrears and late payments",
-      letvest: "100% Guaranteed under contract, paid on the 1st of every month",
-      advantage: true,
-    },
-    {
-      feature: "Void Periods & Vacancies",
-      traditional: "Zero income while finding tenants (averages 4-6 weeks/year)",
-      letvest: "Zero void periods — you get paid every single month for 1 to 5 years",
-      advantage: true,
-    },
-    {
-      feature: "Management Fees & Commission",
-      traditional: "12% – 18% + VAT taken from your rent every month",
-      letvest: "0% Commission — no monthly deductions or agent cuts",
-      advantage: true,
-    },
-    {
-      feature: "Tenant-Find & Setup Fees",
-      traditional: "£300 – £800+ charged each time a new tenant is needed",
-      letvest: "£0 Setup fees — we source, vet, and house occupants at our cost",
-      advantage: true,
-    },
-    {
-      feature: "Utility Bills & Council Tax",
-      traditional: "Landlord pays between tenancies and during vacant spells",
-      letvest: "Agreed utilities and council tax covered under your contract",
-      advantage: true,
-    },
-    {
-      feature: "Occupant Profile",
-      traditional: "Uncertain tenant background and variable room care",
-      letvest: "Strictly screened working professionals and NHS healthcare staff",
-      advantage: true,
-    },
-    {
-      feature: "Property Care & Cleaning",
-      traditional: "Left entirely to tenants, often requiring deposit disputes",
-      letvest: "Regular professional cleaning, inspections, and ongoing upkeep",
-      advantage: true,
-    },
+    { feature: "Rental payments", traditional: "Income comes from the residential tenant; arrears can affect receipts.", letvest: "JM LetVest pays the rent agreed in your lease, on the agreed schedule.", advantage: true },
+    { feature: "Vacant periods", traditional: "An empty property can mean a break in rental income.", letvest: "Vacant-period and occupant non-payment cover are defined by your contract.", advantage: true },
+    { feature: "Fees and costs", traditional: "Agent fees and any additional charges depend on the service agreed.", letvest: "Review the proposed rent, any charges and ownership costs before signing.", advantage: true },
+    { feature: "Utilities and bills", traditional: "Responsibility depends on the tenancy and whether the property is occupied.", letvest: "The written account schedule confirms covered bills, limits and exclusions.", advantage: true },
+    { feature: "Day-to-day management", traditional: "You manage the tenancy or instruct an agent for an agreed scope.", letvest: "JM LetVest coordinates room management and property care within the agreed scope.", advantage: true },
   ];
 
   return (
@@ -57,7 +20,7 @@ export function ComparisonTable() {
             <em>See the difference side by side.</em>
           </h2>
           <p>
-            Why West Sussex property owners are switching from unpredictable AST letting to contractual guaranteed rent.
+            Compare who pays the rent and who handles the day-to-day work. Your written agreement sets the terms for your property.
           </p>
         </div>
 

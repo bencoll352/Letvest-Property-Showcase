@@ -5,38 +5,10 @@ import { siteConfig } from "@/site-config";
 
 export function HomeFaqs() {
   const faqs = [
-    {
-      q: "How does Rent to Rent actually work?",
-      a: "Under our Rent to Rent agreement, JM LetVest leases your property directly from you under a formal commercial company contract. We become your sole tenant, paying you an agreed fixed rent every month. We then manage the rooms for vetted working professionals and NHS key workers. You don't deal with individual occupants, maintenance calls, or tenant disputes.",
-    },
-    {
-      q: "What happens if a room becomes empty or an occupant fails to pay?",
-      a: "You continue to receive 100% of your agreed monthly rent. Because JM LetVest is your contractual tenant, we absorb the risk of void periods and non-payment. Your payments arrive on the 1st of every month without interruption.",
-    },
-    {
-      q: "Which utility bills and council tax are covered?",
-      a: "Your written proposal confirms the full account schedule. Typically, gas, electricity, water rates, and council tax are managed and paid by JM LetVest for the duration of the agreement. This means no surprise bills or utility changeover headaches for you.",
-    },
-    {
-      q: "How long is the agreement, and can I inspect my property?",
-      a: "Contracts typically range from 1 to 5 years, giving you long-term stability and security. You retain complete ownership, and we carry out regular inspections with photographic updates. Landlords are always welcome to inspect the property with agreed prior notice.",
-    },
-    {
-      q: "Who will be living in my property, and how are they vetted?",
-      a: "We cater exclusively to working professionals and healthcare/NHS workers who need quality accommodation in West Sussex. Every occupant undergoes strict identity verification, right-to-rent checks, employment referencing, and affordability screening before being admitted.",
-    },
-    {
-      q: "Are there any hidden fees or agency commission?",
-      a: "No. Unlike traditional high-street letting agents who deduct 12% to 18% + VAT each month plus tenant-find fees, JM LetVest charges zero commission. The rent agreed in your proposal is the exact amount you receive into your account.",
-    },
-    {
-      q: "Who handles maintenance and repairs?",
-      a: "We coordinate routine day-to-day property maintenance and minor repairs up to an agreed threshold at our expense, keeping the house in excellent order. For major structural repairs or capital replacements, we consult you for written approval beforehand.",
-    },
-    {
-      q: "How quickly can you take on my property?",
-      a: "Following an initial conversation and property assessment, we can present a written guaranteed offer within 24–48 hours. Once contracts are signed and standard safety certificates are in place, the arrangement can start in as little as 7–14 days.",
-    },
+    { q: "Is Rent to Rent suitable for my property?", a: "We assess location, condition, layout and the proposed room use before making an offer. Permissions and any safety, licensing or planning requirements must be considered for the individual property." },
+    { q: "Who would live in the property?", a: "We arrange rooms for working professionals and NHS/key workers, subject to screening and suitability. We do not provide family accommodation or claim an NHS partnership." },
+    { q: "What does the agreement cover?", a: "Your proposal sets out rent, payment dates, the contractual period, specified bills and property-care responsibilities. The Rent to Rent page explains what to review before proceeding." },
+    { q: "How do I get started?", a: "Contact us with the property location, type, bedrooms, condition and availability. We will discuss suitability and the next steps; the offer and start date depend on the property." },
   ];
 
   const [openIndex, setOpenIndex] = useState<number | null>(0);
