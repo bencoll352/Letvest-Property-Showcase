@@ -1758,3 +1758,6 @@ body, .care-section, .process, .faq { background: #fff; }
 }
 
 .occupant-grid .care-card { border-bottom: 3px solid var(--gold); }
+
+.occupants-section .occupant-details-link { margin: 28px 0 24px; line-height: 1.6; }
+.occupants-section .occupant-details-link .text-link { display: inline-block; }
