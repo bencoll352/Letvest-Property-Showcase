@@ -117,8 +117,10 @@ export function GuidanceHero() {
     <section className="hero service-hero guidance-hero">
       <div className="hero-media" aria-hidden="true">
         <img
-          src={asset("images/semi-detached-rent.jpg")}
-          alt="Traditional English semi-detached homes representing West Sussex residential properties"
+          src={asset("images/landlord-guides-hero.png")}
+          alt="Property paperwork being completed beside a small wooden house"
+          width="594"
+          height="487"
           fetchPriority="high"
         />
       </div>
