@@ -328,31 +328,38 @@ export default function ServicePage({ view }: { view: string }) {
 
         {view === "contact" && (
           <>
-            <section className="section page-intro page-intro-compact">
-              <div className="container-wide">
-                <span className="eyebrow">JM LetVest · West Sussex</span>
-                <h1 className="display">{title}</h1>
-                <p>Tell us about your property and what matters to you.</p>
+            <section className="contact-welcome" aria-labelledby="contact-heading">
+              <div className="container-wide contact-welcome-grid">
+                <div>
+                  <span className="eyebrow">Let’s talk · West Sussex</span>
+                  <h1 id="contact-heading" className="display">Your next chapter.<em>Starts with a conversation.</em></h1>
+                  <p className="contact-opening">A property to let or a place to call home? Tell us what you have in mind. Our family-run team will help you explore the next step.</p>
+                  <a className="btn btn-gold" href="#enquiry-options">Choose your enquiry <ArrowRight size={18} aria-hidden="true" /></a>
+                </div>
+                <aside className="contact-direct-panel" aria-label="Contact the team directly">
+                  <MessageSquare size={30} aria-hidden="true" />
+                  <h2>Speak with JM LetVest.</h2>
+                  <p>Prefer to write to us directly?</p>
+                  <a href="mailto:info@jmletvest.com">info@jmletvest.com <ArrowRight size={18} aria-hidden="true" /></a>
+                  <span>Local knowledge. Personal service. West Sussex.</span>
+                </aside>
               </div>
             </section>
-            <section className="section container-wide contact-page">
-              <div className="contact-introduction">
-                <span className="eyebrow">Property enquiries · West Sussex</span>
-                <h2 className="display">Let’s find your next step.</h2>
-                <p className="contact-opening">
-                  Whether you own a property or you’re looking for a home, tell us
-                  what you need. We’ll help you explore the options and explain
-                  how we can help.
-                </p>
-                <div className="contact-email-card">
-                  <span>Email our team</span>
-                  <a href="mailto:info@jmletvest.com">
-                    info@jmletvest.com <ArrowRight size={20} aria-hidden="true" />
-                  </a>
-                  <p>Serving landlords and tenants across West Sussex.</p>
-                </div>
+            <section className="section container-wide contact-page" id="enquiry-options" aria-labelledby="enquiry-heading">
+              <div className="section-head contact-options-heading">
+                <span className="eyebrow">The right place to start</span>
+                <h2 id="enquiry-heading" className="display">How can we help?</h2>
+                <p>Choose the enquiry that fits you. The details below help us understand your property or your search before we reply.</p>
               </div>
               <EmailEnquiries />
+              <div className="contact-next-steps" aria-labelledby="next-steps-heading">
+                <h2 id="next-steps-heading" className="display">What happens next?</h2>
+                <ol>
+                  <li><span aria-hidden="true">01</span><div><h3>Tell us a little about you</h3><p>Share your property details or what you’re looking for using the enquiry options above.</p></div></li>
+                  <li><span aria-hidden="true">02</span><div><h3>We pick up the conversation</h3><p>We’ll respond by email to understand your requirements and any questions you have.</p></div></li>
+                  <li><span aria-hidden="true">03</span><div><h3>Explore the next step</h3><p>For landlords, we discuss suitability and a possible proposal. For home seekers, we discuss your search and confirm availability.</p></div></li>
+                </ol>
+              </div>
             </section>
           </>
         )}
