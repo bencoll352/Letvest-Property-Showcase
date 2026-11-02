@@ -1796,3 +1796,22 @@ body, .care-section, .process, .faq { background: #fff; }
 /* Silver-and-blue brand colours; original layout retained. */
 .btn-gold { color: #fff; }
 .btn-gold:hover { color: #fff; }
+
+/* Mobile readability and keyboard access across all pages. */
+.site-shell main, .container-wide, .footer-grid > *, .header-inner > *, .agreement-grid > *, .contact-welcome-grid > * { min-width: 0; }
+.site-shell img { max-width: 100%; }
+.site-shell p, .site-shell a, .site-shell h1, .site-shell h2, .site-shell h3 { overflow-wrap: break-word; }
+:focus-visible { outline: 3px solid #365b85; outline-offset: 4px; }
+.comparison-table-wrapper { max-width: 100%; overflow-x: auto; overscroll-behavior-inline: contain; }
+@media (max-width: 680px) {
+ .site-shell input, .site-shell select, .site-shell textarea { font-size: 16px; }
+ .menu-toggle, .chatbot-close, .faq-accordion-trigger { min-height: 44px; min-width: 44px; }
+ .nav-links a { min-height: 44px; display: flex; align-items: center; }
+ .contact-direct-panel a, .email-copy a { overflow-wrap: anywhere; }
+ .chatbot-window { max-width: calc(100vw - 24px); right: 12px; max-height: calc(100dvh - 110px); }
+ .comparison-table { min-width: 640px; }
+ .site-footer { padding-bottom: calc(100px + env(safe-area-inset-bottom)); }
+}
+@media (prefers-reduced-motion: reduce) {
+ *, *::before, *::after { scroll-behavior: auto !important; animation-duration: .01ms !important; transition-duration: .01ms !important; }
+}

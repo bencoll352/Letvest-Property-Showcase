@@ -22,7 +22,7 @@ export default defineConfig(async ({ command }) => {
       generateBundle() {
         const base = process.env.SITE_URL || 'https://bencoll352.github.io/Letvest-Property-Showcase/';
         const root = base.endsWith('/') ? base : `${base}/`;
-        const views = ['', 'rent-to-rent', 'lettings', 'about', 'industry-news', 'contact', 'privacy', 'complaints', 'professional-standards'];
+        const views = ['', 'rent-to-rent', 'about', 'industry-news', 'contact', 'privacy', 'complaints', 'professional-standards'];
         this.emitFile({type:'asset',fileName:'sitemap.xml',source:`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${views.map(view=>`<url><loc>${root}${view?`?view=${view}`:''}</loc></url>`).join('')}</urlset>`});
       },
       transformIndexHtml(html) {

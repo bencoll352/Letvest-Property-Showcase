@@ -40,6 +40,7 @@ jobs:
 
       - name: Build site
         env:
+          PUBLICATION_READY: 'true'
           PORT: 5173
           BASE_PATH: '/Letvest-Property-Showcase/'
         run: |
