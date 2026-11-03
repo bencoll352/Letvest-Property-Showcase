@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://bencoll352.github.io/Letvest-Property-Showcase/sitemap.xml
+Sitemap: https://jmletvest.co.uk/sitemap.xml

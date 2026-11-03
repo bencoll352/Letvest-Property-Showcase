@@ -13,20 +13,20 @@ if (Number.isNaN(port) || port <= 0) {
 }
 
 export default defineConfig(async ({ command }) => {
-  const basePath = process.env.BASE_PATH || (command === 'build' ? '/Letvest-Property-Showcase/' : '/');
+  const basePath = process.env.BASE_PATH || '/';
   return {
     base: basePath,
   plugins: [
     {
       name: 'letvest-site-metadata',
       generateBundle() {
-        const base = process.env.SITE_URL || 'https://bencoll352.github.io/Letvest-Property-Showcase/';
+        const base = process.env.SITE_URL || 'https://jmletvest.co.uk/';
         const root = base.endsWith('/') ? base : `${base}/`;
         const views = ['', 'rent-to-rent', 'about', 'industry-news', 'contact', 'privacy', 'complaints', 'professional-standards'];
         this.emitFile({type:'asset',fileName:'sitemap.xml',source:`<?xml version="1.0" encoding="UTF-8"?><urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">${views.map(view=>`<url><loc>${root}${view?`?view=${view}`:''}</loc></url>`).join('')}</urlset>`});
       },
       transformIndexHtml(html) {
-        const configuredUrl = process.env.SITE_URL || 'https://bencoll352.github.io/Letvest-Property-Showcase/';
+        const configuredUrl = process.env.SITE_URL || 'https://jmletvest.co.uk/';
         const siteUrl = new URL(configuredUrl);
         if (siteUrl.protocol !== 'https:' || siteUrl.search || siteUrl.hash) throw new Error('SITE_URL must be a clean HTTPS site URL');
         if (!siteUrl.pathname.endsWith('/')) siteUrl.pathname += '/';

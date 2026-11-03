@@ -42,7 +42,8 @@ jobs:
         env:
           PUBLICATION_READY: 'true'
           PORT: 5173
-          BASE_PATH: '/Letvest-Property-Showcase/'
+          BASE_PATH: '/'
+          SITE_URL: 'https://jmletvest.co.uk/'
         run: |
           pnpm --filter @workspace/letvest-property run build
 
