@@ -82,7 +82,7 @@ export function EnquiryForm() {
     if (!configured) {
       setStatus("error");
       setMessage(
-        "Online submission is not available yet. Please email info@jmletvest.com. Nothing has been sent.",
+        "Online submission is not available yet. Please email info@jmletvest.co.uk. Nothing has been sent.",
       );
       return;
     }
@@ -126,7 +126,7 @@ export function EnquiryForm() {
     } catch {
       setStatus("error");
       setMessage(
-        "We could not confirm your enquiry was accepted. Please try again or email info@jmletvest.com.",
+        "We could not confirm your enquiry was accepted. Please try again or email info@jmletvest.co.uk.",
       );
     } finally {
       setToken("");
@@ -146,7 +146,7 @@ export function EnquiryForm() {
           </p>
           <a
             className="btn btn-gold"
-            href="mailto:info@jmletvest.com?subject=Property%20enquiry"
+            href="mailto:info@jmletvest.co.uk?subject=Property%20enquiry"
           >
             Enquire about your property →
           </a>
@@ -161,7 +161,7 @@ export function EnquiryForm() {
           </p>
           <a
             className="btn btn-outline-navy"
-            href="mailto:info@jmletvest.com?subject=Looking%20for%20a%20home"
+            href="mailto:info@jmletvest.co.uk?subject=Looking%20for%20a%20home"
           >
             Register your requirements →
           </a>

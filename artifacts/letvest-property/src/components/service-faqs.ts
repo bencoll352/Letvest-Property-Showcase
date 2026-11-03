@@ -49,7 +49,7 @@ export const rentToRentFaqs = [
   ],
   [
     "How do I get started or request an appraisal?",
-    "Use the Contact us page or email info@jmletvest.com with the property location, type, bedrooms, condition and availability. We can discuss suitability, your priorities and proposed terms before you decide whether to proceed. The offer and start date depend on the property.",
+    "Use the Contact us page or email info@jmletvest.co.uk with the property location, type, bedrooms, condition and availability. We can discuss suitability, your priorities and proposed terms before you decide whether to proceed. The offer and start date depend on the property.",
   ],
 ];
 export const lettingsFaqs = [
@@ -87,7 +87,7 @@ export const lettingsFaqs = [
   ],
   [
     "Can you help me find a home?",
-    "Email your preferred area, budget, property requirements and move-in date to info@jmletvest.com. We can discuss suitable availability and arrange viewings where homes are available.",
+    "Email your preferred area, budget, property requirements and move-in date to info@jmletvest.co.uk. We can discuss suitable availability and arrange viewings where homes are available.",
   ],
   [
     "Do you work with the NHS or particular employers?",
@@ -95,6 +95,6 @@ export const lettingsFaqs = [
   ],
   [
     "How do I get started or request an appraisal?",
-    "Visit the Contact us page or email info@jmletvest.com. An appraisal lets us discuss your property, letting expectations and service requirements without committing you to proceed.",
+    "Visit the Contact us page or email info@jmletvest.co.uk. An appraisal lets us discuss your property, letting expectations and service requirements without committing you to proceed.",
   ],
 ];

@@ -7,7 +7,7 @@ export interface FamilyCommitment { approved: boolean; title: string; detail: st
 export const siteConfig = {
   companyName: 'JM LetVest Ltd', shortName: 'JM LetVest',
   tagline: 'Guaranteed Rent & Agreed Utilities across West Sussex',
-  email: 'info@jmletvest.com', baseTown: 'West Sussex, United Kingdom',
+  email: 'info@jmletvest.co.uk', baseTown: 'West Sussex, United Kingdom',
   occupants: [
     { name: 'Working professionals', description: 'Rooms for people working in the local area, subject to screening and suitability.', approved: true },
     { name: 'NHS workers / key workers', description: 'Rooms for healthcare and essential workers. No NHS or employer partnership is implied.', approved: true },

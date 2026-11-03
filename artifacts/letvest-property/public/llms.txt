@@ -1,6 +1,6 @@
 # JM LetVest Ltd
 
-JM LetVest Ltd is a family-run property business serving West Sussex, UK. Owners: Jake and Maddie Mallender. Email: info@jmletvest.com.
+JM LetVest Ltd is a family-run property business serving West Sussex, UK. Owners: Jake and Maddie Mallender. Email: info@jmletvest.co.uk.
 
 ## Services and information
 - [Home](https://bencoll352.github.io/Letvest-Property-Showcase/)

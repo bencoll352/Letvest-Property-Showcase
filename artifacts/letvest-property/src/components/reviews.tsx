@@ -112,7 +112,7 @@ export function Reviews({
           </div>
           <a
             className="btn btn-outline-navy"
-            href="mailto:info@jmletvest.com?subject=My%20JM%20LetVest%20review"
+            href="mailto:info@jmletvest.co.uk?subject=My%20JM%20LetVest%20review"
           >
             Share your review →
           </a>

@@ -340,7 +340,7 @@ export default function ServicePage({ view }: { view: string }) {
                   <MessageSquare size={30} aria-hidden="true" />
                   <h2>Speak with JM LetVest.</h2>
                   <p>Prefer to write to us directly?</p>
-                  <a href="mailto:info@jmletvest.com">info@jmletvest.com <ArrowRight size={18} aria-hidden="true" /></a>
+                  <a href="mailto:info@jmletvest.co.uk">info@jmletvest.co.uk <ArrowRight size={18} aria-hidden="true" /></a>
                   <span>Local knowledge. Personal service. West Sussex.</span>
                 </aside>
               </div>
