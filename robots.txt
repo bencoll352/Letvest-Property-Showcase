@@ -1,2 +1,4 @@
 User-agent: *
 Allow: /
+
+Sitemap: https://jmletvest.co.uk/sitemap.xml
