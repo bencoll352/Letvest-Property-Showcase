@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
   pages: write
   id-token: write
 
@@ -46,6 +46,20 @@ jobs:
           SITE_URL: 'https://jmletvest.co.uk/'
         run: |
           pnpm --filter @workspace/letvest-property run build
+
+      - name: Publish built site to GitHub Pages branch
+        run: |
+          git fetch origin gh-pages
+          git worktree add --detach "$RUNNER_TEMP/pages-publish" FETCH_HEAD
+          rsync -a --delete --exclude=.git artifacts/letvest-property/dist/public/ "$RUNNER_TEMP/pages-publish/"
+          touch "$RUNNER_TEMP/pages-publish/.nojekyll"
+          git -C "$RUNNER_TEMP/pages-publish" config user.name "github-actions[bot]"
+          git -C "$RUNNER_TEMP/pages-publish" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git -C "$RUNNER_TEMP/pages-publish" add -A
+          if ! git -C "$RUNNER_TEMP/pages-publish" diff --cached --quiet; then
+            git -C "$RUNNER_TEMP/pages-publish" commit -m "Publish site from $GITHUB_SHA"
+            git -C "$RUNNER_TEMP/pages-publish" push origin HEAD:gh-pages
+          fi
 
       - name: Setup Pages
         uses: actions/configure-pages@v5
