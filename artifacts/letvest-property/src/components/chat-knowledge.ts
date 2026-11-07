@@ -25,7 +25,7 @@ export function answerQuestion(question:string, previousTopic=''):Reply {
  // Specific purposes win over broad terms such as property, landlord and rent.
  const priority=['benefits','complaints','privacy','trust','home-search','landlord-occupants','costs','repairs','guidance','process','payments','about','suitability','contact','service'];
  matched.sort((a,b)=>priority.indexOf(a.topic)-priority.indexOf(b.topic));
- let chosen=matched[0];
+ let chosen: (typeof topics)[number] | undefined = matched[0];
  if(!chosen&&previousTopic&&(/^(?:and|what about|how about|also|yes|no|tell me more|more|that|it|when|how often|how much)\b/.test(q)||q.split(' ').length<5))chosen=topics.find(t=>t.topic===previousTopic);
  if(chosen)return {text:chosen.text,view:chosen.view,label:chosen.label,topic:chosen.topic};
  return {topic:'clarify',text:'I can help with JM LetVest’s Rent to Rent service, benefits, costs, property suitability, occupants, property care and enquiry routes. Are you a landlord or looking for a room, and what would you like to know? If your question concerns an existing agreement or live availability, the team can check it at info@jmletvest.co.uk.',view:'contact',label:'Ask the team directly'};
