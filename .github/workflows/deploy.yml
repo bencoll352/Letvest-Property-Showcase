@@ -51,7 +51,7 @@ jobs:
         run: |
           git fetch origin gh-pages
           git worktree add --detach "$RUNNER_TEMP/pages-publish" FETCH_HEAD
-          rsync -a --delete --exclude=.git artifacts/letvest-property/dist/public/ "$RUNNER_TEMP/pages-publish/"
+          rsync -a --checksum --delete --exclude=.git artifacts/letvest-property/dist/public/ "$RUNNER_TEMP/pages-publish/"
           touch "$RUNNER_TEMP/pages-publish/.nojekyll"
           git -C "$RUNNER_TEMP/pages-publish" config user.name "github-actions[bot]"
           git -C "$RUNNER_TEMP/pages-publish" config user.email "41898282+github-actions[bot]@users.noreply.github.com"
